@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#二回目rails db:seedするときは、元々登録してた記述をコメントアウトする
+#Admin.create!(
+  #email: 'niryuhogo@mbox.re',
+ #password: '202306'
+#)
