@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise' #ユーザー認証機能
 gem 'kaminari' #ページネーション
 gem 'ransack' #検索機能
+gem "enum_help" #enum

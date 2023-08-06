@@ -1,0 +1,15 @@
+ja: # 日本語の設定を行う
+  enums: # enumの設定を行う
+    place: # モデル名
+      type:  # カラム名
+        shrine: "神社"
+        temple: "お寺"
+      goshuin_status:
+        note: "書き置き"
+        direct_writing: "直書き"
+        both: "両方"
+        others: "その他"
+      pet_status:
+        ok: "OK"
+        ng: "NG"
+        not_clea: "わからない"
