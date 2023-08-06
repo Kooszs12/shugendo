@@ -1,2 +1,63 @@
-<h1>Admin::Places#new</h1>
-<p>Find me in app/views/admin/places/new.html.erb</p>
+<!--管理者側神社・お寺投稿ページ-->
+<div class="container o-8column">
+  <div class="row">
+    <h1>神社・仏閣投稿ページ</h1>
+
+    <%= form_with model: @place, url: admin_places_path, method: :post do |form| %>
+      <div class="form-group">
+        <%= form.radio_button :type, 0, checked: true %>
+        <%= form.label :type, Place.types_i18n[:shrine] %>
+        <%= form.radio_button :type, 1 %>
+        <%= form.label :type, Place.types_i18n[:temple] %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :地方 %>
+        <%= form.select :area_id, Area.all.collect { |a| [a.name, a.id] }, prompt: "選択してください", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :都道府県 %>
+        <%= form.select :prefecture_id, Prefecture.all.collect { |a| [a.name, a.id] }, prompt: "選択してください", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :住所 %>
+        <%= form.text_field :address, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :電話番号 %>
+        <%= form.text_field :phone_number, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :御祭神 %>
+        <%= form.text_field :got, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :宗派 %>
+        <%= form.text_field :sect, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :御朱印の種類 %>
+        <!--invertでkeyとvalueを入れ替えることで日本語化に成功-->
+        <%= form.select :goshuin_status, Place.goshuin_statuses_i18n.invert, prompt: "選択してください", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :ペット %>
+        <%= form.select :pet_status, Place.pet_statuses_i18n.invert, prompt: "選択してください", class: "form-control" %>
+      </div>
+
+      <%= form.submit "投稿", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
