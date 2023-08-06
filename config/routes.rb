@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
-  # 顧客用
+  namespace :user do
+    get 'homes/top'
+  end
+  namespace :admin do
+    get 'homes/top'
+  end
+  # 会員用
   # URL /customers/sign_in ...
   devise_for :users, skip: [:passwords],controllers: {
     registrations: "user/registrations",
@@ -13,7 +19,5 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
-  root to: "homes#top"
 
 end

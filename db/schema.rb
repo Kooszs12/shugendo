@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_05_105144) do
+ActiveRecord::Schema.define(version: 2023_08_06_064656) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,40 @@ ActiveRecord::Schema.define(version: 2023_08_05_105144) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "goshuins", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "place_id", null: false
+    t.string "message"
+    t.integer "price", null: false
+    t.date "visit_day"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["place_id"], name: "index_goshuins_on_place_id"
+    t.index ["user_id"], name: "index_goshuins_on_user_id"
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.integer "area_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_prefectures_on_area_id"
+  end
+
+  create_table "prefustures", force: :cascade do |t|
+    t.integer "area_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_prefustures_on_area_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +71,8 @@ ActiveRecord::Schema.define(version: 2023_08_05_105144) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "goshuins", "places"
+  add_foreign_key "goshuins", "users"
+  add_foreign_key "prefectures", "areas"
+  add_foreign_key "prefustures", "areas"
 end
