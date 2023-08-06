@@ -13,12 +13,12 @@
 
       <div class="form-group">
         <%= form.label :地方 %>
-        <%= form.select :area_id, Area.all.collect { |a| [a.name, a.id] }, prompt: "選択してください", class: "form-control" %>
+        <%= form.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください" }, { class: "form-control", id: "area-select" } %>
       </div>
 
       <div class="form-group">
         <%= form.label :都道府県 %>
-        <%= form.select :prefecture_id, Prefecture.all.collect { |a| [a.name, a.id] }, prompt: "選択してください", class: "form-control" %>
+        <%= form.select :prefecture_id, options_for_select([]), { prompt: "都道府県を選択してください" }, { class: "form-control", id: "prefecture-select" } %>
       </div>
 
       <div class="form-group">
@@ -54,10 +54,34 @@
 
       <div class="form-group">
         <%= form.label :ペット %>
-        <%= form.select :pet_status, Place.pet_statuses_i18n.invert, prompt: "選択してください", class: "form-control" %>
+        <%= form.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
       </div>
 
       <%= form.submit "投稿", class: "btn btn-primary" %>
     <% end %>
+
+    <%#= javascript_pack_tag 'custom' %>
+
   </div>
 </div>
+<script>
+const areaSelect = document.getElementById('area-select');
+  const prefectureSelect = document.getElementById('prefecture-select');
+  const prefecturesByArea = JSON.parse('<%== Prefecture.includes(:area).map{|o| { id: o.id, name: o.name, area_id: o.area.id } }.to_json %>');
+
+  function updatePrefectureOptions() {
+    const selectedArea = areaSelect.value;
+    const prefectures = prefecturesByArea.filter((o)=> o.area_id == selectedArea);
+
+    // 都道府県のセレクトボックスを更新します
+    prefectureSelect.innerHTML = '<option value="">都道府県を選択してください</option>';
+    prefectures.forEach(function(prefecture) {
+      prefectureSelect.innerHTML += `<option value="${prefecture.id}">${prefecture.name}</option>`;
+    });
+  }
+
+  // 地方が変更されたときに都道府県のセレクトボックスを更新します
+  areaSelect.addEventListener('change', function() {
+    updatePrefectureOptions();
+  });
+  </script>
