@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  namespace :user do
-    get 'homes/top'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  # 会員用
+   # 会員用
   # URL /customers/sign_in ...
   devise_for :users, skip: [:passwords],controllers: {
     registrations: "user/registrations",
@@ -18,6 +13,15 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  namespace :admin do
+    get "/" => "homes#top"
+    resources :places, only: [:new, :create, :index, :show, :edit, :update]
+  end
+
+  scope module: :user do
+    root "homes#top"
+    resources :places, only: [:new, :create, :index, :show, :edit, :update]
+  end
 
 end
