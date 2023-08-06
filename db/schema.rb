@@ -50,14 +50,6 @@ ActiveRecord::Schema.define(version: 2023_08_06_064656) do
     t.index ["area_id"], name: "index_prefectures_on_area_id"
   end
 
-  create_table "prefustures", force: :cascade do |t|
-    t.integer "area_id", null: false
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["area_id"], name: "index_prefustures_on_area_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -74,5 +66,4 @@ ActiveRecord::Schema.define(version: 2023_08_06_064656) do
   add_foreign_key "goshuins", "places"
   add_foreign_key "goshuins", "users"
   add_foreign_key "prefectures", "areas"
-  add_foreign_key "prefustures", "areas"
 end

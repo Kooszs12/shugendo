@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #二回目rails db:seedするときは、元々登録してた記述をコメントアウトする
-#Admin.create!(
-  #email: 'niryuhogo@mbox.re',
-  #password: '202306'
-#)
+Admin.create!(
+  email: 'niryuhogo@mbox.re',
+  password: '202306'
+)
 
 #地方と都道府県の配列
 area_prefectures = [
