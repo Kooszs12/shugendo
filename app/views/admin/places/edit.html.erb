@@ -1,2 +1,13 @@
-<h1>Admin::Places#edit</h1>
-<p>Find me in app/views/admin/places/edit.html.erb</p>
+<!--管理者側神社・お寺投稿ページ-->
+<div class="container o-8column">
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+      <%= render 'layouts/a_side' %>
+    </div>
+    <div class="col-md-7 offset-md-1 col-sm-6">
+      <h1>神社・仏閣投稿ページ</h1>
+      <!--変数modelsに配列を-->
+      <%= render 'admin/places/form', models: [:admin, @place], submit: "toukou" %>
+    </div>
+  </div>
+</div>

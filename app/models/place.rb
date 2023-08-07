@@ -18,8 +18,8 @@ class Place < ApplicationRecord
   #imageカラム
   has_one_attached :image
 
-  #メソッド
-  def get_item_image
+  #添付される画像がなかった場合のメソッド
+  def get_place_image
     (image.attached?) ? image : 'no_image.jpg'
   end
 

@@ -1,0 +1,79 @@
+  <!--変数を新たに設定-->
+  <% place = models.last %>
+  <!--都道府県のレコードよりさきに地方のレコードを取り出している：includes-->
+  <% prefectures = Prefecture.includes(:area) %>
+  <% target_prefectures = place.prefecture_id ? prefectures.where('areas.id': place.prefecture.area_id).map{|o| [o.name, o.id] } : [] %>
+  <%= form_with model: (models.first == :admin ? models : place), local: true  do |form| %>
+    <!--バリデーションの部分テンプレート-->
+    <!--formからmodelobjectを抜き出す-->
+    <%= render "layouts/error_messages", model: form.object %>
+    <div class="form-group">
+      <div class="w-25">
+      <%= form.label :寺社画像 %>
+        <% if place.image.attached? %>
+          <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid" %>
+        <% else %>
+          <%= image_tag "no_image.jpg", id: 'imagePreview', class: "img-fluid" %>
+        <% end %>
+      </div>
+      <%= form.file_field :image, id: "imageField" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
+        <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :地方 %>
+      <!--form.selectを使用するときは機能とHTML要素に{ }をつけてあげないとブートストラップが反映-->
+      <%= form.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください", selected: place.prefecture&.area_id }, { class: "form-control", id: "area-select" } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :都道府県 %>
+      <%= form.select :prefecture_id, options_for_select(target_prefectures), { prompt: "都道府県を選択してください", selected: place.prefecture_id },
+                                                              { class: "form-control", id: "prefecture-select",
+                                                                data: { json: (prefectures.map{|o| { id: o.id, name: o.name, area_id: o.area.id } }).to_json }
+                                                              } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :寺社名 %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :住所 %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :電話番号 %>
+      <%= form.text_field :phone_number, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :御祭神 %>
+      <%= form.text_field :got, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :宗派 %>
+      <%= form.text_field :sect, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :御朱印の種類 %>
+      <!--invertでkeyとvalueを入れ替えることで日本語化に成功-->
+      <%= form.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :ペット %>
+      <%= form.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+    </div>
+
+    <%= form.submit submit, class: "btn btn-primary" %>
+  <% end %>

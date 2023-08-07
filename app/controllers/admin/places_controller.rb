@@ -11,13 +11,13 @@ class Admin::PlacesController < ApplicationController
     #空の変数作成
     @place = Place.new(place_params)
     #保存が成功したら
-    #byebug
     if @place.save
-      redirect_to place_path(@place.id), notice: "投稿されました"
+      redirect_to admin_place_path(@place)
+      flash[:notice] = "投稿されました"
     #失敗したら
     else
-      @places = Place.all
-      render :index, notice: "投稿失敗しました"
+      flash.now[:alert] = "failed"
+      render :new
     end
   end
 
@@ -25,15 +25,20 @@ class Admin::PlacesController < ApplicationController
   end
 
   def show
+    @place = Place.find(params[:id])
   end
 
   def edit
+    @place = Place.find(params[:id])
+  end
+
+  def update
   end
 
    private
 
   def place_params
-    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :type, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image)
+    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image)
   end
 
 end

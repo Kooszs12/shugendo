@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
     t.integer "prefecture_id", null: false
     t.integer "user_id"
     t.integer "admin_id"
-    t.integer "category", null: false
+    t.integer "category", default: 0, null: false
     t.string "name", null: false
     t.string "address", null: false
     t.string "postcode"
