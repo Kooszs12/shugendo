@@ -1,7 +1,7 @@
 ja: # 日本語の設定を行う
   enums: # enumの設定を行う
     place: # モデル名
-      type:  # カラム名
+      category:  # カラム名
         shrine: "神社"
         temple: "お寺"
       goshuin_status:

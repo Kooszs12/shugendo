@@ -3,16 +3,27 @@
   <div class="row">
     <h1>神社・仏閣投稿ページ</h1>
 
-    <%= form_with model: @place, url: admin_places_path, method: :post do |form| %>
+    <%= form_with model: @place, url: admin_places_path, method: :post, html: { multipart: true } do |form| %>
       <div class="form-group">
-        <%= form.radio_button :type, 0, checked: true %>
-        <%= form.label :type, Place.types_i18n[:shrine] %>
-        <%= form.radio_button :type, 1 %>
-        <%= form.label :type, Place.types_i18n[:temple] %>
+        <%= form.label :寺社画像 %>
+        <% if @place.image.attached? %>
+          <%= image_tag @place.image, style: "max-width: 200px;" %>
+        <% else %>
+          <%= "No image available" %>
+        <% end %>
+        <%= form.file_field :image %>
+      </div>
+
+      <div class="form-group">
+        <%= form.radio_button :category, 0, checked: true %>
+        <%= form.label :category, Place.categories_i18n[:shrine] %>
+        <%= form.radio_button :category, 1 %>
+        <%= form.label :category, Place.categories_i18n[:temple] %>
       </div>
 
       <div class="form-group">
         <%= form.label :地方 %>
+        <!--form.selectを使用するときは機能とHTML要素に{ }をつけてあげないとブートストラップが反映-->
         <%= form.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください" }, { class: "form-control", id: "area-select" } %>
       </div>
 
@@ -49,7 +60,7 @@
       <div class="form-group">
         <%= form.label :御朱印の種類 %>
         <!--invertでkeyとvalueを入れ替えることで日本語化に成功-->
-        <%= form.select :goshuin_status, Place.goshuin_statuses_i18n.invert, prompt: "選択してください", class: "form-control" %>
+        <%= form.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
       </div>
 
       <div class="form-group">
@@ -60,10 +71,10 @@
       <%= form.submit "投稿", class: "btn btn-primary" %>
     <% end %>
 
-    <%#= javascript_pack_tag 'custom' %>
-
   </div>
 </div>
+
+<!--能動的なセレクトボックス-->
 <script>
 const areaSelect = document.getElementById('area-select');
   const prefectureSelect = document.getElementById('prefecture-select');
