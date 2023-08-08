@@ -15,16 +15,16 @@
   <!--バリデーションの部分テンプレート-->
   <!--formからmodelobjectを抜き出す-->
   <%= render "layouts/error_messages", model: f.object %>
-  
+
   <!--フォーム内の関連する入力フィールドやラベルをまとめてグループ化、フォームをスタイリッシュにレイアウトしたり、<label>を使用してフォームと対応するラベルを関連付ける-->
   <div class="form-group">
     <!--画像サイズのブートストラップ-->
-    <div class="w-25">
+    <div class="w-50">
     <%= f.label :寺社画像 %>
       <% if place.image.attached? %>
-        <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid" %>
+        <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% else %>
-        <%= image_tag "no_image.jpg", id: 'imagePreview', class: "img-fluid" %>
+        <%= image_tag "no_image.jpg", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% end %>
     </div>
     <%= f.file_field :image, id: "imageField" %>
@@ -51,39 +51,39 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :寺社名 %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.label :寺社名 %><font color="red">*必須</font>
+    <%= f.text_field :name, placeholder: "寺社名", class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :市区町村 %>
-    <%= f.text_field :address, class: "form-control" %>
+    <%= f.label :市区町村 %><font color="red">*必須</font>
+    <%= f.text_field :address, placeholder: "市区町村から記入してください", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :電話番号 %>
-    <%= f.text_field :phone_number, class: "form-control" %>
+    <%= f.text_field :phone_number, placeholder: "0000000", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :御祭神 %>
-    <%= f.text_field :got, class: "form-control" %>
+    <%= f.text_field :got, placeholder: "主祭神を記入してください", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :宗派 %>
-    <%= f.text_field :sect, class: "form-control" %>
+    <%= f.text_field :sect, placeholder: "宗派", class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :御朱印の種類 %>
+    <%= f.label :御朱印の種類 %><font color="red">*必須</font>
     <!--invertでkeyとvalueを入れ替えることで日本語化に成功-->
     <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
   </div>
 
   <div class="form-group">
-    <%= f.label :ペット %>
-    <%= form.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+    <%= f.label :ペット %><font color="red">*必須</font>
+    <%= f.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
   </div>
 
   <%= f.submit submit, class: "btn btn-primary" %>
