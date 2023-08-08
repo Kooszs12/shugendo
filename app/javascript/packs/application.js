@@ -18,38 +18,50 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// 選択された画像を即反映させる
+// turbolinks:load イベントが発火したときに実行されるコード
 $(document).on('turbolinks:load', () => {
-  console.log('hello')
+  // コンソールに 'hello' と出力する
+  console.log('hello');
+  // 画像の選択フィールドの変更イベントが発生したときに実行されるコード
   $('#imageField').on('change', (e) => {
+    // 選択されたファイルを取得
     const file = e.target.files[0];
+    // FileReader オブジェクトを生成
     var reader = new FileReader();
+    // ファイルの読み込みが完了したときの処理
     reader.onload = (f) => {
+      // 読み込んだデータをビューに表示するために、src 属性を設定
       $('#imagePreview').attr('src', f.target.result);
     }
-    reader.readAsDataURL(file)
-  })
-})
+    // 選択されたファイルをデータ URL として読み込む
+    reader.readAsDataURL(file);
+  });
+});
 
 //能動的なセレクトボックス
+// turbolinks:load イベントが発火したときに実行されるコード
 $(document).on('turbolinks:load', () => {
+  // 地方選択セレクトボックスと都道府県選択セレクトボックスの要素を取得
   const areaSelect = document.getElementById('area-select');
   const prefectureSelect = document.getElementById('prefecture-select');
-  console.log($(prefectureSelect).attr('data-json'))
+  // 都道府県データをJSON形式で持っている要素からデータを取得してパースする
   const prefecturesByArea = JSON.parse($(prefectureSelect).attr('data-json'));
-
+  // 都道府県選択肢を更新する関数
   const updatePrefectureOptions = () => {
+    // 選択されている地方を取得
     const selectedArea = areaSelect.value;
-    const prefectures = prefecturesByArea.filter((o)=> o.area_id == selectedArea);
-
-    // 都道府県のセレクトボックスを更新します
+    // 選択された地方に属する都道府県をフィルタリング
+    const prefectures = prefecturesByArea.filter((o) => o.area_id == selectedArea);
+    // 都道府県のセレクトボックスを初期化して、デフォルトの選択肢を追加
     prefectureSelect.innerHTML = '<option value="">都道府県を選択してください</option>';
+    // 選択された地方に属する都道府県をセレクトボックスに追加
     prefectures.forEach(function(prefecture) {
       prefectureSelect.innerHTML += `<option value="${prefecture.id}">${prefecture.name}</option>`;
     });
   }
-
-  // 地方が変更されたときに都道府県のセレクトボックスを更新します
+  // 地方選択セレクトボックスの値が変更されたときに都道府県選択肢を更新する
   areaSelect.addEventListener('change', function() {
     updatePrefectureOptions();
   });
-})
+});
