@@ -100,3 +100,12 @@ $(function(){
         $('.area_overlay').hide();
     }
 });
+
+// チェックボックスINセレクトボックス
+jQuery(function(){
+  jQuery('.checkbox-toggle').on('click', function(){
+    jQuery('.checkboxes').slideToggle();
+    // チェックボックスのスタイルにdisplay: flex;を付与する処理を追加
+    jQuery('.checkboxes').css('display', 'flex');
+  });
+});

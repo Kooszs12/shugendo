@@ -86,5 +86,6 @@
     <%= f.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
   </div>
 
+  <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->
   <%= f.submit submit, class: "btn btn-primary" %>
 <% end %>
