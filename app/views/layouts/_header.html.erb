@@ -8,10 +8,19 @@
         <ul class="navbar-nav ml-auto">
           <!--userがログインしているか判断-->
           <% if user_signed_in? %>
-            <!--ログインしていた場合-->
+            <!--ログインしていた場合のヘッダー-->
             <li>
               <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Log out
+              <% end %>
+            </li>
+
+          <!-- adminがログインしているか判断 -->
+          <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Log out
               <% end %>
             </li>
@@ -26,7 +35,7 @@
             </li>
             <li>
               <%= link_to new_user_session_path, class: "nav-link text-light" do %>
-                <i class="fas fa-sign-in-alt"></i>
+                <i class="fa-solid fa-right-to-bracket"></i>
                 Log in
               <% end %>
             </li>
