@@ -24,7 +24,7 @@
       <% if place.image.attached? %>
         <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% else %>
-        <%= image_tag "no_image.jpg", id: 'imagePreview', class: "img-fluid mb-3" %>
+        <%= image_tag "no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% end %>
     </div>
     <%= f.file_field :image, id: "imageField" %>

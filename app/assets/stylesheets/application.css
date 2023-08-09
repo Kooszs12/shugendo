@@ -18,6 +18,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color:#967E76;
   font-family: 'imagine YOKOHAMA.otf', 'HannariMincho-Regular.otf', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
-  }
+}
+
+main {
+  /*background-image: url(shutterstock_2156559911);*/
+  background-size: cover;
+  background-size: contain;
+  padding: 50px 0; /* 上下に余白を追加 */
+}
+
+footer {
+  /*background-image: url(shutterstock_2141982411);*/
+  background-size: cover;
+  background-size: contain;
+  padding: 50px 0; /* 上下に余白を追加 */
+}

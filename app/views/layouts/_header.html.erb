@@ -1,0 +1,38 @@
+<header>
+  <nav class="navbar navbar-expand navbar-dark bg-info p-4">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <!--userがログインしているか判断-->
+          <% if user_signed_in? %>
+            <!--ログインしていた場合-->
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
+                <i class="fas fa-sign-out-alt"></i>
+                Log out
+              <% end %>
+            </li>
+
+          <% else %>
+            <!--ログインしていない場合-->
+            <li>
+              <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+                <i class="fas fa-user-plus"></i>
+                Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path, class: "nav-link text-light" do %>
+                <i class="fas fa-sign-in-alt"></i>
+                Log in
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

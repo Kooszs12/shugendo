@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!--  jQueryをCDNで読み込み  -->
@@ -21,6 +21,13 @@
   <body>
     <!--フラッシュメッセージの部分テンプレート-->
     <%= render 'layouts/flash_messages' %>
-    <%= yield %>
+    <!--ヘッダーの部分テンプレート-->
+    <%= render "layouts/header" %>
+    <main>
+    　<%= yield %>
+    </main>
+
+    <!--フッターの部分テンプレート-->
+    <%= render "layouts/footer" %>
   </body>
 </html>
