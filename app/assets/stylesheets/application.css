@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color:#967E76;
+  font-family: 'imagine YOKOHAMA.otf', 'HannariMincho-Regular.otf', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+  }

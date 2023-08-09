@@ -66,6 +66,7 @@ $(document).on('turbolinks:load', () => {
   });
 });
 
+// 日本地図の地方文字をクリックすると都道府県が表示される仕組み
 $(function(){
     //地域を選択
     $('.area_btn').click(function(){
