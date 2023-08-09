@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/" => "homes#top"
-    resources :places, only: [:new, :create, :index, :show, :edit, :update]
+    resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   scope module: :user do

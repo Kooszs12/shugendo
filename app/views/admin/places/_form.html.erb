@@ -20,7 +20,6 @@
   <div class="form-group">
     <!--画像サイズのブートストラップ-->
     <div class="w-50">
-    <%= f.label :寺社画像 %>
       <% if place.image.attached? %>
         <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% else %>
@@ -37,6 +36,16 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :寺社名 %><font color="red">*必須</font>
+    <%= f.text_field :name, placeholder: "寺社名", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :郵便番号 %>
+    <%= f.text_field :postcode, placeholder: "郵便番号", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :地方 %><font color="red">*必須</font>
     <!--f.selectを使用するときは機能とHTML要素に{ }をつけてあげないとブートストラップが反映-->
     <%= f.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください", selected: place.prefecture&.area_id }, { class: "form-control", id: "area-select" } %>
@@ -48,11 +57,6 @@
                                                             { class: "form-control", id: "prefecture-select",
                                                               data: { json: (prefectures.map{|o| { id: o.id, name: o.name, area_id: o.area.id } }).to_json }
                                                             } %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :寺社名 %><font color="red">*必須</font>
-    <%= f.text_field :name, placeholder: "寺社名", class: "form-control" %>
   </div>
 
   <div class="form-group">

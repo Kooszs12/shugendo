@@ -20,14 +20,14 @@
   </head>
 
   <body>
-    <!--フラッシュメッセージの部分テンプレート-->
-    <%= render 'layouts/flash_messages' %>
     <!--ヘッダーの部分テンプレート-->
     <%= render "layouts/header" %>
     <!--フッターの位置を下に固定するためのブロック要素-->
     <div class="wrapper">
       <div class="container">
         <main>
+          <!--フラッシュメッセージの部分テンプレート-->
+          <%= render 'layouts/flash_messages' %>
       　  <%= yield %>
         </main>
       </div>

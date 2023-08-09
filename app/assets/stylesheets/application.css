@@ -18,12 +18,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'imagine YOKOHAMA.otf', 'HannariMincho-Regular.otf', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+  font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 }
 
 main {
-  position: absolute;/*←絶対位置*/
-  bottom: 0; /*下に固定*/
+  /*position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定
   /*background-image: url(shutterstock_2156559911);*/
   background-size: cover;
   background-size: contain;
