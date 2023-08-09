@@ -37,13 +37,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :地方 %>
+    <%= f.label :地方 %><font color="red">*必須</font>
     <!--f.selectを使用するときは機能とHTML要素に{ }をつけてあげないとブートストラップが反映-->
     <%= f.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください", selected: place.prefecture&.area_id }, { class: "form-control", id: "area-select" } %>
     </div>
 
   <div class="form-group">
-    <%= f.label :都道府県 %>
+    <%= f.label :都道府県 %><font color="red">*必須</font>
     <%= f.select :prefecture_id, options_for_select(target_prefectures), { prompt: "都道府県を選択してください", selected: place.prefecture_id },
                                                             { class: "form-control", id: "prefecture-select",
                                                               data: { json: (prefectures.map{|o| { id: o.id, name: o.name, area_id: o.area.id } }).to_json }

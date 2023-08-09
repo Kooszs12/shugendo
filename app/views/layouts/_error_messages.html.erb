@@ -3,7 +3,7 @@
   <%= model.errors.count %>件のエラーが発生しました
   <ul>
     <% model.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <li><%= message.gsub("Prefecture", "都道府県").gsub("Name", "寺社名").gsub("Address", "市区町村").gsub("Goshuin status", "御朱印の種類").gsub("Pet status", "ペット") %></li>
     <% end %>
   </ul>
 <% end %>
