@@ -1,2 +1,13 @@
-<h1>User::Homes#top</h1>
-<p>Find me in app/views/user/homes/top.html.erb</p>
+<div class="row">
+  <% @places.each do |place| %>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><%= place.name %></h5>
+          <p class="card-text"><%= place.address %></p>
+          <!-- 他の情報を表示 -->
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
