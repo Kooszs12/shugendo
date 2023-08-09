@@ -24,10 +24,14 @@
     <%= render 'layouts/flash_messages' %>
     <!--ヘッダーの部分テンプレート-->
     <%= render "layouts/header" %>
-    <main>
-    　<%= yield %>
-    </main>
-
+    <!--フッターの位置を下に固定するためのブロック要素-->
+    <div class="wrapper">
+      <div class="container">
+        <main>
+      　  <%= yield %>
+        </main>
+      </div>
+    </div>
     <!--フッターの部分テンプレート-->
     <%= render "layouts/footer" %>
   </body>
