@@ -1,4 +1,4 @@
-#管理者：神社・仏閣コントローラー
+#管理者：寺社コントローラー
 class Admin::PlacesController < ApplicationController
 
   before_action :authenticate_admin!
@@ -21,18 +21,24 @@ class Admin::PlacesController < ApplicationController
     end
   end
 
-  def index
-  end
-
   def show
     @place = Place.find(params[:id])
   end
+
 
   def edit
     @place = Place.find(params[:id])
   end
 
   def update
+    @place = Place.find(params[:id])
+    if @place.update(place_params)
+        redirect_to admin_place_path(@place)
+        flash[:notice] = "編集されました"
+    else
+      flash.now[:alert] = "failed"
+      render :edit
+    end
   end
 
    private
