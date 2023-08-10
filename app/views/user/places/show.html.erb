@@ -1,4 +1,4 @@
-<!-- 管理者側寺寺社詳細ページのコンテナ-->
+<!-- ユーザー側寺寺社詳細ページのコンテナ-->
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
@@ -11,7 +11,7 @@
     <!-- 右側のコラム (幅: 7カラム) -->
     <!--寺社詳細部分テンプレート呼び出し-->
     <div class="col-md-7 offset-lg-1">
-      <%= render 'admin/places/show', place: [:admin, @place] %>
+      <%= render 'layouts/place_show', place: @place %>
     </div>
   </div>
 </div>

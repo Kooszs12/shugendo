@@ -32,8 +32,13 @@
   </div>
 </div>
 
-<%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info" %>
-<!-- 削除をadminにしか出来ないように -->
+<!--どっちがログインしているか判断-->
+<!--<% if user_signed_in? %><!--userがログインしていたら-->
+  <%= link_to "編集", edit_user_place_path(place), class: "btn btn-sm btn-info" %>
+<% elsif admin_signed_in? %><!--adminがログインしていたら-->
+  <%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info" %>
+<% end %>
+<!-- 削除をadminにしか表示させない -->
 <% if admin_signed_in? %>
   <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
 <% end %>
