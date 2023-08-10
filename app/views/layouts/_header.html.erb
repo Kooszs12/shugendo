@@ -1,43 +1,42 @@
 <header>
-  <nav class="navbar navbar-expand navbar-dark bg-info p-4">
+  <nav class="navbar navbar-expand p-4">
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <%= link_to image_tag("24180387", size: "100x100"), "/" %>
+      <div class="collapse navbar-collapse">
+        <%= link_to image_tag("syukendou_logo", size: "250x250"), "/" %>
         <ul class="navbar-nav ml-auto">
           <!--userがログインしているか判断-->
           <% if user_signed_in? %>
             <!--ログインしていた場合のヘッダー-->
-            <li class="vertical-text">
-              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
+            <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
+              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
-                ろぐあうと
+                <h5>ろぐあうと</h5>
               <% end %>
-            </li>
 
           <!-- adminがログインしているか判断 -->
           <% elsif admin_signed_in? %>
-            <li class="vertical-text">
+            <li class="vertical-text .text-info ">
               <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
-                ろぐあうと
+                <h5>ろぐあうと</h5>
               <% end %>
             </li>
 
           <!--ログインしていない場合-->
           <% else %>
-            <li class="vertical-text">
-              <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+            <li class="vertical-text .text-info">
+              <%= link_to new_user_registration_path, class: "nav-link" do %>
                 <i class="fas fa-user-plus"></i>
-                さいんあっぷ
+                <h5>さいんあっぷ</h5>
               <% end %>
             </li>
-            <li class="vertical-text">
-              <%= link_to new_user_session_path, class: "nav-link text-light" do %>
+            <li class="vertical-text .text-info">
+              <%= link_to new_user_session_path, class: "nav-link" do %>
                 <i class="fa-solid fa-right-to-bracket"></i>
-                ろぐいん
+                <h5>ろぐいん</h5>
               <% end %>
             </li>
           <% end %>
