@@ -14,11 +14,11 @@
   <div class="col-md-4">
     <div>
       <!-- 表示させたいデータを連続で置くことで繋がって表示させることができる -->
-      <%= place.prefecture.name %><%= @place.address %>
+      <%= place.prefecture.name %><%= place.address %>
     </div>
   </div>
   <div class="col-md-4">
-    <div>☎︎<%=@place.phone_number %></div>
+    <div>☎︎<%=place.phone_number %></div>
   </div>
 </div>
 
@@ -35,5 +35,5 @@
 <%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info" %>
 <!-- 削除をadminにしか出来ないように -->
 <% if admin_signed_in? %>
-  <%= link_to "削除", admin_place_path(@place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+  <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
 <% end %>

@@ -1,2 +1,17 @@
-<h1>User::Places#show</h1>
-<p>Find me in app/views/user/places/show.html.erb</p>
+<!-- 管理者側寺寺社詳細ページのコンテナ-->
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+    <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+    <!-- 左側のコラム (幅: 5カラム) -->
+    <div class="col-md-4">
+      <%= render 'layouts/a_side' %>
+    </div>
+
+    <!-- 右側のコラム (幅: 7カラム) -->
+    <!--寺社詳細部分テンプレート呼び出し-->
+    <div class="col-md-7 offset-lg-1">
+      <%= render 'admin/places/show', place: [:admin, @place] %>
+    </div>
+  </div>
+</div>
