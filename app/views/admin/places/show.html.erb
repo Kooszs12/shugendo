@@ -4,42 +4,14 @@
   <div class="row">
     <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
     <!-- 左側のコラム (幅: 5カラム) -->
-    <div class="col-lg-5 border border-danger">
+    <div class="col-md-4">
       <%= render 'layouts/a_side' %>
     </div>
 
     <!-- 右側のコラム (幅: 7カラム) -->
-    <!--メイン表示-->
-    <div class="col-lg-7">
-      <h1><%= @place.name %></h1>
-      <!--画像表示-->
-      <% if @place.image.attached? %>
-        <%= image_tag @place.image, style: "max-width: 700px;" %>
-      <% else %>
-        <%= image_tag "no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
-      <% end %>
-
-      <div class="row">
-        <div class="col-md-4">
-          <div><%= @place.postcode %></div>
-        </div>
-        <div class="col-md-4">
-          <div><%= @place.prefecture.name %><br>><%= @place.address %></div>
-        </div>
-        <div class="col-md-4">
-          <div><%= @place.phone_number %></div>
-        </div>
-      </div>
-      <!--2段目-->
-      <div class="row">
-        <div class="col-md-6">
-          <div><strong>御朱印状況:</strong> <%= @place.goshuin_status_i18n %></div>
-        </div>
-        <div class="col-md-6">
-          <div><strong>ペット状況:</strong> <%= @place.pet_status_i18n %></div>
-        </div>
-      </div>
-
-      <%= link_to "編集", edit_admin_place_path(@place), class: "btn btn-sm btn-info" %>
-      <%= link_to "削除", admin_place_path(@place), method: :delete, "削除確認" => "本当に削除してもいいですか?", class: "btn btn-sm btn-danger" %>
+    <!--寺社詳細部分テンプレート呼び出し-->
+    <div class="col-md-7 offset-lg-1">
+      <%= render 'admin/places/show', place: [:admin, @place] %>
     </div>
+  </div>
+</div>

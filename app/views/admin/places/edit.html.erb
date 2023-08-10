@@ -3,12 +3,12 @@
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
     <!-- 左側のコラム (幅: 5カラム) -->
-    <div class="col-lg-5 border">
+    <div class="col-md-5">
       <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
       <%= render 'layouts/a_side' %>
     </div>
     <!-- 右側のコラム (幅: 7カラム) -->
-    <div class="col-lg-7">
+    <div class="col-md-6 offset-lg-1">
       <h1>寺社新規投稿</h1>
       <!-- 寺社フォーム部分テンプレートを描画 -->
       <%= render 'admin/places/form', models: [:admin, @place], submit: "更新" %><!--submit: "投稿"はsubmitボタンの名前を-->
