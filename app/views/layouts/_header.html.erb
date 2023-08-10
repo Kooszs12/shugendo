@@ -10,34 +10,34 @@
           <!--userがログインしているか判断-->
           <% if user_signed_in? %>
             <!--ログインしていた場合のヘッダー-->
-            <li>
+            <li class="vertical-text">
               <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
-                Log out
+                ろぐあうと
               <% end %>
             </li>
 
           <!-- adminがログインしているか判断 -->
           <% elsif admin_signed_in? %>
-            <li class="nav-item">
+            <li class="vertical-text">
               <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
-                Log out
+                ろぐあうと
               <% end %>
             </li>
 
+          <!--ログインしていない場合-->
           <% else %>
-            <!--ログインしていない場合-->
-            <li>
+            <li class="vertical-text">
               <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
                 <i class="fas fa-user-plus"></i>
-                Sign up
+                さいんあっぷ
               <% end %>
             </li>
-            <li>
+            <li class="vertical-text">
               <%= link_to new_user_session_path, class: "nav-link text-light" do %>
                 <i class="fa-solid fa-right-to-bracket"></i>
-                Log in
+                ろぐいん
               <% end %>
             </li>
           <% end %>

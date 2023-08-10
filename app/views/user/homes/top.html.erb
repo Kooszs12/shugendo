@@ -1,25 +1,13 @@
-<div class="row">
-  <% @places.each do |place| %>
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th></th>
-                <th>寺社</th>
-                <th></th>
-              </tr>
-          <% if place.image.attached? %>
-            <%= image_tag place.image, style: "max-width: 700px;" %>
-          <% else %>
-            <%= image_tag "no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
-          <% end %>
-          <h5 class="card-title"><%= place.name %></h5>
-          <p class="card-text"><%= place.address %></p>
-          <!-- 他の情報を表示 -->
-        </div>
-      </div>
+<div class="container o-8column">
+  <div class="row">
+
+    <!--サイドバー部分テンプレート-->
+    <div class="col-md-5 border border-danger">
+      <%= render 'layouts/a_side' %>
     </div>
-  <% end %>
+
+    <!--寺社一覧表示-->
+    <div class="col-md-6 offset-lg-1">
+    </div>
+  </div>
 </div>

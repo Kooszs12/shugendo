@@ -5,9 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   #バリデーション設定
-  validates :nickname,
-    #文字数制限
-    length: { minimum: 1, maximum: 10 },
-    #ニックネームの一意性
-    uniqueness: true
+  validates :nickname, presence: true, length: { maximum: 10 }, uniqueness: true
+
 end
