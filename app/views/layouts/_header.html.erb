@@ -1,11 +1,11 @@
 <header class= "bg-light mt-4">
-  <nav class="navbar navbar-expand p-4">
+  <nav class="navbar navbar-expand p-3">
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse">
-        <%= link_to image_tag("syukendou_logo", size: "250x250"), "/" %>
+        <%= link_to image_tag("syukendou_logo", size: "200x200"), "/" %>
         <ul class="navbar-nav ml-auto">
           <!--userがログインしているか判断-->
           <% if user_signed_in? %>
@@ -15,6 +15,11 @@
                  <h5>ほぉむ</h5>
               <% end %>
             </li>
+            <li class="vertical-text .text-info ">
+              <%= link_to places_path, class: "nav-link" do %>
+                <h5>いちらん</h5>
+              <% end %>
+            </il>
             <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
               <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>

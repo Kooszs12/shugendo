@@ -19,6 +19,10 @@ class User::PlacesController < ApplicationController
     end
   end
 
+  def index
+    @places = Place.all
+  end
+
   def show
     @place = Place.find(params[:id])
   end
