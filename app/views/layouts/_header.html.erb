@@ -20,6 +20,11 @@
                 <h5>いちらん</h5>
               <% end %>
             </il>
+            <li class="vertical-text .text-info">
+              <%= link_to new_place_path, class: "nav-link" do %>
+                <h5>寺社とうこう</h5>
+              <% end %>
+            </li>
             <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
               <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -36,6 +41,11 @@
             <li class="vertical-text .text-info ">
               <%= link_to admin_places_path, class: "nav-link" do %>
                 <h5>いちらん</h5>
+              <% end %>
+            </li>
+            <li class="vertical-text .text-info ">
+              <%= link_to admin_places_new_path, class: "nav-link" do %>
+                <h5>とうこう</h5>
               <% end %>
             </li>
             <li class="vertical-text .text-info ">
