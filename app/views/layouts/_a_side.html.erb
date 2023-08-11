@@ -1,9 +1,20 @@
+<!--新規投稿＆検索サイドバー-->
 <%= stylesheet_link_tag "custom", :media => "all" %>
-<!--行を示す要素で、内部のコンテンツを行内に配置-->
-<h1>検索めにゅう</h1>
+
+<h2 class="text-center">新規投稿</h2>
+<div class="row text-center">
+  <div class="col-3 bgred center-block">
+    <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
+  </div>
+  <!--<div class="col-3 bgblue center-block">-->
+    <%#= link_to image_tag("godyuinn_new", size: "150x150"), new_gosyuin_path %>
+  <!--</div>-->
+</div>
+
+<h2 class=" text-center">検索めにゅう</h2>
 <!--キーワード検索-->
 <form class="mb-3 mt-3">
-  <submit>きいわあど検索</submit>
+  <submit>きぃわぁど検索</submit>
 </form>
 
 <form class="mb-1">
@@ -108,7 +119,7 @@
     <!--   チェックボックスの表示切替ボタン   -->
     <div class="checkbox-toggle mt-3 ml-auto mr-auto">
       御朱印の種類<br>
-      <font color="gray">ここをクリックまたはタップで開閉します</font>
+      <font color="gray">▼</font>
     </div>
     <!--   チェックボックス   -->
     <div class="checkboxes" style="display: none;">
@@ -133,7 +144,7 @@
     <!--   チェックボックスの表示切替ボタン   -->
     <div class="checkbox-toggle mt-3 ml-auto mr-auto">
       ペット連れ<br>
-      <font color="gray">ここをクリックまたはタップで開閉します</font>
+      <font color="gray">▼</font>
     </div>
     <!--   チェックボックス   -->
     <div class="checkboxes" style="display: none;">
