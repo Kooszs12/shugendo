@@ -43,10 +43,10 @@ class User::GosyuinsController < ApplicationController
   end
 
   def destroy
-     @gosyuin = Gosyuin.find(params[:id])
-     @gosyuin.destroy
-     redirect_to gosyuin_path
-
+    @gosyuin = Gosyuin.find(params[:id])
+    @gosyuin.destroy
+    flash[:notice] = "削除が完了しました。"
+    redirect_to gosyuin_path
   end
 
 end

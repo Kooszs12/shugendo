@@ -40,7 +40,7 @@ class Admin::PlacesController < ApplicationController
         redirect_to admin_place_path(@place)
         flash[:notice] = "編集されました"
     else
-      flash.now[:alert] = "failed"
+      flash.now[:alert] = "失敗"
       render :edit
     end
   end

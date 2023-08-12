@@ -37,13 +37,12 @@
 
   <div class="form-group">
     <%= f.label :寺社名 %><font color="red">*必須</font>
-    <!--autocomplete: 'off'を記述することで入力フォームに履歴が出ないようにできる-->
-    <%= f.text_field :name, placeholder: "寺社名", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :name, placeholder: "寺社名", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :郵便番号 %>
-    <%= f.text_field :postcode, placeholder: "郵便番号", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :postcode, placeholder: "郵便番号", class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -62,22 +61,22 @@
 
   <div class="form-group">
     <%= f.label :市区町村 %><font color="red">*必須</font>
-    <%= f.text_field :address, placeholder: "市区町村から記入してください", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :address, placeholder: "市区町村から記入してください", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :電話番号 %>
-    <%= f.text_field :phone_number, placeholder: "0000000", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :phone_number, placeholder: "0000000", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :御祭神 %>
-    <%= f.text_field :got, placeholder: "主祭神を記入してください", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :got, placeholder: "主祭神を記入してください", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :宗派 %>
-    <%= f.text_field :sect, placeholder: "宗派", autocomplete: 'off', class: "form-control" %>
+    <%= f.text_field :sect, placeholder: "宗派", class: "form-control" %>
   </div>
 
   <div class="form-group">
