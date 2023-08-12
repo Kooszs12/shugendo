@@ -18,7 +18,7 @@ class User::GoshuinsController < ApplicationController
     @otera= Place.where(category: 1)
     if @goshuin.save
       flash[:notice] = "投稿されました"
-      redirect_to goshuin_path(@goshuin)
+      redirect_to place_path(@goshuin)
     #失敗したら
     else
       flash.now[:alert] = "失敗しました"
@@ -36,11 +36,14 @@ class User::GoshuinsController < ApplicationController
 
   def edit
     @goshuin = Goshuin.find(params[:id])
+    @jinja = Place.where(category: 0)
+    @otera = Place.where(category: 1)
+    @places_data = { jinja: @jinja, otera: @otera }
   end
 
   def update
     @goshuin = Goshuin.find(params[:id])
-    if @goshuin.update(goshuin_paramus)
+    if @goshuin.update(goshuin_params)
       redirect_to place_path(@goshuin)
       flash[:notice] = "編集されました"
     else
