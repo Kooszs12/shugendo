@@ -1,6 +1,8 @@
 #ユーザー：神社・仏閣コントローラー
 class User::PlacesController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @place = Place.new
   end

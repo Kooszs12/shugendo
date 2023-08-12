@@ -1,15 +1,22 @@
 <!--新規投稿＆検索サイドバー-->
 <%= stylesheet_link_tag "custom", :media => "all" %>
 
-<h2 class="text-center">新規投稿</h2>
-<div class="row text-center">
-  <div class="col-3 bgred center-block">
-    <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
+<% if user_signed_in? %>
+  <h2 class="text-center">新規投稿</h2>
+  <div class="row text-center">
+    <div class="col-3 bgred center-block">
+      <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
+    </div>
+    <div class="col-3 bgblue center-block">
+      <%= link_to image_tag("godyuinn_new", size: "150x150"), new_place_path %>
+    </div>
   </div>
-  <!--<div class="col-3 bgblue center-block">-->
-    <%#= link_to image_tag("godyuinn_new", size: "150x150"), new_gosyuin_path %>
-  <!--</div>-->
-</div>
+<% elsif admin_signed_in? %>
+ <h2 class="text-center">新規投稿</h2>
+  <div class="text-center">
+    <%= link_to image_tag("place_new", size: "150x150"), new_admin_place_path %>
+  </div>
+<% end %>
 
 <h2 class=" text-center">検索めにゅう</h2>
 <!--キーワード検索-->
