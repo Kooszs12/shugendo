@@ -1,4 +1,7 @@
 <!--新規投稿＆検索サイドバー-->
+<!--a_sideのJavaScript適用-->
+<%= javascript_pack_tag 'a_side' %>
+<!--custom.CSS適用-->
 <%= stylesheet_link_tag "custom", :media => "all" %>
 
 <% if user_signed_in? %>
