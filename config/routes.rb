@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   scope module: :user do
     root "homes#top"
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
-    resources :gosyuins, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :goshuins, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
 end

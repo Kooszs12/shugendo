@@ -1,0 +1,2 @@
+module User::GoshuinsHelper
+end
