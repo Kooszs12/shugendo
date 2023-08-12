@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-   # 会員用
+   # ユーザー用
   # URL /customers/sign_in ...
   devise_for :users, skip: [:passwords],controllers: {
     registrations: "user/registrations",
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   scope module: :user do
     root "homes#top"
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
+    resources :gosyuins, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
 end

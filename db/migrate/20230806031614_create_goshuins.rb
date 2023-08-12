@@ -6,7 +6,7 @@ class CreateGoshuins < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true
       t.references :place, null: false, foreign_key: true
       t.string :message
-      t.integer :price, null: false
+      t.integer :price
       t.date :visit_day
 
       t.timestamps

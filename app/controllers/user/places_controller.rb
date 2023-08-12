@@ -12,7 +12,7 @@ class User::PlacesController < ApplicationController
     @place = Place.new(place_params)
     #保存が成功したら
     if @place.save
-      redirect_to admin_place_path(@place)
+      redirect_to place_path(@place)
       flash[:notice] = "投稿されました"
     #失敗したら
     else
