@@ -7,4 +7,6 @@ class User < ApplicationRecord
   #バリデーション設定
   validates :nickname, presence: true, length: { maximum: 10 }, uniqueness: true
 
+  # アソシエーション
+  has_many :goshuins
 end

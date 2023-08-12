@@ -9,6 +9,7 @@ class Place < ApplicationRecord
 
   #アソシエーション
   belongs_to :prefecture
+  has_many :goshuins
 
   #enum設定
   enum category: { shrine: 0, temple: 1 }
