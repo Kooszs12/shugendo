@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
     t.integer "user_id", null: false
     t.integer "place_id", null: false
     t.string "message"
-    t.integer "price", null: false
+    t.integer "price"
     t.date "visit_day"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

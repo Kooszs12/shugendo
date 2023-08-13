@@ -12,14 +12,10 @@ class User::GoshuinsController < ApplicationController
 
   def create
     @goshuin = Goshuin.new(goshuin_params)
-    # 神社date
-    @jinja= Place.where(category: 0)
-    # お寺data
-    @otera= Place.where(category: 1)
+
     if @goshuin.save
       flash[:notice] = "投稿されました"
-      redirect_to place_path(@goshuin)
-    #失敗したら
+      redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
     else
       flash.now[:alert] = "失敗しました"
       render :new
@@ -30,22 +26,19 @@ class User::GoshuinsController < ApplicationController
     @goshuins = Goshuin.all
   end
 
-  def show
-    @goshuin = Goshuin.find(params[:id])
-  end
-
   def edit
     @goshuin = Goshuin.find(params[:id])
-    @jinja = Place.where(category: 0)
-    @otera = Place.where(category: 1)
+    @jinja = Place.where(category: 0) # 神社data
+    @otera = Place.where(category: 1) # お寺data
   end
 
   def update
     @goshuin = Goshuin.find(params[:id])
-    @jinja = Place.where(category: 0)
-    @otera = Place.where(category: 1)
+
+    @jinja = Place.where(category: 0) # 神社data
+    @otera = Place.where(category: 1) # お寺data
     if @goshuin.update(goshuin_params)
-      redirect_to place_path(@goshuin)
+      redirect_to place_path(@goshuin.place) # 関連する寺社の詳細ページに遷移
       flash[:notice] = "編集されました"
     else
       flash.now[:alert] = "失敗しました"
@@ -63,7 +56,7 @@ class User::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :category)
+    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day)
   end
 
 
