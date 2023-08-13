@@ -13,7 +13,7 @@
           <tr>
             <th>御朱印</th>
             <th>寺社名</th>
-            <th>投稿者</th>
+            <th>情報</th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -22,7 +22,8 @@
           <% @goshuins.each do |goshuin| %>
             <tr>
               <td>
-               <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %>
+               <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %><br>
+              <%= goshuin.user.nickname %>
               </td>
               <td>
                 <%= link_to place_path(goshuin.place.id) do %>
@@ -34,7 +35,10 @@
                   <% end %>
                 <% end %>
               </td>
-              <td><%= goshuin.user.nickname %></td>
+              <td>
+                <%= goshuin.visit_day %><br>
+                ￥<%= goshuin.price %>
+              </td>
             </tr>
           <% end %>
         </tbody>
