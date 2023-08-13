@@ -1,13 +1,43 @@
 <div class="container o-8column">
   <div class="row">
 
-    <!--サイドバー部分テンプレート-->
+    <!-- サイドバー部分テンプレート -->
     <div class="col-md-4">
       <%= render 'layouts/a_side' %>
     </div>
 
-    <!--寺社一覧表示-->
+    <!-- 御朱印一覧表示 -->
     <div class="col-md-7 offset-lg-1">
+      <table class='table table-hover table-inverse'>
+        <thead>
+          <tr>
+            <th>御朱印</th>
+            <th>寺社名</th>
+            <th>投稿者</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <!-- テーブル内容表示 -->
+        <tbody>
+          <% @goshuins.each do |goshuin| %>
+            <tr>
+              <td>
+                <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %>
+              </td>
+              <td>
+                <%= goshuin.place.name %>
+              </td>
+              <td><%= goshuin.user.nickname %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center"> <!-- ページネーションを中央に配置するためのクラス -->
+        <div class="pagination"> <!-- ページネーション -->
+          <%= paginate @goshuins %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

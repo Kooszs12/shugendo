@@ -14,10 +14,8 @@ class Goshuin < ApplicationRecord
   has_one_attached :image
 
   #添付される画像がなかった場合のメソッド
-  def get_gosyuin_image
+  def get_goshuin_image
     (image.attached?) ? image : 'gosyuin_no_image'
   end
-
-
 
 end
