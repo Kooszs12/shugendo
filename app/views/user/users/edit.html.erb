@@ -1,2 +1,41 @@
-<h1>User::Users#edit</h1>
-<p>Find me in app/views/user/users/edit.html.erb</p>
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+    <!-- 左側のコラム (幅: 5カラム) -->
+    <div class="col-md-4">
+      <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+      <%= render 'b_side', user: @user %>
+    </div>
+
+    <!--編集表示-->
+    <div class="col-md-7 offset-lg-1">
+      <h2>ぷろふぃる編集</h2>
+      　<%= form_with model: @user, url: users_mypage_path, method: :patch do |f| %>
+        　<!--バリデーションの部分テンプレート-->
+          <!--formからmodelobjectを抜き出す-->
+          <%= render "layouts/error_messages", model: f.object %>
+
+        <div class="form-group">
+          <!--画像サイズのブートストラップ-->
+          <div class="w-50">
+            <% if @user.image.attached? %>
+              <%= image_tag @user.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+            <% else %>
+              <%= image_tag "profile_no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
+            <% end %>
+          </div>
+           <%= f.file_field :image, id: "imageField" %>
+        </div>
+
+    　   <div class="form-group mt-3">
+          <%= f.label :にっくねぇむ %>
+          <%= f.text_field :nickname, class: "form-control" %>
+        </div>
+
+        <%= f.submit '編集' %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

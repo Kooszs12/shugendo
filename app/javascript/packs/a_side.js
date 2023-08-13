@@ -32,16 +32,6 @@ $(document).on('turbolinks:load', () => {
         $('.area_overlay').hide();
     }
 
-    $('#imageField').on('change', (e) => {
-        var file = e.target.files[0];
-        var reader = new FileReader();
-        reader.onload = (f) => {
-            $('#imagePreview').attr('src', f.target.result);
-        }
-        reader.readAsDataURL(file);
-    });
-});
-
 // セレクトボックスの中にチェックボックス
 jQuery(function(){
     jQuery('.checkbox-toggle').on('click', function(){

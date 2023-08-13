@@ -18,4 +18,20 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// 画像アップロードフィールドの変更イベントが発生したときの処理
+$('#imageField').on('change', (e) => {
+  // 選択されたファイルを取得
+  var file = e.target.files[0];
 
+  // FileReaderオブジェクトを作成
+  var reader = new FileReader();
+
+  // 読み込み完了時の処理
+  reader.onload = (f) => {
+    // プレビュー画像のsrc属性を選択した画像ファイルのDataURLに設定
+    $('#imagePreview').attr('src', f.target.result);
+  }
+
+  // 画像ファイルをDataURL形式で読み込む
+  reader.readAsDataURL(file);
+});
