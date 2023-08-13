@@ -9,4 +9,13 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :goshuins
+
+  #画像カラム
+  has_one_attached :image
+
+  #添付される画像がなかった場合のメソッド
+  def get_goshuin_image
+    (image.attached?) ? image : 'profile_no_image'
+  end
+
 end
