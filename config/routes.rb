@@ -22,8 +22,16 @@ Rails.application.routes.draw do
 
   scope module: :user do
     root "homes#top"
+    # マイページ
+    get 'users/mypage' => 'users#show'
+    # 会員編集ページ
+    get 'users/infomation/edit' => 'users#edit'
+    patch '/users/infomation' => 'users#update'
+    # 退会確認ページ
+    get 'users/confirm_withdraw' => 'users#confirm_withdraw'
+    # 退会機能
+    patch '/customers/withdraw' => 'customers#withdraw'
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
     resources :goshuins, only: [:new, :create, :edit, :update, :destroy]
-    resources :users, only: [:show, :edit, :update, :destroy]
   end
 end
