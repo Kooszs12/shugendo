@@ -12,6 +12,9 @@
     <div class="col-md-7 offset-lg-1">
       <h1>御朱印投稿</h1>
       <%= form_with model: @goshuin do |f| %>
+        <!--バリデーションの部分テンプレート呼び出し-->
+        <%= render "layouts/error_messages", model: f.object %>
+
         <div class="form-group">
           <!--画像サイズのブートストラップ-->
           <div class="w-50">

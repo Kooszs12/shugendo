@@ -1,17 +1,25 @@
 <%= javascript_pack_tag 'goshuin' %>
 
 <div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
+    <!-- 左側のコラム (幅: 5カラム) -->
     <div class="col-md-4">
+      <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
       <%= render 'layouts/a_side' %>
     </div>
+    <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
       <h1>御朱印投稿</h1>
       <%= form_with model: @goshuin do |f| %>
+        <!--バリデーションの部分テンプレート呼び出し-->
+        <%= render "layouts/error_messages", model: f.object %>
+
         <div class="form-group">
+          <!--画像サイズのブートストラップ-->
           <div class="w-50">
             <% if @goshuin.image.attached? %>
-              <%= image_tag @goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+              <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% else %>
               <%= image_tag "gosyuin_no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% end %>
@@ -26,34 +34,35 @@
             <% end %>
           </div>
 
-          <div class="form-group" id="zinzya">
+          <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @places_data[:jinja].map { |place| [place.name, place.id] }, prompt: "選択してください", class: "form-control" %>
+            <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
           </div>
 
-          <div class="form-group" id="otera">
+          <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @places_data[:otera].map { |place| [place.name, place.id] }, prompt: "選択してください", class: "form-control" %>
+            <%= f.select :place_id, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
           </div>
 
           <div class="form-group">
-            <%= f.label :visit_day, "参拝日" %>
+            <%= f.label :参拝日 %>
             <%= f.date_field :visit_day, class: "form-control" %>
           </div>
 
           <div class="form-group">
-            <%= f.label :price, "心付け" %>
+            <%= f.label :心付け %>
             <%= f.text_field :price, placeholder: "心付け", class: "form-control" %>
           </div>
 
           <div class="form-group">
-            <%= f.label :message, "めっせぇじ" %>
+            <%= f.label :めっせぇじ %>
             <%= f.text_area :message, placeholder: "ご自由にどうぞ", class: "form-control" %>
           </div>
 
-          <%= f.submit "とうこう", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+          <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->
+          <%= f.submit :とうこう, class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

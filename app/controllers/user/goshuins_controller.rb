@@ -38,11 +38,12 @@ class User::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     @jinja = Place.where(category: 0)
     @otera = Place.where(category: 1)
-    @places_data = { jinja: @jinja, otera: @otera }
   end
 
   def update
     @goshuin = Goshuin.find(params[:id])
+    @jinja = Place.where(category: 0)
+    @otera = Place.where(category: 1)
     if @goshuin.update(goshuin_params)
       redirect_to place_path(@goshuin)
       flash[:notice] = "編集されました"

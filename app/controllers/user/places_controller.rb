@@ -27,6 +27,7 @@ class User::PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @goshuins = Goshuin.all
   end
 
 
