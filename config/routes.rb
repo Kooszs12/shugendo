@@ -17,12 +17,13 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/" => "homes#top"
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :users, only: [:index, :edit, :update, :destroy]
   end
 
   scope module: :user do
     root "homes#top"
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
-    resources :goshuins, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :goshuins, only: [:new, :create, :edit, :update, :destroy]
+    resources :users, only: [:show, :edit, :update, :destroy]
   end
-
 end

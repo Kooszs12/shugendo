@@ -27,6 +27,8 @@ class Admin::PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
+    @goshuins = @place.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
   end
 
 
