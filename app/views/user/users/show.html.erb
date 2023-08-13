@@ -1,2 +1,17 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<!-- マイページのコンテナ-->
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+    <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+    <!-- 左側のコラム (幅: 5カラム) -->
+    <div class="col-md-4">
+      ユーザー詳細サイドバー
+    </div>
+
+    <!-- 右側のコラム (幅: 7カラム) -->
+    <!--カレントユーザーが投稿した御朱印一覧表示-->
+    <div class="col-md-7 offset-lg-1">
+      <%= render 'layouts/goshuin_index' ,goshuins: @goshuins %>
+    </div>
+  </div>
+</div>

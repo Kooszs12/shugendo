@@ -8,47 +8,7 @@
 
     <!-- 御朱印一覧表示 -->
     <div class="col-md-7 offset-lg-1">
-      <table class='table table-hover table-inverse'>
-        <thead>
-          <tr>
-            <th>御朱印</th>
-            <th>寺社名</th>
-            <th>情報</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-        <!-- テーブル内容表示 -->
-        <tbody>
-          <% @goshuins.each do |goshuin| %>
-            <tr>
-              <td>
-               <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %><br>
-              <%= goshuin.user.nickname %>
-              </td>
-              <td>
-                <%= link_to place_path(goshuin.place.id) do %>
-                  <%= goshuin.place.name %>
-                <% end %>
-                <% if admin_signed_in? %><!--adminがログインしていたら-->
-                  <%= link_to admin_place_path(goshuin.place.id) do %>
-                    <%= goshuin.place.name %>
-                  <% end %>
-                <% end %>
-              </td>
-              <td>
-                <%= goshuin.visit_day %><br>
-                ￥<%= goshuin.price %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <div class="d-flex justify-content-center"> <!-- ページネーションを中央に配置するためのクラス -->
-        <div class="pagination"> <!-- ページネーション -->
-          <%= paginate @goshuins %>
-        </div>
-      </div>
+       <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
     </div>
   </div>
 </div>
