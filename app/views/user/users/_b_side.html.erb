@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+<h2 class="text-center">新規投稿</h2>
+<!--d-flexで設定、justify-content-around均等割-->
+<div class="d-flex justify-content-around">
+  <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
+  <%= link_to image_tag("godyuinn_new", size: "150x150"), new_goshuin_path %>
+</div>
+<% end %>
+
+<div class="sidebar">
+  <%#= image_tag @user.profile_picture_url, class: "profile-picture" %>
+  <h2 class="user-nickname"><%= user.nickname %></h2>
+  <p class="contact-info">Email: <%= user.email %></p>
+  <%= link_to "Edit Profile", users_infomation_edit_path(user), class: "edit-profile-link" %>
+</div>
