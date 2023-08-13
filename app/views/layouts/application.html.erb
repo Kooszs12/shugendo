@@ -21,24 +21,22 @@
 
   <body>
     <div class="background">
-      <div class="image">
-        <!--ヘッダーの部分テンプレート-->
-        <div>
-          <%= render "layouts/header" %>
-        </div>
-        <!--フッターの位置を下に固定するためのブロック要素-->
-        <div class="wrapper">
-          <div class="container">
-            <main>
-              <!--フラッシュメッセージの部分テンプレート-->
-              <%= render 'layouts/flash_messages' %>
-          　  <%= yield %>
-            </main>
-          </div>
-        </div>
-        <!--フッターの部分テンプレート-->
-        <%= render "layouts/footer" %>
+      <!--ヘッダーの部分テンプレート-->
+      <div class="header_image">
+        <%= render "layouts/header" %>
       </div>
+      <!--フッターの位置を下に固定するためのブロック要素-->
+      <div class="wrapper">
+        <div class="container">
+          <main>
+            <!--フラッシュメッセージの部分テンプレート-->
+            <%= render 'layouts/flash_messages' %>
+        　  <%= yield %>
+          </main>
+        </div>
+      </div>
+      <!--フッターの部分テンプレート-->
+      <%= render "layouts/footer" %>
     </div>
   </body>
 </html>

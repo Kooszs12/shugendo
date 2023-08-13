@@ -21,8 +21,9 @@
   font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 }
 
-header {
-  opacity: 0.8; /*全体を透明化*/
+.header_image {
+  background-image: url('23208622'); /* Corrected the URL */
+  background-size: 100% 100%;
 }
 
 .vertical-text {
@@ -35,14 +36,6 @@ header {
   background-size: cover;
   background-blend-mode: lighten;
   background-color: rgba(255, 255, 255,  0.8);/*４つ目で背景のみを透明化*/
-}
-
-.image {
-  background-image: url(24150466.png);
-  background-size: 100% 100%;
-  background-blend-mode: lighten;
-  background-color: rgba(255, 255, 255,  0.3);/*４つ目で背景のみを透明化*/
-
 }
 
 /*フッターを下に固定させるためのCSS*/
@@ -79,8 +72,9 @@ main {
 }
 
 footer {
-  opacity: 0.8; /*全体を透明化*/
-  height: 300px;
+  opacity: 0.8;
+  background-image: url('23532707'); /* Corrected the URL */
   background-size: 100% 100%;
-  padding: 50px 0; /* 上下に余白を追加 */
+  height: 300px;
+  padding: 50px 0;
 }
