@@ -13,13 +13,6 @@ ja: # 日本語の設定を行う
         ok: "OK"
         ng: "NG"
         not_clea: "わからない"
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
   date:
     abbr_day_names:
     - 日
@@ -195,7 +188,14 @@ ja: # 日本語の設定を行う
       short: "%m/%d %H:%M"
     pm: 午後
   activerecord:
+    errors:
+      messages:
+        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
     attributes:
+      gochuin: 御朱印
       user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
@@ -222,6 +222,8 @@ ja: # 日本語の設定を行う
         updated_at: 更新日
     models:
       user: ユーザー
+      goshuin: 
+      place:
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

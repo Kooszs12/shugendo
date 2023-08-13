@@ -37,11 +37,13 @@
           <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
             <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
+            <%#= select_tag "place_id", options_for_select(@jinja.map { |place| [place.name, place.id] }, selected: f.object.place_id), prompt: "選択してください", class: "form-control" %>
           </div>
 
           <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-            <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
+            <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
+            <%#= f.select :place_id2, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
+            <%= select_tag :place_id2, options_for_select(@otera.map { |place| [place.name, place.id] }, selected: params[:place_id2]), prompt: "選択してください", class: "form-control" %>
           </div>
 
           <div class="form-group">

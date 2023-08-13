@@ -12,7 +12,13 @@ class User::GoshuinsController < ApplicationController
 
   def create
     @goshuin = Goshuin.new(goshuin_params)
-
+    if @goshuin[:place_id].nil?
+      @goshuin[:place_id] = params[:place_id2]
+    end
+     # 神社data
+    @jinja= Place.where(category: 0)
+    # お寺data
+    @otera= Place.where(category: 1)
     if @goshuin.save
       flash[:notice] = "投稿されました"
       redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
@@ -34,7 +40,6 @@ class User::GoshuinsController < ApplicationController
 
   def update
     @goshuin = Goshuin.find(params[:id])
-
     @jinja = Place.where(category: 0) # 神社data
     @otera = Place.where(category: 1) # お寺data
     if @goshuin.update(goshuin_params)
