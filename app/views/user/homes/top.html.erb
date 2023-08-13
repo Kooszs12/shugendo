@@ -22,10 +22,17 @@
           <% @goshuins.each do |goshuin| %>
             <tr>
               <td>
-                <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %>
+               <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 100, height: 100 %>
               </td>
               <td>
-                <%= goshuin.place.name %>
+                <%= link_to place_path(goshuin.place.id) do %>
+                  <%= goshuin.place.name %>
+                <% end %>
+                <% if admin_signed_in? %><!--adminがログインしていたら-->
+                  <%= link_to admin_place_path(goshuin.place.id) do %>
+                    <%= goshuin.place.name %>
+                  <% end %>
+                <% end %>
               </td>
               <td><%= goshuin.user.nickname %></td>
             </tr>
