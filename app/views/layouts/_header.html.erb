@@ -1,77 +1,30 @@
-<header class= "mt-4">
-  <nav class="navbar navbar-expand p-3">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse d-flex justify-content-center">
-        <%= link_to image_tag("syukendou_logo", size: "200x200"), "/" %>
-        <ul class="navbar-nav ml-auto">
-          <!--userがログインしているか判断-->
-          <% if user_signed_in? %>
-            <!--ログインしていた場合のヘッダー-->
-            <li class="vertical-text text-info">
-              <%= link_to root_path, class: "nav-link" do %>
-                 <h5>ほぉむ</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text text-info">
-              <%= link_to users_mypage_path, class: "nav-link" do %>
-                 <h5>まいぺぇじ</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text .text-info ">
-              <%= link_to places_path, class: "nav-link" do %>
-                <h5>いちらん</h5>
-              <% end %>
-            </il>
-            <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
-              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <h5>ろぐあうと</h5>
-              <% end %>
+<header class="header_image">
+  <div class="container h-100">
 
-          <!-- adminがログインしているか判断 -->
-          <% elsif admin_signed_in? %>
-            <li class="vertical-text text-info">
-              <%= link_to root_path, class: "nav-link" do %>
-                 <h5>ほぉむ</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text .text-info ">
-              <%= link_to admin_places_path, class: "nav-link" do %>
-                <h5>いちらん</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text .text-info ">
-              <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <h5>ろぐあうと</h5>
-              <% end %>
-            </li>
+    <div class="position-relative h-100" style="z-index: 9998;">
 
-          <!--ログインしていない場合-->
-          <% else %>
-            <li class="vertical-text text-info">
-              <%= link_to root_path, class: "nav-link" do %>
-                 <h5>ほぉむ</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text .text-info">
-              <%= link_to new_user_registration_path, class: "nav-link" do %>
-                <i class="fas fa-user-plus"></i>
-                <h5>さいんあっぷ</h5>
-              <% end %>
-            </li>
-            <li class="vertical-text .text-info">
-              <%= link_to new_user_session_path, class: "nav-link" do %>
-                <i class="fa-solid fa-right-to-bracket"></i>
-                <h5>ろぐいん</h5>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
+      <div class="hum-menu d-block d-lg-none position-fixed p-2"
+            style="top: 10px; right: 10px; background-color: #f0f0f0; z-index: 9999;">
+        <i class="fa-solid fa-bars fa-2x"></i>
+      </div>
+
+      <div class="position-absolute d-flex w-100">
+          <%= link_to image_tag("syukendou_logo", size: "200x200"), "/", class: 'mx-auto' %>
+      </div>
+
+      <div class="position-absolute d-none d-lg-flex h-100 w-100" style="z-index: 9998;">
+        <%= render 'layouts/menu' %>
       </div>
     </div>
-  </nav>
+  </div>
 </header>
+
+<div class="sp-menu position-fixed d-none w-100 h-100"
+      style="z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #f0f0f0;">
+  <div class="d-flex align-items-center flex-column w-100 h-100">
+    <%= link_to image_tag("syukendou_logo", size: "200x200"), "/", class: 'mx-auto' %>
+    <%= render 'layouts/menu' %>
+  </div>
+</div>
+
+

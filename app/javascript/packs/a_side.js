@@ -39,3 +39,4 @@ jQuery(function(){
         jQuery('.checkboxes').css('display', 'flex');
     });
 });
+});

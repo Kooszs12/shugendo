@@ -23,10 +23,10 @@ Rails.application.routes.draw do
   scope module: :user do
     root "homes#top"
     # マイページ
-    get 'users/mypage' => 'users#show'
+    get 'users/mypage/:id' => 'users#show', as: :users_mypage
     # 会員編集ページ
     get 'users/infomation/edit' => 'users#edit'
-    patch '/users/infomation' => 'users#update'
+    patch '/users/information' => 'users#update'
     # 退会確認ページ
     get 'users/confirm_withdraw' => 'users#confirm_withdraw'
     # 退会機能

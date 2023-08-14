@@ -18,20 +18,28 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-// 画像アップロードフィールドの変更イベントが発生したときの処理
-$('#imageField').on('change', (e) => {
-  // 選択されたファイルを取得
-  var file = e.target.files[0];
+$(document).on('turbolinks:load', function() {
+  // 画像アップロードフィールドの変更イベントが発生したときの処理
+  $('#imageField').on('change', (e) => {
 
-  // FileReaderオブジェクトを作成
-  var reader = new FileReader();
+    // 選択されたファイルを取得
+    var file = e.target.files[0];
 
-  // 読み込み完了時の処理
-  reader.onload = (f) => {
-    // プレビュー画像のsrc属性を選択した画像ファイルのDataURLに設定
-    $('#imagePreview').attr('src', f.target.result);
-  }
+    // FileReaderオブジェクトを作成
+    var reader = new FileReader();
 
-  // 画像ファイルをDataURL形式で読み込む
-  reader.readAsDataURL(file);
+    // 読み込み完了時の処理
+    reader.onload = (f) => {
+      // プレビュー画像のsrc属性を選択した画像ファイルのDataURLに設定
+      $('#imagePreview').attr('src', f.target.result);
+    }
+
+    // 画像ファイルをDataURL形式で読み込む
+    reader.readAsDataURL(file);
+  });
+
+  $('.hum-menu, .sp-menu').click(function () {
+    $('.sp-menu').toggleClass('d-none');
+  })
+
 });

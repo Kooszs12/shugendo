@@ -10,10 +10,10 @@
     <!--編集表示-->
     <div class="col-md-7 offset-lg-1">
       <h2>ゆぅざぁ編集</h2>
-      　<%= form_with model: @user, url: users_mypage_path, method: :patch do |f| %>
-        　<!--バリデーションの部分テンプレート-->
-          <!--formからmodelobjectを抜き出す-->
-          <%= render "layouts/error_messages", model: f.object %>
+      <%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
+        <!--バリデーションの部分テンプレート-->
+        <!--formからmodelobjectを抜き出す-->
+        <%= render "layouts/error_messages", model: f.object %>
 
         <div class="form-group">
           <!--画像サイズのブートストラップ-->
@@ -34,9 +34,8 @@
         </div>
 
         <%= f.submit '編集' %>
-
-        <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
+

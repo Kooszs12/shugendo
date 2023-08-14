@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <!-- ユーザーのマイページへのリンク -->
-            <%= link_to goshuin.user.nickname, users_mypage_path(goshuin.user), class: "user-profile-link" %><br>
+            <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
             <%= goshuin.place.prefecture.name %>
           </div>
           <h5 class="card-title text-center">
