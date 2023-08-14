@@ -1,2 +1,16 @@
-<h1>User::Goshuins#index</h1>
-<p>Find me in app/views/user/goshuins/index.html.erb</p>
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+    <!-- 左側のコラム (幅: 5カラム) -->
+    <div class="col-md-4">
+      <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+      <%= render 'user/users/b_side', user: @user %>
+    </div>
+
+    <!--編集表示-->
+    <div class="col-md-7 offset-lg-1">
+      <h2>参拝日記</h2>
+        <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+    </div>
+  </div>
+</div>

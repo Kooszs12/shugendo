@@ -29,7 +29,8 @@ class User::GoshuinsController < ApplicationController
   end
 
   def index
-    @goshuins = Goshuin.all
+    @user = current_user
+    @goshuins = @user.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
   end
 
   def edit

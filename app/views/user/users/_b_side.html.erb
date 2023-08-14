@@ -8,8 +8,16 @@
 <% end %>
 
 <div class="sidebar">
-  <%#= image_tag @user.profile_picture_url, class: "profile-picture" %>
-  <h2 class="user-nickname"><%= user.nickname %></h2>
-  <p class="contact-info">Email: <%= user.email %></p>
-  <%= link_to "Edit Profile", users_infomation_edit_path(user), class: "edit-profile-link" %>
+  <div class="user-profile text-center">
+    <h2 class="user-nickname"><%= user.nickname %></h2>
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, class: "profile-image img-fluid rounded-circle" %>
+    <% else %>
+      <%= image_tag "profile_no_image.png", class: "profile-image img-fluid rounded-circle" %>
+    <% end %>
+  </div>
+  <!--<p class="contact-info">Email: <%#= user.email %></p>-->
+  <%= link_to "編集", users_infomation_edit_path(user), class: "edit-profile-link" %><br>
+  <%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %>
+
 </div>

@@ -18,9 +18,10 @@
         <div class="form-group">
           <!--画像サイズのブートストラップ-->
           <div class="w-50">
-            <% if @user.image.attached? %>
+            <!--画像カラムが空かどうか判断-->
+            <% if @user.image.attached? %><!--入っていた場合-->
               <%= image_tag @user.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
-            <% else %>
+            <% else %><!--入っていない場合-->
               <%= image_tag "profile_no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% end %>
           </div>

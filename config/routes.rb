@@ -32,6 +32,6 @@ Rails.application.routes.draw do
     # 退会機能
     patch '/customers/withdraw' => 'customers#withdraw'
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
-    resources :goshuins, only: [:new, :create, :edit, :update, :destroy]
+    resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 end
