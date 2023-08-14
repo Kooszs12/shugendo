@@ -1,6 +1,6 @@
 class User::GoshuinsController < ApplicationController
 
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def new
     @goshuin = Goshuin.new
@@ -54,9 +54,13 @@ class User::GoshuinsController < ApplicationController
 
   def destroy
     @goshuin = Goshuin.find(params[:id])
-    @goshuin.destroy
-    flash[:notice] = "削除が完了しました。"
-    redirect_to gosyuin_path
+    if @goshuin.destroy
+      redirect_to goshuins_path
+      flash[:notice] = "削除完了しました。"
+    else
+      flash.now[:alert] = "削除失敗しました"
+      render :index
+    end
   end
 
   private

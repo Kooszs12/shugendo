@@ -1,23 +1,27 @@
 <% if user_signed_in? %>
-<h2 class="text-center">新規投稿</h2>
-<!--d-flexで設定、justify-content-around均等割-->
-<div class="d-flex justify-content-around">
-  <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
-  <%= link_to image_tag("godyuinn_new", size: "150x150"), new_goshuin_path %>
-</div>
+  <h2 class="text-center">新規投稿</h2>
+  <!--d-flexで設定、justify-content-around均等割-->
+  <div class="d-flex justify-content-around">
+    <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
+    <%= link_to image_tag("godyuinn_new", size: "150x150"), new_goshuin_path %>
+  </div>
 <% end %>
 
 <div class="sidebar">
   <div class="user-profile text-center">
-    <h2 class="user-nickname"><%= user.nickname %></h2>
+    <h3 class="user-nickname"><%= user.nickname %></h3>
     <% if @user.image.attached? %>
       <%= image_tag @user.image, class: "profile-image img-fluid rounded-circle" %>
     <% else %>
       <%= image_tag "profile_no_image.png", class: "profile-image img-fluid rounded-circle" %>
     <% end %>
   </div>
-  <!--<p class="contact-info">Email: <%#= user.email %></p>-->
-  <%= link_to "編集", users_infomation_edit_path(user), class: "edit-profile-link" %><br>
-  <%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %>
-
+  <div>
+    <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
+    <% if user_signed_in? && user == current_user %>
+      <p class="mt-3">めぇる: <%= user.email %></p>
+      <p><%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "edit-profile-link" %></p>
+      <p><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>
+    <% end %>
+  </div>
 </div>

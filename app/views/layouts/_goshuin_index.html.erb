@@ -1,21 +1,20 @@
 <!-- 御朱印一覧表示 -->
-<h3 class = "text-center mt-3">御朱印一覧</h3>
-
 <div class="mb-3">
-  <div class="card-body">
-    <% goshuins.each do |goshuin| %>
+  <% goshuins.each do |goshuin| %>
+    <div class="card-body">
       <p class="card-text">
         <div class="d-flex justify-content-between">
           <div>
-            <%= goshuin.user.nickname %><br>
+            <!-- ユーザーのマイページへのリンク -->
+            <%= link_to goshuin.user.nickname, users_mypage_path(goshuin.user), class: "user-profile-link" %><br>
             <%= goshuin.place.prefecture.name %>
           </div>
           <h5 class="card-title text-center">
-            <%= link_to place_path(goshuin.place.id) do %>
+            <%= link_to place_path(goshuin.place) do %>
               <%= goshuin.place.name %>
             <% end %>
-            <% if admin_signed_in? %><!--adminがログインしていたら-->
-              <%= link_to admin_place_path(goshuin.place.id) do %>
+            <% if admin_signed_in? %>
+              <%= link_to admin_place_path(goshuin.place) do %>
                 <%= goshuin.place.name %>
               <% end %>
             <% end %>
@@ -32,13 +31,20 @@
       <p class="card-text mb-5">
         <%= goshuin.message %>
       </p>
-    <% end %>
-  </div>
+      <div>
+        <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
+        <% if user_signed_in? && goshuin.user == current_user %>
+          <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
+          <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <!-- ページネーション -->
-<div class="d-flex justify-content-center"> <!-- ページネーションを中央に配置するためのクラス -->
-  <div class="pagination"> <!-- ページネーション -->
+<div class="d-flex justify-content-center">
+  <div class="pagination">
     <%= paginate goshuins %>
   </div>
 </div>
