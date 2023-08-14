@@ -1,7 +1,9 @@
+# ユーザー：御朱印関連
 class User::GoshuinsController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
+  # 御朱印投稿ページ
   def new
     @goshuin = Goshuin.new
     # 神社data
@@ -10,6 +12,7 @@ class User::GoshuinsController < ApplicationController
     @otera= Place.where(category: 1)
   end
 
+  # 御朱印投稿機能
   def create
     @goshuin = Goshuin.new(goshuin_params)
     if @goshuin[:place_id].nil?
@@ -28,17 +31,20 @@ class User::GoshuinsController < ApplicationController
     end
   end
 
+  # ユーザー参拝日記（ログインしているユーザーのみ）
   def index
     @user = current_user
     @goshuins = @user.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
   end
 
+  # 御朱印編集ページ
   def edit
     @goshuin = Goshuin.find(params[:id])
     @jinja = Place.where(category: 0) # 神社data
     @otera = Place.where(category: 1) # お寺data
   end
 
+  # 御朱印編集機能
   def update
     @goshuin = Goshuin.find(params[:id])
     @jinja = Place.where(category: 0) # 神社data
@@ -52,6 +58,7 @@ class User::GoshuinsController < ApplicationController
     end
   end
 
+  # 御朱印削除機能
   def destroy
     @goshuin = Goshuin.find(params[:id])
     if @goshuin.destroy

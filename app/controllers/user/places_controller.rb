@@ -1,12 +1,14 @@
-#ユーザー：神社・仏閣コントローラー
+#ユーザー：寺社コントローラー
 class User::PlacesController < ApplicationController
 
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
 
+  # 寺社投稿ページ
   def new
     @place = Place.new
   end
 
+  # 寺社投稿機能
   def create
     #空の変数作成
     @place = Place.new(place_params)
@@ -21,10 +23,12 @@ class User::PlacesController < ApplicationController
     end
   end
 
+  # 寺社一覧
   def index
     @places = Place.all
   end
 
+  # 寺社詳細ページ（関連した御朱印の表示）
   def show
     @place = Place.find(params[:id])
     @goshuins = @place.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
@@ -33,11 +37,12 @@ class User::PlacesController < ApplicationController
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
   end
 
-
+  # 寺社編集ページ（誰がいつ編集したのか履歴を残したい）
   def edit
     @place = Place.find(params[:id])
   end
 
+  # 寺社編集機能
   def update
     @place = Place.find(params[:id])
     if @place.update(place_params)
