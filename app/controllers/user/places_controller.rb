@@ -25,7 +25,7 @@ class User::PlacesController < ApplicationController
 
   # 寺社一覧
   def index
-    @places = Place.all
+    @places = Place.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
   end
 
   # 寺社詳細ページ（関連した御朱印の表示）

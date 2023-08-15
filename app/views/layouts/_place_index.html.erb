@@ -8,23 +8,20 @@
 <div class="mb-3">
   <% places.each do |place| %>
     <div class="card-body">
-      <div class="card-text d-flex justify-content-between">
-        <% if user_signed_in? %><!--userがログインしていたら-->
-          <%= link_to place.name, place_path(place) %>
-        <% elsif admin_signed_in? %><!--adminがログインしていたら-->
+      <h5 class="card-text text-center">
+        <%= link_to place.name, place_path(place) %>
+        <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to place.name, admin_place_path(place) %>
         <% end %>
-      </div>
+      </h5>
 
-      <div class="card-img-bottom">
-        <!--どっちがログインしているか判断-->
-        <% if user_signed_in? %><!--userがログインしていたら-->
-          <%= link_to place_path(place) do %>
-            <%= image_tag place.get_place_image, alt: 'Place Image', width: 100, height: 100 %>
-          <% end %>
-        <% elsif admin_signed_in? %><!--adminがログインしていたら-->
+      <div class="card-img-bottom text-center">
+        <%= link_to place_path(place) do %>
+           <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
+        <% end %>
+        <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to admin_place_path(place) do %>
-            <%= image_tag place.get_place_image, alt: 'Place Image', width: 100, height: 100 %>
+            <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
           <% end %>
         <% end %>
       </div>
@@ -38,5 +35,12 @@
       <td><%= place.prefecture.name %> <%= place.address %></td>
      <p class="card-text mb-5">
     <% end %>
+  </div>
+</div>
+
+<!-- ページネーション -->
+<div class="d-flex justify-content-center">
+  <div class="pagination">
+    <%= paginate places %>
   </div>
 </div>
