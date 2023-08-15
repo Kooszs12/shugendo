@@ -9,6 +9,7 @@
             <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
             <%= goshuin.place.prefecture.name %>
           </div>
+          <% if params[:controller] != 'user/places' && params[:action] != 'show' %>
           <h5 class="card-title text-center">
             <%= link_to place_path(goshuin.place) do %>
               <%= goshuin.place.name %>
@@ -19,6 +20,7 @@
               <% end %>
             <% end %>
           </h5>
+          <% end %>
           <div class="card-text">
             心付け：￥<%= goshuin.price %><br>
             参拝日：<%= goshuin.visit_day %>

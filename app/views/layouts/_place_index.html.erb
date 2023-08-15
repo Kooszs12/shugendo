@@ -9,33 +9,26 @@
   <% places.each do |place| %>
     <div class="card-body">
       <h5 class="card-text text-center">
-        <%= link_to place.name, place_path(place) %>
         <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to place.name, admin_place_path(place) %>
+        <% else %>
+          <%= link_to place.name, place_path(place) %>
         <% end %>
       </h5>
 
       <div class="card-img-bottom text-center">
-        <%= link_to place_path(place) do %>
-           <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
-        <% end %>
         <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to admin_place_path(place) do %>
             <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
           <% end %>
+        <% else %>
+          <%=  link_to place_path(place) do %>
+           <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
+          <% end %>
         <% end %>
       </div>
-
-      <p class="card-text mb-5">
-        <% if user_signed_in? %><!--userがログインしていたら-->
-          <%= link_to place.name, place_path(place) %>
-        <% elsif admin_signed_in? %><!--adminがログインしていたら-->
-          <%= link_to place.name, admin_place_path(place) %></td>
-        <% end %>
-      <td><%= place.prefecture.name %> <%= place.address %></td>
-     <p class="card-text mb-5">
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 
 <!-- ページネーション -->

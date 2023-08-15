@@ -25,7 +25,7 @@ class User::PlacesController < ApplicationController
 
   # 寺社一覧
   def index
-    @places = Place.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @places = Place.all.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
   end
 
   # 寺社詳細ページ（関連した御朱印の表示）
@@ -57,7 +57,7 @@ class User::PlacesController < ApplicationController
    private
 
   def place_params
-    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image)
+    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image, :page)
   end
 
 end
