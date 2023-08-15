@@ -21,7 +21,7 @@
   <!--フォーム内の関連する入力フィールドやラベルをまとめてグループ化、フォームをスタイリッシュにレイアウトしたり、<label>を使用してフォームと対応するラベルを関連付ける-->
   <div class="form-group">
     <!--画像サイズのブートストラップ-->
-    <div class="w-50">
+    <div class="w-100">
       <% if place.image.attached? %>
         <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
       <% else %>

@@ -22,7 +22,8 @@
 <!--キーワード検索-->
 <div class="search" >
   <%= form_with model: @q, method: :get, url: search_path, class: "search" do |f| %>
-    <%= f.search_field :name_cont, placeholder: "キーワード検索" %>
+    <!--検索するカラム-->
+    <%= f.search_field :name_or_address_or_postcode_or_phone_number_or_got_or_sect_or_cont, placeholder: "きぃわぁど検索" %>
     <%= f.button type: :submit, class: "search-button" do %>
       <i class="fa-solid fa-magnifying-glass" style="color: #17d0d3;"></i>
     <% end %>

@@ -46,10 +46,10 @@ class User::PlacesController < ApplicationController
   def update
     @place = Place.find(params[:id])
     if @place.update(place_params)
-        redirect_to admin_place_path(@place)
-        flash[:notice] = "編集されました"
+        redirect_to place_path(@place)
+        flash[:notice] = "更新されました"
     else
-      flash.now[:alert] = "failed"
+      flash.now[:alert] = "失敗しました"
       render :edit
     end
   end

@@ -12,6 +12,7 @@
     <!--寺社詳細部分テンプレート呼び出し-->
     <div class="col-md-7 offset-lg-1">
       <%= render 'layouts/place_show', place: @place %>
+      <h2 class="text-center mt-5">御朱印一覧</h2>
       <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
     </div>
   </div>
