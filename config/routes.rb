@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get "/" => "homes#top"
+     #検索
+    get "search" => "searches#search"
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
   end
@@ -31,6 +33,8 @@ Rails.application.routes.draw do
     get 'users/confirm_withdraw' => 'users#confirm_withdraw'
     # 退会機能
     patch '/customers/withdraw' => 'customers#withdraw'
+     #検索
+    get "search" => "searches#search"
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
     resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy]
   end

@@ -24,4 +24,8 @@ class Place < ApplicationRecord
     (image.attached?) ? image : 'no_image'
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "category", "created_at", "goshuin_status", "got", "name", "pet_status", "phone_number", "postcode", "prefecture_id", "sect"]
+  end
+
 end
