@@ -5,21 +5,18 @@
  <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
 </h2>
 
-<table class='table table-hover table-inverse'>
-  <!-- テーブルの題名 -->
-  <thead>
-    <tr>
-      <th></th>
-      <th>寺社名</th>
-      <th>住所</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <!-- テーブル内容表示 -->
-  <tbody>
-   <% places.each do |place| %>
-    <tr>
-      <td>
+<div class="mb-3">
+  <% places.each do |place| %>
+    <div class="card-body">
+      <div class="card-text d-flex justify-content-between">
+        <% if user_signed_in? %><!--userがログインしていたら-->
+          <%= link_to place.name, place_path(place) %>
+        <% elsif admin_signed_in? %><!--adminがログインしていたら-->
+          <%= link_to place.name, admin_place_path(place) %>
+        <% end %>
+      </div>
+
+      <div class="card-img-bottom">
         <!--どっちがログインしているか判断-->
         <% if user_signed_in? %><!--userがログインしていたら-->
           <%= link_to place_path(place) do %>
@@ -30,15 +27,16 @@
             <%= image_tag place.get_place_image, alt: 'Place Image', width: 100, height: 100 %>
           <% end %>
         <% end %>
-      </td>
-      <td>
+      </div>
+
+      <p class="card-text mb-5">
         <% if user_signed_in? %><!--userがログインしていたら-->
           <%= link_to place.name, place_path(place) %>
         <% elsif admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to place.name, admin_place_path(place) %></td>
         <% end %>
       <td><%= place.prefecture.name %> <%= place.address %></td>
-     </tr>
+     <p class="card-text mb-5">
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
