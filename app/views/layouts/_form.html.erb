@@ -55,7 +55,7 @@
 
   <div class="form-group">
     <%= f.label :都道府県 %><font color="red">*必須</font>
-    <%= f.select :prefecture_id, options_for_select(target_prefectures), { prompt: "都道府県を選択してください", selected: place.prefecture_id },
+    <%= f.select :prefecture_id, options_for_select(target_prefectures, place.prefecture_id), { prompt: "都道府県を選択してください" },
                                                             { class: "form-control", id: "prefecture-select",
                                                               data: { json: (prefectures.map{|o| { id: o.id, name: o.name, area_id: o.area.id } }).to_json }
                                                             } %>

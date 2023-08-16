@@ -12,7 +12,7 @@
           </div>
 
           <!--この部分テンプレートを使用している特定のページにのみ寺社名を表示させないIf-->
-          <% if params[:controller] != 'user/places' && params[:action] != 'show' %>
+          <% if params[:controller] != 'user/places' %>
           <h5 class="card-title text-center">
             <!--管理者がログインしていた場合-->
             <% if admin_signed_in? %>

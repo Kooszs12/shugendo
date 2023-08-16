@@ -12,7 +12,7 @@
       <table class="table border table-hover table-inverse">
         <% if @result == [] %>
           <h3 class="mt-3 text-center">検索結果がありません。</h3>
-        <% elsif @place.present? %>
+        <% elsif @places.present? %>
           <h2 class="mt-3">検索結果 "<%= @word %>"</h2>
           <thead>
             <tr>
@@ -23,7 +23,7 @@
           </thead>
           <tbody>
             <tr>
-              <% @place.each do |f| %>
+              <% @places.each do |f| %>
               <td><%= image_tag f.get_place_image, size: "248x200", class: "image" %></td>
               <td><%= link_to f.name, place_path(f.id) %></td>
             </tr>
