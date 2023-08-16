@@ -1,41 +1,48 @@
 <!-- ユーザーの御朱印一覧表示 -->
 <div class="mb-3">
+  <!--カードデザインで投稿された御朱印を繰り返し表示-->
   <% goshuins.each do |goshuin| %>
     <div class="card-body">
-      <p class="card-text">
+      <div class="card-text">
         <div class="d-flex justify-content-between">
           <div>
             <!-- ユーザーのマイページへのリンク -->
             <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
             <%= goshuin.place.prefecture.name %><!-- 御朱印を投稿したユーザーのニックネーム -->
           </div>
+
           <!--この部分テンプレートを使用している特定のページにのみ寺社名を表示させないIf-->
           <% if params[:controller] != 'user/places' && params[:action] != 'show' %>
           <h5 class="card-title text-center">
             <!--管理者がログインしていた場合-->
             <% if admin_signed_in? %>
               <%= link_to admin_place_path(goshuin.place) do %>
-                <%= goshuin.place.name %>
+                <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
               <% end %>
             <% else %><!--それ以外-->
               <%= link_to place_path(goshuin.place) do %>
-                <%= goshuin.place.name %>
+                <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
               <% end %>
             <% end %>
           </h5>
           <% end %>
+
           <div class="card-text">
             心付け：￥<%= goshuin.price %><br>
             参拝日：<%= goshuin.visit_day %>
           </div>
         </div>
-      </p>
+      </div>
+
+      <!--投稿された御朱印の画像-->
       <div class="card-img-bottom text-center">
         <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 500, height: 580 %>
       </div>
+      <!--投稿された御朱印のメッセージ-->
       <p class="card-text mb-5">
         <%= goshuin.message %>
       </p>
+
       <div>
         <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
         <% if user_signed_in? && goshuin.user == current_user %>

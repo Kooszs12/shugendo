@@ -38,7 +38,7 @@
       <!--フッターの部分テンプレート-->
       <%= render "layouts/footer" %>
     </div>
-    <%#= debug params if Rails.env.development? %>
+    <%= debug params if Rails.env.development? %>
     <%#= current_user.inspect if Rails.env.development? %>
     <%#= current_admin.inspect if Rails.env.development? %>
   </body>

@@ -33,6 +33,7 @@ $(document).on('turbolinks:load', () => {
   }
 
 // セレクトボックスの中にチェックボックス
+  // クリックしたら発火
   $('.checkbox-toggle').on('click', (e) => {
     const targetName = $(e.target).attr('id')
     $(`#${targetName}Checkboxes`).slideToggle();
