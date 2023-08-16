@@ -12,7 +12,7 @@
     <%= link_to image_tag("godyuinn_new", size: "150x150"), new_goshuin_path %>
   </div>
 <% elsif admin_signed_in? %>
- <h2 class="text-center">新規投稿</h2>
+  <h2 class="text-center">新規投稿</h2>
   <div class="text-center">
     <%= link_to image_tag("place_new", size: "150x150"), new_admin_place_path %>
   </div>
@@ -31,15 +31,20 @@
       <% end %>
     </div>
   <% end %>
+</div>
 
-  <!--寺社選択検索-->
+<div class="search">
+  <!--絞り込み検索　form_withで囲んであげることによって絞り込み検索が可能-->
   <%= form_with model: @q, method: :get, url: search_path do |f| %>
     <div class="form-group">
-      <!--検索するカラム-->
-      <%= f.label "寺社選択" %>
+      <%= f.label "" %>
+      <!--モデルの中のenmuカラムの中身をKeyとvarで分けて、繰り返しチェックボックスを作成する処理-->
       <% Place.categories.each do |k, v| %>
+        <!--label_tagでチェックボックスと文字を囲むことで文字を押してもチェックが入るようになる-->
         <%= label_tag do %>
+          <!--_inは完全一致。チェックが入ったら検索-->
           <%= check_box_tag "q[category_in][]", v %>
+          <!--表示するenumのkeyをGemを使用しないで日本語化して表示-->
           <span><%= t "enums.place.category.#{k}" %></span>
         <% end %>
       <% end %>
@@ -130,61 +135,44 @@
       </div>
     </div>
 
-    <!--中央寄せブートストラップ-->
-    <div class="center-block">
-      <form>
-        <!--   チェックボックスの表示切替ボタン   -->
-        <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="kindButton">
-          御朱印の種類<br>
-          <font color="gray">▼</font>
-        </div>
-        <!--   チェックボックス   -->
-        <div class="checkboxes" id="kindButtonCheckboxes" style="display: none;">
-          選択してください
-          <label>
-            <input type="checkbox">
-            <span>書き置き</span>
-          </label>
-          <label>
-            <input type="checkbox">
-            <span>直書き</span>
-          </label>
-          <label>
-            <input type="checkbox">
-            <span>わからない</span>
-          </label>
-        </div>
-      </form>
-
-      <!--セレクトボックスの中にチェックボックス-->
-      <form>
-        <!--   チェックボックスの表示切替ボタン   -->
-        <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="petButton">
-          ペット連れ<br>
-          <font color="gray">▼</font>
-        </div>
-        <!--   チェックボックス   -->
-        <div class="checkboxes" id="petButtonCheckboxes" style="display: none;">
-          選択してください
-          <label>
-            <input type="checkbox">
-            <span>OK</span>
-          </label>
-          <label>
-            <input type="checkbox">
-            <span>NG</span>
-          </label>
-          <label>
-            <input type="checkbox">
-            <span>わからない</span>
-          </label>
-        </div>
-      </form>
+    <!--御朱印の種類チェックボックス-->
+    <div class="form-group">
+      <!--   チェックボックスの表示切替ボタン   -->
+      <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="kindButton">
+        御朱印の種類<br>
+        <font color="gray">▼</font>
+      </div>
+      <%= f.label "" %>
+      <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
+      <div class="checkboxes" id="kindButtonCheckboxes" style="display: none;">
+        <% Place.goshuin_statuses.each do |k, v| %>
+          <%= label_tag do %>
+            <%= check_box_tag "q[goshuin_status_in][]", v %>
+            <span><%= t "enums.place.goshuin_status.#{k}" %></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <%= f.submit "完了" %>
-<% end %>
 
-<!--<div class="mt-3">-->
-  <!--<submit class="ml-auto">検索</submit>-->
-<!--</div>-->
+    <!--ペットチェックボックス-->
+    <div class="form-group">
+      <!--   チェックボックスの表示切替ボタン   -->
+      <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="petButton">
+        ペット<br>
+        <font color="gray">▼</font>
+      </div>
+      <%= f.label "" %>
+      <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
+      <div class="checkboxes" id="petButtonCheckboxes" style="display: none;">
+        <% Place.pet_statuses.each do |k, v| %>
+          <%= label_tag do %>
+            <%= check_box_tag "q[pet_status_in][]", v %>
+            <span><%= t "enums.place.pet_status.#{k}" %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.submit "検索開始" %>
+  <% end %>
+</div>

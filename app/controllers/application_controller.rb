@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # 全てのページで検索できるようにした。ただしあまり推奨させていない
   def set_q
     @q = Place.ransack(params[:q])
   end

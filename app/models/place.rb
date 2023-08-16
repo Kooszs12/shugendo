@@ -24,10 +24,12 @@ class Place < ApplicationRecord
     (image.attached?) ? image : 'no_image'
   end
 
+# 検索許可
   def self.ransackable_attributes(auth_object = nil)
-    ["address", "category", "created_at", "goshuin_status", "got", "name", "pet_status", "phone_number", "postcode", "sect"]
+    ["address", "category", "goshuin_status", "got", "name", "pet_status", "phone_number", "postcode", "sect"]
   end
 
+# アソシエーション先の検索許可
   def self.ransackable_associations(auth_object = nil)
     ["goshuins", "prefecture"]
   end
