@@ -28,41 +28,63 @@
 
           <%= f.hidden_field :user_id, value: current_user.id %>
 
-           <div class="form-group mt-3">
+          <!--寺社選択ラジオボタン-->
+          <div class="form-group mt-3">
             <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
               <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
             <% end %>
           </div>
 
+          <!--神社名セレクトボックス-->
           <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
             <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
-            <%#= select_tag "place_id", options_for_select(@jinja.map { |place| [place.name, place.id] }, selected: f.object.place_id), prompt: "選択してください", class: "form-control" %>
           </div>
 
+          <!--お寺名セレクトボックス-->
           <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%#= f.select :place_id2, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
             <%= select_tag :place_id2, options_for_select(@otera.map { |place| [place.name, place.id] }, selected: params[:place_id2]), prompt: "選択してください", class: "form-control" %>
           </div>
 
+          <div class="d-flex mb-3">
+            <%= link_to "寺社投稿", new_place_path, class: "btn btn-secondary mr-1" %>
+            <p class="ml-1">選択肢がない場合はお手数ですが寺社投稿お願いします</p>
+          </div>
+
+          <!--参拝日カレンダーフォーム-->
           <div class="form-group">
             <%= f.label :参拝日 %>
             <%= f.date_field :visit_day, class: "form-control" %>
           </div>
 
+          <!--御朱印料金フォーム-->
           <div class="form-group">
             <%= f.label :心付け %>
             <%= f.text_field :price, placeholder: "心付け", class: "form-control" %>
           </div>
 
+          <!--御朱印の種類選択セレクトボックス-->
+          <div class="form-group">
+            <%= f.label :御朱印の種類 %><font color="red">*必須</font>
+            <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+          </div>
+
+          <!--投稿メッセージフォーム-->
           <div class="form-group">
             <%= f.label :めっせぇじ %>
             <%= f.text_area :message, placeholder: "ご自由にどうぞ", class: "form-control" %>
           </div>
 
+          <!--投稿・非公開ラジオボタン-->
+          <div class="form-group">
+            <%= f.collection_radio_buttons :status, Goshuin.statuses_i18n, :first, :last do |b| %>
+              <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
+            <% end %>
+          </div>
+
           <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->
-          <%= f.submit :とうこう, class: "btn btn-primary" %>
+          <%= f.submit :投稿, class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

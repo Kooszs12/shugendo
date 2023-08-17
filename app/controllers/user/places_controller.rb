@@ -31,7 +31,8 @@ class User::PlacesController < ApplicationController
   # 寺社詳細ページ（関連した御朱印の表示）
   def show
     @place = Place.find(params[:id])
-    @goshuins = @place.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ１０件表示）
+    @goshuins = @place.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(10)
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
@@ -57,7 +58,7 @@ class User::PlacesController < ApplicationController
    private
 
   def place_params
-    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image, :page)
+    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image, :fee)
   end
 
 end

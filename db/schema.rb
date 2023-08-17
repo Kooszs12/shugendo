@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
   create_table "goshuins", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "place_id", null: false
+    t.integer "price", default: 0
+    t.integer "goshuin_status", null: false
     t.string "message"
-    t.integer "price"
     t.date "visit_day"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["place_id"], name: "index_goshuins_on_place_id"
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
     t.string "phone_number"
     t.string "got"
     t.string "sect"
+    t.integer "fee", default: 0
     t.integer "goshuin_status", null: false
     t.integer "pet_status", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -103,6 +106,7 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "nickname", null: false
+    t.string "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

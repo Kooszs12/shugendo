@@ -31,28 +31,33 @@
     <%= f.file_field :image, id: "imageField" %>
   </div>
 
+  <!--寺社選択ラジオボタン-->
   <div class="form-group">
     <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
       <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
     <% end %>
   </div>
 
+  <!--寺社名フォーム-->
   <div class="form-group">
     <%= f.label :寺社名 %><font color="red">*必須</font>
     <%= f.text_field :name, placeholder: "寺社名", class: "form-control" %>
   </div>
 
+  <!--郵便番号フォーム-->
   <div class="form-group">
     <%= f.label :郵便番号 %>
-    <%= f.text_field :postcode, placeholder: "郵便番号", class: "form-control" %>
+    <%= f.text_field :postcode, placeholder: "ハイフンなし", class: "form-control" %>
   </div>
 
+  <!--地方選択セレクトボックス-->
   <div class="form-group">
     <%= f.label :地方 %><font color="red">*必須</font>
     <!--f.selectを使用するときは機能とHTML要素に{ }をつけてあげないとブートストラップが反映-->
     <%= f.select :area_id, Area.all.collect { |area| [area.name, area.id] }, { prompt: "地方を選択してください", selected: place.prefecture&.area_id }, { class: "form-control", id: "area-select" } %>
     </div>
 
+  <!--都道府県選択セレクトボックス（地方選択によって中身が変わる）-->
   <div class="form-group">
     <%= f.label :都道府県 %><font color="red">*必須</font>
     <%= f.select :prefecture_id, options_for_select(target_prefectures, place.prefecture_id), { prompt: "都道府県を選択してください" },
@@ -61,32 +66,43 @@
                                                             } %>
   </div>
 
+  <!--住所カラム（市区町村から）-->
   <div class="form-group">
     <%= f.label :市区町村 %><font color="red">*必須</font>
     <%= f.text_field :address, placeholder: "市区町村から記入してください", class: "form-control" %>
   </div>
 
+  <!--電話番号カラム-->
   <div class="form-group">
     <%= f.label :電話番号 %>
-    <%= f.text_field :phone_number, placeholder: "0000000", class: "form-control" %>
+    <%= f.text_field :phone_number, placeholder: "ハイフンなし", class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :拝観料 %>
+    <%= f.text_field :fee, placeholder: "大人料金", class: "form-control" %>
+  </div>
+
+  <!--神様カラム-->
   <div class="form-group">
     <%= f.label :御祭神 %>
     <%= f.text_field :got, placeholder: "主祭神を記入してください", class: "form-control" %>
   </div>
 
+  <!--宗派カラム-->
   <div class="form-group">
     <%= f.label :宗派 %>
     <%= f.text_field :sect, placeholder: "宗派", class: "form-control" %>
   </div>
 
+  <!--御朱印の種類選択セレクトボックス-->
   <div class="form-group">
     <%= f.label :御朱印の種類 %><font color="red">*必須</font>
     <!--invertでkeyとvalueを入れ替えることで日本語化に成功-->
     <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
   </div>
 
+  <!--ペット選択セレクトボックス-->
   <div class="form-group">
     <%= f.label :ペット %><font color="red">*必須</font>
     <%= f.select :pet_status, Place.pet_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>

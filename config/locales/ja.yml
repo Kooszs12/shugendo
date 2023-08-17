@@ -7,12 +7,17 @@ ja: # 日本語の設定を行う
       goshuin_status:
         note: "書き置き"
         direct_writing: "直書き"
-        both: "両方"
-        others: "その他"
+        limited: "限定"
+        multiple: "複数"
+        other: "その他"
       pet_status:
         ok: "OK"
         ng: "NG"
         not_clea: "わからない"
+    goshuin:
+      status:
+        release: "全体公開"
+        private_status: "非公開"
   date:
     abbr_day_names:
     - 日
@@ -222,7 +227,7 @@ ja: # 日本語の設定を行う
         updated_at: 更新日
     models:
       user: ユーザー
-      goshuin: 
+      goshuin:
       place:
   devise:
     confirmations:

@@ -19,21 +19,24 @@
           <!--画像サイズのブートストラップ-->
           <div class="w-50">
             <% if @goshuin.image.attached? %>
-              <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+              <%= image_tag @goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% else %>
               <%= image_tag "gosyuin_no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% end %>
           </div>
-          <%= f.file_field :image, id: "imageField" %>
 
+          <!--ユーザーに表示させないがデータを送らないといけないため-->
+          <%= f.file_field :image, id: "imageField" %>
           <%= f.hidden_field :user_id, value: current_user.id %>
 
+           <!--神社名セレクトボックス-->
           <div class="form-group mt-3">
             <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
               <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
             <% end %>
           </div>
 
+          <!--お寺名セレクトボックス-->
           <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
             <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
@@ -44,19 +47,35 @@
             <%= f.select :place_id, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
           </div>
 
+          <!--参拝日カレンダーフォーム-->
           <div class="form-group">
             <%= f.label :参拝日 %>
             <%= f.date_field :visit_day, class: "form-control" %>
           </div>
 
+          <!--御朱印料金フォーム-->
           <div class="form-group">
             <%= f.label :心付け %>
             <%= f.text_field :price, placeholder: "心付け", class: "form-control" %>
           </div>
 
+          <!--御朱印の種類選択セレクトボックス-->
+          <div class="form-group">
+            <%= f.label :御朱印の種類 %><font color="red">*必須</font>
+            <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+          </div>
+
+          <!--投稿メッセージフォーム-->
           <div class="form-group">
             <%= f.label :めっせぇじ %>
             <%= f.text_area :message, placeholder: "ご自由にどうぞ", class: "form-control" %>
+          </div>
+
+          <!--投稿・非公開ラジオボタン-->
+          <div class="form-group">
+            <%= f.collection_radio_buttons :status, Goshuin.statuses_i18n, :first, :last do |b| %>
+              <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
+            <% end %>
           </div>
 
           <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->

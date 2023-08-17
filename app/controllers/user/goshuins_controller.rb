@@ -14,20 +14,36 @@ class User::GoshuinsController < ApplicationController
 
   # 御朱印投稿機能
   def create
+    # フォームからのデータを使って新しい Goshuin オブジェクトを作成
     @goshuin = Goshuin.new(goshuin_params)
+
+    # もし place_id が nil の場合、params から place_id2 を取得して代入
     if @goshuin[:place_id].nil?
       @goshuin[:place_id] = params[:place_id2]
     end
-     # 神社data
-    @jinja= Place.where(category: 0)
-    # お寺data
-    @otera= Place.where(category: 1)
-    if @goshuin.save
-      flash[:notice] = "投稿されました"
-      redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
-    else
-      flash.now[:alert] = "失敗しました"
-      render :new
+
+    # 神社データの取得（category: 0 でフィルタリング）
+    @jinja = Place.where(category: 0)
+    # お寺データの取得（category: 1 でフィルタリング）
+    @otera = Place.where(category: 1)
+
+    # レスポンスの形式に応じて処理を分岐
+    respond_to do |format|
+      if @goshuin.save
+        format.html do
+          # 成功時にフラッシュメッセージを設定し、詳細ページにリダイレクト
+          flash[:notice] = "投稿されました"
+          redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
+        end
+        format.json { render :show, status: :created, location: @goshuin }
+      else
+        format.html do
+          # 失敗時にフラッシュメッセージを設定し、新規投稿フォームを再表示
+          flash.now[:alert] = "失敗しました"
+          render :new
+        end
+        format.json { render json: @goshuin.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -73,8 +89,7 @@ class User::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day)
+    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :goshuin_status, :status, :image)
   end
-
 
 end

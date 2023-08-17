@@ -13,7 +13,7 @@ class Place < ApplicationRecord
 
   #enum設定
   enum category: { shrine: 0, temple: 1 }
-  enum goshuin_status: { note: 0, direct_writing: 1, both: 2, others: 3 }
+  enum goshuin_status: { note: 0, direct_writing: 1, limited: 2, multiple: 3, other: 4}
   enum pet_status: { ok: 0, ng: 1, not_clea: 2 }
 
   #imageカラム
