@@ -18,7 +18,7 @@
   </div>
   <div>
   <!-- ユーザーがログインしている場合 -->
-  <% if user_signed_in? == current_user %>
+  <% if @user == current_user %>
     <p class="mt-3">めぇる: <%= user.email %></p>
     <p><%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "edit-profile-link" %></p>
     <p><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>

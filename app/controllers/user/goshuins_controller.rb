@@ -56,6 +56,7 @@ class User::GoshuinsController < ApplicationController
   # 御朱印編集ページ
   def edit
     @goshuin = Goshuin.find(params[:id])
+    @category = @goshuin.place.category
     @jinja = Place.where(category: 0) # 神社data
     @otera = Place.where(category: 1) # お寺data
   end

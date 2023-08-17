@@ -11,10 +11,13 @@
     <!-- 右側のコラム (幅: 7カラム) -->
     <!--カレントユーザーが投稿した御朱印一覧表示-->
     <div class="col-md-7 offset-lg-1">
-      <h2 class="text-center">
-        <%= @goshuins.first.user.nickname %>御朱印一覧
-      </h2>
-      <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <!--present:御朱印が存在する場合-->
+      <% if @goshuins.present? %>
+        <h2 class="text-center">
+          <%= @goshuins.first.user.nickname %>御朱印一覧
+        </h2>
+        <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <% end %>
     </div>
   </div>
 </div>
