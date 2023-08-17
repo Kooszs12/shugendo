@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     patch '/customers/withdraw' => 'customers#withdraw'
      #検索
     get "search" => "searches#search"
-    resources :places, only: [:new, :create, :index, :show, :edit, :update]
+    resources :places, only: [:new, :create, :index, :edit, :update]
     resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 end

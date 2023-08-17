@@ -6,7 +6,7 @@
     <!-- 左側のコラム (幅: 5カラム) -->
     <div class="col-md-4">
       <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
-      <%= render 'layouts/a_side' %>
+      <%= render 'layouts/a_side', q: @q %>
     </div>
     <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
@@ -60,7 +60,7 @@
           </div>
 
           <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->
-          <%= f.submit :とうこう, class: "btn btn-primary" %>
+          <%= f.submit :更新, class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
