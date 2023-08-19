@@ -17,9 +17,16 @@
        <%= f.file_field :image, id: "imageField" %>
     </div>
 
+    <!--名前の編集-->
 　   <div class="form-group mt-3">
       <%= f.label :にっくねぇむ %>
       <%= f.text_field :nickname, class: "form-control" %>
+    </div>
+
+    <!--自己紹介-->
+    <div class="form-group mt-3">
+      <%= f.label :自己紹介 %>
+      <%= f.text_area :introduction, class: "form-control" %>
     </div>
 
     <%= f.submit '編集' %>
