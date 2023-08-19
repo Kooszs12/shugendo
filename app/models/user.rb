@@ -29,6 +29,11 @@ class User < ApplicationRecord
     end
   end
 
+   # ゲストログイン判断メソッド
+  def User.guest_user?
+    email == 'guest@example.com'
+  end
+
   # is_deletedがfalseならtrueを返すようにしている(退会制限)
   def active_for_authentication?
     super && (is_deleted == false)

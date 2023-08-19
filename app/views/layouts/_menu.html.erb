@@ -39,7 +39,7 @@
     </li>
 
   <!--ゲストログインの場合-->
-  <% elsif current_user && current_user.email == 'guest@example.com' %>
+  <% elsif user_signed_in? %>
     <li class="vertical-text text-info">
       <%= link_to 'ほぉむ', root_path, class: "nav-link"%>
     </li>
