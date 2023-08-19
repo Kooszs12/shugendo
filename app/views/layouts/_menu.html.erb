@@ -19,7 +19,7 @@
       <%= link_to places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
       <% end %>
-    </il>
+    </li>
 
 
     <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
@@ -27,6 +27,7 @@
         <i class="fa-solid fa-right-from-bracket"></i>
         <h5>ろぐあうと</h5>
       <% end %>
+    </li>
 
   <!-- adminがログインしているか判断 -->
   <% elsif admin_signed_in? %>
@@ -55,11 +56,31 @@
       <% end %>
     </li>
 
+  <% elsif current_user && current_user.email == 'guest@example.com' %>
+    <li class="vertical-text text-info">
+    <%= link_to root_path, class: "nav-link" do %>
+       <h5>ほぉむ</h5>
+    <% end %>
+    </li>
+
+    <li class="vertical-text .text-info ">
+      <%= link_to places_path, class: "nav-link" do %>
+        <h5>寺社一覧</h5>
+      <% end %>
+    </li>
+
+    <li class="vertical-text .text-info">
+      <%= link_to guest_sign_in_path, method: :post do %>
+        <i class="fas fa-user-plus"></i>
+        <h5>ろぐあうと</h5>
+      <% end %>
+    </li>
+
   <!--ログインしていない場合-->
   <% else %>
     <li class="vertical-text text-info">
       <%= link_to root_path, class: "nav-link" do %>
-         <h5>ほぉむ</h5>
+        <h5>ほぉむ</h5>
       <% end %>
     </li>
 
@@ -67,7 +88,7 @@
       <%= link_to places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
       <% end %>
-    </il>
+    </li>
 
     <li class="vertical-text .text-info">
       <%= link_to end_users_guest_sign_in_path, class: "nav-link" do %>
