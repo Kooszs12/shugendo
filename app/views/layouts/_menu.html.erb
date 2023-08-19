@@ -1,111 +1,78 @@
 <!--ヘッダーメニュー-->
 <ul class="mx-auto mx-lg-0 ml-lg-auto d-flex align-self-center list-unstyled">
+
   <!--userがログインしているか判断-->
   <% if user_signed_in? %>
     <!--ログインしていた場合のヘッダー-->
     <li class="vertical-text text-info">
-      <%= link_to root_path, class: "nav-link" do %>
-         <h5>ほぉむ</h5>
-      <% end %>
+      <%= link_to 'ほぉむ', root_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text text-info">
-      <%= link_to users_mypage_path(current_user.id), class: "nav-link" do %>
-         <h5>まいぺぇじ</h5>
-      <% end %>
+      <%= link_to 'まいぺぇじ', users_mypage_path(current_user.id), class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to places_path, class: "nav-link" do %>
-        <h5>寺社一覧</h5>
-      <% end %>
+      <%= link_to '寺社一覧', places_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
-      <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <h5>ろぐあうと</h5>
-      <% end %>
+      <%= link_to 'ろぐあうと', destroy_user_session_path, method: :delete, class: "nav-link" %>
     </li>
 
   <!-- adminがログインしているか判断 -->
   <% elsif admin_signed_in? %>
     <li class="vertical-text text-info">
-      <%= link_to root_path, class: "nav-link" do %>
-         <h5>ほぉむ</h5>
-      <% end %>
+      <%= link_to 'ほぉむ', root_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to admin_places_path, class: "nav-link" do %>
-        <h5>寺社一覧</h5>
-      <% end %>
+      <%= link_to '寺社一覧', admin_places_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to admin_users_path, class: "nav-link" do %>
-        <h5>会員一覧</h5>
-      <% end %>
+      <%= link_to '会員一覧', admin_users_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <h5>ろぐあうと</h5>
-      <% end %>
+      <%= link_to 'ろぐあう', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
 
   <!--ゲストログインの場合-->
   <% elsif current_user && current_user.email == 'guest@example.com' %>
     <li class="vertical-text text-info">
-      <%= link_to root_path, class: "nav-link" do %>
-         <h5>ほぉむ</h5>
-      <% end %>
+      <%= link_to 'ほぉむ', root_path, class: "nav-link"%>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to places_path, class: "nav-link" do %>
-        <h5>寺社一覧</h5>
-      <% end %>
+      <%= link_to '寺社一覧', places_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info">
-      <%= link_to guest_sign_in_path, method: :post do %>
+      <%= link_to 'ろぐあうと', guest_sign_in_path, method: :post %>
         <i class="fas fa-user-plus"></i>
-        <h5>ろぐあうと</h5>
-      <% end %>
     </li>
 
   <!--ログインしていない場合-->
   <% else %>
     <li class="vertical-text text-info">
-      <%= link_to root_path, class: "nav-link" do %>
-        <h5>ほぉむ</h5>
-      <% end %>
+      <%= link_to 'ほぉむ', root_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info ">
-      <%= link_to places_path, class: "nav-link" do %>
-        <h5>寺社一覧</h5>
-      <% end %>
+      <%= link_to '寺社一覧', places_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info">
-      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
+      <%= link_to 'げすとろぐいん', users_guest_sign_in_path, class: "nav-link", method: :post %>
     </li>
 
     <li class="vertical-text .text-info">
-      <%= link_to new_user_registration_path, class: "nav-link" do %>
-        <i class="fas fa-user-plus"></i>
-        <h5>さいんあっぷ</h5>
-      <% end %>
+      <%= link_to 'さいんあっぷ', new_user_registration_path, class: "nav-link" %>
     </li>
 
     <li class="vertical-text .text-info">
-      <%= link_to new_user_session_path, class: "nav-link" do %>
-        <i class="fa-solid fa-right-to-bracket"></i>
-        <h5>ろぐいん</h5>
-      <% end %>
+      <%= link_to 'ろぐいん', new_user_session_path, class: "nav-link" %>
     </li>
   <% end %>
 </ul>
