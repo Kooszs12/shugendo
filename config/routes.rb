@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get 'users/infomation/edit' => 'users#edit'
     patch '/users/information' => 'users#update'
     # 退会確認ページ
-    get 'users/user_withdraw' => 'users#confirm_withdraw'
+    get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: :users_confirm_withdraw
     # 退会機能
     patch '/user/withdraw' => 'users#withdraw'
      #検索

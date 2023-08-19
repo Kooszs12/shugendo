@@ -14,10 +14,10 @@
       <thead class = "thead-light">
         <div class = "row justify-content-center mt-3">
           <tr>
-            <th>会員ID</th>
-            <th>氏名</th>
-            <th>メールアドレス</th>
-            <!--<th>ステータス</th>-->
+            <th>会員番号</th>
+            <th>にっくねぇむ</th>
+            <th>めぇるあどれす</th>
+            <th>退会状況</th>
             <th colspan="4"></th>
           </tr>
         </div>
@@ -28,7 +28,7 @@
             <td><%= user.id %></td>
             <td><%= link_to user.nickname, admin_user_path(user.id) %></td>
             <td><%= user.email %></td>
-            <td><%#= user.is_deleted ? '退会' : '有効' %></td>
+            <td><%= user.is_deleted ? '退会' : '有効' %></td>
           </tr>
         <% end %>
       </tbody>

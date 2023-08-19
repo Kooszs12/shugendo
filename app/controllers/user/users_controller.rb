@@ -32,6 +32,10 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def confirm_withdraw
+    @user = User.find(current_user.id)
+  end
+
   def withdraw
     @user = User.find(current_user.id)
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
