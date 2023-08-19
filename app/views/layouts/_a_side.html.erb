@@ -65,7 +65,13 @@
       <div class="pref_area">
         <!--北海道・東北地方-->
         <div class="pref_list" data-list="1">
-          <div data-id="1">北海道</div>
+          <div data-id="1">
+            <%= label_tag do %>
+              北海道
+              <%= check_box_tag "q[test][]", "北海道" %>
+            <% end %>
+            
+          </div>
           <div data-id="2">青森県</div>
           <div data-id="3">岩手県</div>
           <div data-id="4">宮城県</div>

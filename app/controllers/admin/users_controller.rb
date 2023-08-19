@@ -30,4 +30,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def user_params
+    params.require(:user).permit(:id, :gohuin_id, :nickname, :email)
+  end
+
 end
