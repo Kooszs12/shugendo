@@ -29,5 +29,8 @@
       <%= f.text_area :introduction, class: "form-control" %>
     </div>
 
-    <%= f.submit '編集' %>
+    <div class="btn-group ">
+      <%= f.submit '更新', class: "btn btn-info ms-3" %>
+      <%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger ms-3 ml-3", data: { confirm: "本当に退会しますか？" }  %>
+    </div>
   <% end %>
