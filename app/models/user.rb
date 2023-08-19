@@ -20,17 +20,18 @@ class User < ApplicationRecord
   end
 
   # ゲストユーザーの生成
-  def guest_sign_in
-    # メールアドレス 'guest@example.com' のユーザーを検索または作成
-    user = User.find_or_create_by!(email: 'guest@example.com') do |end_user|
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
       # パスワード生成
-      end_user.password = SecureRandom.urlsafe_base64
+      user.password = SecureRandom.urlsafe_base64
       # ゲストニックネーム
-      end_user.nickname = '修験者'
+      user.nickname = '修験者'
     end
-    # ログイン処理（セッションの管理など）
-    sign_in(user)
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  # is_deletedがfalseならtrueを返すようにしている(退会制限)
+  def active_for_authentication?
+    super && (is_deleted == false)
   end
 
 end

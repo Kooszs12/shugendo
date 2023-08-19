@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   }
 
   # ゲストログイン
-  devise_scope :end_user do
-    get 'end_users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'user/sessions#guest_sign_in'
   end
 
   namespace :admin do
@@ -35,9 +35,9 @@ Rails.application.routes.draw do
     get 'users/infomation/edit' => 'users#edit'
     patch '/users/information' => 'users#update'
     # 退会確認ページ
-    get 'users/confirm_withdraw' => 'users#confirm_withdraw'
+    get 'users/user_withdraw' => 'users#confirm_withdraw'
     # 退会機能
-    patch '/customers/withdraw' => 'customers#withdraw'
+    patch '/user/withdraw' => 'users#withdraw'
      #検索
     get "search" => "searches#search"
     # 寺社関連

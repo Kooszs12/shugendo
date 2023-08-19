@@ -36,6 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname, null: false
       # 自己紹介カラム
       t.string :introduction
+      t.boolean :is_deleted, default: false, null: false
 
       t.timestamps null: false
     end

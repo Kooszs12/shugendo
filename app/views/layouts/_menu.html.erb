@@ -21,7 +21,6 @@
       <% end %>
     </li>
 
-
     <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
       <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
         <i class="fa-solid fa-right-from-bracket"></i>
@@ -56,6 +55,7 @@
       <% end %>
     </li>
 
+  <!--ゲストログインの場合-->
   <% elsif current_user && current_user.email == 'guest@example.com' %>
     <li class="vertical-text text-info">
       <%= link_to root_path, class: "nav-link" do %>
@@ -91,9 +91,7 @@
     </li>
 
     <li class="vertical-text .text-info">
-      <%= link_to end_users_guest_sign_in_path, class: "nav-link" do %>
-        <h5>げすとろぐいん</h5>
-      <% end %>
+      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
     </li>
 
     <li class="vertical-text .text-info">

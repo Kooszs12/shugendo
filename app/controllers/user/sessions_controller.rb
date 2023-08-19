@@ -25,11 +25,31 @@ class User::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+before_action :reject_user, only: [:create]
+
   # ゲストログインメソッド
   def guest_sign_in
-    end_user = EndUser.guest
-    sign_in end_user
+    user = User.guest
+    # byebug
+    sign_in user
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  protected
+
+  # 退会済みのユーザーがログインできないようにする
+  def reject_user
+    @user = User.find_by(email: params[:user][:email])
+    if @user
+      if @user.valid_password?(params[:user][:password]) && (@user.is_deleted == true)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください"
+        redirect_to new_user_registration_path
+      else
+        flash[:notice] = "項目を入力してください"
+      end
+    else
+      flash[:notice] = "該当するユーザーが見つかりません"
+    end
   end
 
 end
