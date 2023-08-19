@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
+  # ゲストログイン
+  devise_scope :end_user do
+    get 'end_users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+  end
+
   namespace :admin do
     get "/" => "homes#top"
      #検索

@@ -8,16 +8,20 @@
          <h5>ほぉむ</h5>
       <% end %>
     </li>
+
     <li class="vertical-text text-info">
       <%= link_to users_mypage_path(current_user.id), class: "nav-link" do %>
          <h5>まいぺぇじ</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info ">
       <%= link_to places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
       <% end %>
     </il>
+
+
     <li class="vertical-text text-info"> <!-- ここで .text-info クラスを適用 -->
       <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
         <i class="fa-solid fa-right-from-bracket"></i>
@@ -31,16 +35,19 @@
          <h5>ほぉむ</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info ">
       <%= link_to admin_places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info ">
       <%= link_to admin_users_path, class: "nav-link" do %>
         <h5>会員一覧</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info ">
       <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
         <i class="fa-solid fa-right-from-bracket"></i>
@@ -55,17 +62,26 @@
          <h5>ほぉむ</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info ">
       <%= link_to places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
       <% end %>
     </il>
+
+    <li class="vertical-text .text-info">
+      <%= link_to end_users_guest_sign_in_path, class: "nav-link" do %>
+        <h5>げすとろぐいん</h5>
+      <% end %>
+    </li>
+
     <li class="vertical-text .text-info">
       <%= link_to new_user_registration_path, class: "nav-link" do %>
         <i class="fas fa-user-plus"></i>
         <h5>さいんあっぷ</h5>
       <% end %>
     </li>
+
     <li class="vertical-text .text-info">
       <%= link_to new_user_session_path, class: "nav-link" do %>
         <i class="fa-solid fa-right-to-bracket"></i>
