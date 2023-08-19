@@ -68,81 +68,310 @@
           <div data-id="1">
             <%= label_tag do %>
               北海道
-              <%= check_box_tag "q[test][]", "北海道" %>
+              <%= check_box_tag "q[prefecture_in][]", "北海道" %>
             <% end %>
-            
           </div>
-          <div data-id="2">青森県</div>
-          <div data-id="3">岩手県</div>
-          <div data-id="4">宮城県</div>
-          <div data-id="5">秋田県</div>
-          <div data-id="6">山形県</div>
-          <div data-id="7">福島県</div>
+          <div data-id="2">
+            <%= label_tag do %>
+              青森県
+              <%= check_box_tag "q[prefecture_in][]", "青森県" %>
+            <% end %>
+            </div>
+          <div data-id="3">
+            <%= label_tag do %>
+              岩手県
+              <%= check_box_tag "q[prefecture_in][]", "岩手県" %>
+            <% end %>
+          </div>
+          <div data-id="4">
+            <%= label_tag do %>
+              宮城県
+              <%= check_box_tag "q[prefecture_in][]", "宮城県" %>
+            <% end %>
+          </div>
+          <div data-id="5">
+            <%= label_tag do %>
+              秋田県
+              <%= check_box_tag "q[prefecture_in][]", "秋田県" %>
+            <% end %>
+          </div>
+          <div data-id="6">
+            <%= label_tag do %>
+              山形県
+              <%= check_box_tag "q[prefecture_in][]", "山形県" %>
+            <% end %>
+          </div>
+          <div data-id="7">
+            <%= label_tag do %>
+              福島県
+              <%= check_box_tag "q[prefecture_in][]", "福島県" %>
+            <% end %>
+          </div>
           <div></div>
         </div>
 
         <!--関東地方-->
         <div class="pref_list" data-list="2">
-          <div data-id="8">茨城県</div>
-          <div data-id="9">栃木県</div>
-          <div data-id="10">群馬県</div>
-          <div data-id="11">埼玉県</div>
-          <div data-id="12">千葉県</div>
-          <div data-id="13">東京都</div>
-          <div data-id="14">神奈川県</div>
+          <div data-id="8">
+            <%= label_tag do %>
+              茨城県
+              <%= check_box_tag "q[prefecture_in][]", "茨城県" %>
+            <% end %>
+          </div>
+          <div data-id="9">
+            <%= label_tag do %>
+              栃木県
+              <%= check_box_tag "q[prefecture_in][]", "栃木県" %>
+            <% end %>
+          </div>
+          <div data-id="10">
+            <%= label_tag do %>
+              群馬県
+              <%= check_box_tag "q[prefecture_in][]", "群馬県" %>
+            <% end %>
+          </div>
+          <div data-id="11">
+            <%= label_tag do %>
+              埼玉県
+              <%= check_box_tag "q[prefecture_in][]", "埼玉県" %>
+            <% end %>
+          </div>
+          <div data-id="12">
+            <%= label_tag do %>
+              千葉県
+              <%= check_box_tag "q[prefecture_in][]", "千葉県" %>
+            <% end %>
+          </div>
+          <div data-id="13">
+            <%= label_tag do %>
+              東京都
+              <%= check_box_tag "q[prefecture_in][]", "東京都" %>
+            <% end %>
+          </div>
+          <div data-id="14">
+            <%= label_tag do %>
+              神奈川県
+              <%= check_box_tag "q[prefecture_in][]", "神奈川県" %>
+            <% end %>
+          </div>
           <div></div>
         </div>
 
         <!--中部地方-->
         <div class="pref_list" data-list="3">
-          <div data-id="15">新潟県‎</div>
-          <div data-id="16">富山県‎</div>
-          <div data-id="17">石川県‎</div>
-          <div data-id="18">福井県‎</div>
-          <div data-id="19">山梨県‎</div>
-          <div data-id="20">長野県‎</div>
-          <div data-id="21">岐阜県</div>
-          <div data-id="22">静岡県</div>
-          <div data-id="23">愛知県‎</div>
+          <div data-id="15">
+            <%= label_tag do %>
+              新潟県
+              <%= check_box_tag "q[prefecture_in][]", "新潟県" %>
+            <% end %>
+          </div>
+          <div data-id="16">
+            <%= label_tag do %>
+              富山県
+              <%= check_box_tag "q[prefecture_in][]", "富山県" %>
+            <% end %>
+          ‎</div>
+          <div data-id="17">
+            <%= label_tag do %>
+              石川県
+              <%= check_box_tag "q[prefecture_in][]", "石川県" %>
+            <% end %>
+          ‎</div>
+          <div data-id="18">
+            <%= label_tag do %>
+              福井県
+              <%= check_box_tag "q[prefecture_in][]", "福井県" %>
+            <% end %>
+          </div>
+          <div data-id="19">
+            <%= label_tag do %>
+              山梨県
+              <%= check_box_tag "q[prefecture_in][]", "山梨県" %>
+            <% end %>
+          </div>
+          <div data-id="20">
+            <%= label_tag do %>
+              長野県
+              <%= check_box_tag "q[prefecture_in][]", "長野県" %>
+            <% end %>
+          </div>
+          <div data-id="21">
+            <%= label_tag do %>
+              岐阜県
+              <%= check_box_tag "q[prefecture_in][]", "岐阜県" %>
+            <% end %>
+          </div>
+          <div data-id="22">
+            <%= label_tag do %>
+              静岡県
+              <%= check_box_tag "q[prefecture_in][]", "静岡県" %>
+            <% end %>
+          </div>
+          <div data-id="23">
+            <%= label_tag do %>
+              愛知県
+              <%= check_box_tag "q[prefecture_in][]", "愛知県" %>
+            <% end %>
+          </div>
           <div></div>
         </div>
 
         <!--近畿地方-->
         <div class="pref_list" data-list="4">
-          <div data-id="24">三重県</div>
-          <div data-id="25">滋賀県</div>
-          <div data-id="26">京都府</div>
-          <div data-id="27">大阪府</div>
-          <div data-id="28">兵庫県</div>
-          <div data-id="29">奈良県</div>
-          <div data-id="30">和歌山県</div>
+          <div data-id="24">
+            <%= label_tag do %>
+              三重県
+              <%= check_box_tag "q[prefecture_in][]", "三重県" %>
+            <% end %>
+          </div>
+          <div data-id="25">
+            <%= label_tag do %>
+              滋賀県
+              <%= check_box_tag "q[prefecture_in][]", "滋賀県" %>
+            <% end %>
+          </div>
+          <div data-id="26">
+            <%= label_tag do %>
+              京都府
+              <%= check_box_tag "q[prefecture_in][]", "京都府" %>
+            <% end %>
+          </div>
+          <div data-id="27">
+            <%= label_tag do %>
+              大阪府
+              <%= check_box_tag "q[prefecture_in][]", "大阪府" %>
+            <% end %>
+          </div>
+          <div data-id="28">
+            <%= label_tag do %>
+              兵庫県
+              <%= check_box_tag "q[prefecture_in][]", "兵庫県" %>
+            <% end %>
+          </div>
+          <div data-id="29">
+            <%= label_tag do %>
+              奈良県
+              <%= check_box_tag "q[prefecture_in][]", "奈良県" %>
+            <% end %>
+          </div>
+          <div data-id="30">
+            <%= label_tag do %>
+              和歌山県
+              <%= check_box_tag "q[prefecture_in][]", "和歌山県" %>
+            <% end %>
+          </div>
           <div></div>
         </div>
 
         <!--中国・四国地方-->
         <div class="pref_list" data-list="5">
-          <div data-id="31">鳥取県</div>
-          <div data-id="32">島根県</div>
-          <div data-id="33">岡山県</div>
-          <div data-id="34">広島県</div>
-          <div data-id="35">山口県</div>
-          <div data-id="36">徳島県</div>
-          <div data-id="37">香川県</div>
-          <div data-id="38">愛媛県</div>
-          <div data-id="39">高知県</div>
+          <div data-id="31">
+            <%= label_tag do %>
+              鳥取県
+              <%= check_box_tag "q[prefecture_in][]", "鳥取県" %>
+            <% end %>
+          </div>
+          <div data-id="32">
+            <%= label_tag do %>
+              島根県
+              <%= check_box_tag "q[prefecture_in][]", "島根県" %>
+            <% end %>
+          </div>
+          <div data-id="33">
+            <%= label_tag do %>
+              岡山県
+              <%= check_box_tag "q[prefecture_in][]", "岡山県" %>
+            <% end %>
+          </div>
+          <div data-id="34">
+            <%= label_tag do %>
+              広島県
+              <%= check_box_tag "q[prefecture_in][]", "広島県" %>
+            <% end %>
+          </div>
+          <div data-id="35">
+            <%= label_tag do %>
+              山口県
+              <%= check_box_tag "q[prefecture_in][]", "山口県" %>
+            <% end %>
+          </div>
+          <div data-id="36">
+            <%= label_tag do %>
+              徳島県
+              <%= check_box_tag "q[prefecture_in][]", "徳島県" %>
+            <% end %>
+          </div>
+          <div data-id="37">
+            <%= label_tag do %>
+              香川県
+              <%= check_box_tag "q[prefecture_in][]", "香川県" %>
+            <% end %>
+          </div>
+          <div data-id="38">
+            <%= label_tag do %>
+              愛媛県
+              <%= check_box_tag "q[prefecture_in][]", "愛媛県" %>
+            <% end %>
+          </div>
+          <div data-id="39">
+            <%= label_tag do %>
+              高知県
+              <%= check_box_tag "q[prefecture_in][]", "高知県" %>
+            <% end %>
+          </div>
           <div></div>
         </div>
 
         <!--九州・沖縄地方-->
         <div class="pref_list" data-list="6">
-          <div data-id="40">福岡県</div>
-          <div data-id="41">佐賀県</div>
-          <div data-id="42">長崎県</div>
-          <div data-id="43">熊本県</div>
-          <div data-id="44">大分県</div>
-          <div data-id="45">宮崎県</div>
-          <div data-id="46">鹿児島県</div>
-          <div data-id="47">沖縄県</div>
+          <div data-id="40">
+            <%= label_tag do %>
+              福岡県
+              <%= check_box_tag "q[prefecture_in][]", "福岡県" %>
+            <% end %>
+          </div>
+          <div data-id="41">
+            <%= label_tag do %>
+              佐賀県
+              <%= check_box_tag "q[prefecture_in][]", "佐賀県" %>
+            <% end %>
+          </div>
+          <div data-id="42">
+            <%= label_tag do %>
+              長崎県
+              <%= check_box_tag "q[prefecture_in][]", "長崎県" %>
+            <% end %>
+          </div>
+          <div data-id="43">
+            <%= label_tag do %>
+              熊本県
+              <%= check_box_tag "q[prefecture_in][]", "熊本県" %>
+            <% end %>
+          </div>
+          <div data-id="44">
+            <%= label_tag do %>
+              大分県
+              <%= check_box_tag "q[prefecture_in][]", "大分県" %>
+            <% end %>
+          </div>
+          <div data-id="45">
+            <%= label_tag do %>
+              宮崎県
+              <%= check_box_tag "q[prefecture_in][]", "宮崎県" %>
+            <% end %>
+          </div>
+          <div data-id="46">
+            <%= label_tag do %>
+              鹿児島県
+              <%= check_box_tag "q[prefecture_in][]", "鹿児島県" %>
+            <% end %>
+          </div>
+          <div data-id="47">
+            <%= label_tag do %>
+              沖縄県
+              <%= check_box_tag "q[prefecture_in][]", "沖縄県" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
