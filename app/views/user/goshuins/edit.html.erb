@@ -42,10 +42,10 @@
             <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
           </div>
 
-          <!--お寺選択フォーム-->
+          <!--お寺名セレクトボックス-->
           <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-            <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
+            <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
+            <%= select_tag :place_id2, options_for_select(@otera.map { |place| [place.name, place.id] }, selected: @goshuin.place.id), class: "form-control" %>
           </div>
 
           <div class="d-flex mb-3">

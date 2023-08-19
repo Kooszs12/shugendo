@@ -33,6 +33,7 @@ class Goshuin < ApplicationRecord
   favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
 
+  #
   attr_accessor :place_id2
 
 end
