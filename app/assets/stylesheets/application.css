@@ -14,6 +14,20 @@
  *= require_self
  */
 
+/*imagine_YOKOHAMAのWEBフォント対応定義*/
+@font-face {
+  font-family: "imagine_YOKOHAMA";
+  font-style: normal;
+  src: asset_url('HuiFont29.ttf');
+}
+
+/*HannariMincho-RegularのWEBフォント対応定義*/
+@font-face {
+  font-family: "HannariMincho-Regular";
+  font-style: normal;
+  src: asset_url('HuiFont29.ttf');
+}
+
 * {
   margin: 0;
   padding: 0;
