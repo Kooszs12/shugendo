@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :goshuins
+  has_many :favorites, dependent: :destroy
 
   #画像カラム
   has_one_attached :image

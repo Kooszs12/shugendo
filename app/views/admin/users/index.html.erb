@@ -1,2 +1,35 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<!-- 管理者側寺社ページのコンテナ -->
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+    <!-- 左側のコラム (幅: 5カラム) -->
+    <div class="col-md-5">
+      <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+      <%= render 'layouts/a_side', q: @q %>
+    </div>
+    <!-- 右側のコラム (幅: 7カラム) -->
+    <div class="col-md-6 offset-lg-1">
+      <h2 class="text-center ">会員一覧</h2>
+      <table class = "table table-striped">
+      <thead class = "thead-light">
+        <div class = "row justify-content-center mt-3">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <!--<th>ステータス</th>-->
+            <th colspan="4"></th>
+          </tr>
+        </div>
+      <thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= link_to user.nickname, admin_user_path(user.id) %></td>
+            <td><%= user.email %></td>
+            <td><%#= user.is_deleted ? '退会' : '有効' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

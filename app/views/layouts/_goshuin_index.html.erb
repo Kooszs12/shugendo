@@ -43,13 +43,18 @@
         <%= goshuin.message %>
       </p>
 
+      <div class="card-text">
+        <% if user_signed_in? %>
+          <%#= render "user/favorites/btn", goshuin: @goshuin %>
+        <% end %>
+      </div>
+
       <div>
         <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
         <% if user_signed_in? && goshuin.user == current_user %>
           <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
           <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
-        <!--後につけるかも？-->
-        <%# else admin_signed_in? %>
+        <% else admin_signed_in? %>
           <%#= link_to "編集", admin_edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
           <%#= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
         <% end %>

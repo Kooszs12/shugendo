@@ -1,3 +1,4 @@
+<!--ヘッダーメニュー-->
 <ul class="mx-auto mx-lg-0 ml-lg-auto d-flex align-self-center list-unstyled">
   <!--userがログインしているか判断-->
   <% if user_signed_in? %>
@@ -33,6 +34,11 @@
     <li class="vertical-text .text-info ">
       <%= link_to admin_places_path, class: "nav-link" do %>
         <h5>寺社一覧</h5>
+      <% end %>
+    </li>
+    <li class="vertical-text .text-info ">
+      <%= link_to admin_users_path, class: "nav-link" do %>
+        <h5>会員一覧</h5>
       <% end %>
     </li>
     <li class="vertical-text .text-info ">

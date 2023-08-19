@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @user = User.all
+    @users = User.all
   end
 
   def show
@@ -20,6 +20,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id]) # URLからユーザーIDを取得してユーザー情報を取得
+    if @user.update(user_params)
+      redirect_to admin_user_path(@user) # 管理者向けの詳細ページにリダイレクト
+      flash[:notice] = "編集されました"
+    else
+      flash.now[:alert] = "失敗しました"
+      render :edit
+    end
   end
 
 end

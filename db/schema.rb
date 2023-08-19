@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_07_032053) do
+ActiveRecord::Schema.define(version: 2023_08_18_091715) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "goshuin_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["goshuin_id"], name: "index_favorites_on_goshuin_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "goshuins", force: :cascade do |t|
@@ -115,6 +124,8 @@ ActiveRecord::Schema.define(version: 2023_08_07_032053) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "goshuins"
+  add_foreign_key "favorites", "users"
   add_foreign_key "goshuins", "places"
   add_foreign_key "goshuins", "users"
   add_foreign_key "places", "prefectures"

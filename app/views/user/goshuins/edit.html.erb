@@ -10,7 +10,7 @@
     </div>
     <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
-      <h1>御朱印編集</h1>
+      <h1>御朱印投稿</h1>
       <%= form_with model: @goshuin do |f| %>
         <!--バリデーションの部分テンプレート呼び出し-->
         <%= render "layouts/error_messages", model: f.object %>
@@ -19,32 +19,46 @@
           <!--画像サイズのブートストラップ-->
           <div class="w-50">
             <% if @goshuin.image.attached? %>
-              <%= image_tag @goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+              <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% else %>
               <%= image_tag "gosyuin_no_image", id: 'imagePreview', class: "img-fluid mb-3" %>
             <% end %>
           </div>
 
-          <!--ユーザーに表示させないがデータを送らないといけないため-->
           <%= f.file_field :image, id: "imageField" %>
           <%= f.hidden_field :user_id, value: current_user.id %>
 
-           <!--神社名セレクトボックス-->
+          <!-- place モデルの names を取得（includes の際に category テーブルも取得） -->
+          <% if @goshuin.place_id %>
+            <% category_name = @goshuin.category %> <!-- enumの値（文字列）を取得 -->
+            <% target_place_names = Place.where(category: Place.categories[category_name]).pluck(:name, :id) %>
+            <% target_place_names = target_place_names.select { |name, id| place_names.include?(name) && @goshuin.category == category } %>
+          <% else %>
+            <% target_place_names = [] %>
+          <% end %>
+
+          <!-- 寺社選択ラジオボタン -->
           <div class="form-group mt-3">
-            <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last,{checked:@category} do |b| %>
+            <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
               <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
             <% end %>
           </div>
 
-          <!--お寺名セレクトボックス-->
-          <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
+          <!-- 寺社選択フォーム -->
+          <div class="form-group" id="zinzya">
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
+            <%= f.collection_select :place_id, @jinja, :id, :name, { prompt: "選択してください" }, { class: "form-control", selected: @goshuin.place_id, data: { place_select: "" } } %>
           </div>
 
-          <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-            <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @otera.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: @goshuin.place.id }, { class: "form-control" } %>
+          <div class="form-group" id="otera" data-place-select="hidden">
+            <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
+            <%= select_tag :place_id2, options_for_select(target_place_names, selected: @goshuin.place_id2), prompt: "選択してください", class: "form-control", data: { place_select: "" } %>
+          </div>
+
+
+          <div class="d-flex mb-3">
+            <%= link_to "寺社投稿", new_place_path, class: "btn btn-secondary mr-1" %>
+            <p class="ml-1">選択肢がない場合はお手数ですが寺社投稿お願いします</p>
           </div>
 
           <!--参拝日カレンダーフォーム-->
@@ -79,7 +93,7 @@
           </div>
 
           <!--送信フォームここで名前はつけられていないので、表示したいViewの部分テンプレート呼び出し後に記述する-->
-          <%= f.submit :更新, class: "btn btn-primary" %>
+          <%= f.submit :投稿, class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

@@ -35,7 +35,12 @@ Rails.application.routes.draw do
     patch '/customers/withdraw' => 'customers#withdraw'
      #検索
     get "search" => "searches#search"
+    # 寺社関連
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
-    resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy]
+    # 御朱印関連
+    resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy] do
+      # いいね関連
+      resource :favorites, only: [:create, :destroy]
+    end
   end
 end

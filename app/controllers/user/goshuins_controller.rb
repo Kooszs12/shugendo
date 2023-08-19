@@ -56,7 +56,6 @@ class User::GoshuinsController < ApplicationController
   # 御朱印編集ページ
   def edit
     @goshuin = Goshuin.find(params[:id])
-    @category = @goshuin.place.category
     @jinja = Place.where(category: 0) # 神社data
     @otera = Place.where(category: 1) # お寺data
   end
@@ -66,6 +65,12 @@ class User::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     @jinja = Place.where(category: 0) # 神社data
     @otera = Place.where(category: 1) # お寺data
+
+    # もし place_id が nil の場合、params から place_id2 を取得して代入
+    if @goshuin[:place_id].nil?
+      @goshuin[:place_id] = params[:place_id2]
+    end
+
     if @goshuin.update(goshuin_params)
       redirect_to place_path(@goshuin.place) # 関連する寺社の詳細ページに遷移
       flash[:notice] = "編集されました"
@@ -90,7 +95,7 @@ class User::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :goshuin_status, :status, :image)
+    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :message, :price, :visit_day, :goshuin_status, :status, :image)
   end
 
 end
