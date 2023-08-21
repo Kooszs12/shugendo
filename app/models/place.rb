@@ -1,11 +1,21 @@
 class Place < ApplicationRecord
 
   #バリデーション設定
+  # カテゴリーラジオボタンバリデーション
   validates :category, presence: true
+  # 寺社名バリデーション
   validates :name, presence: true, length: { maximum: 20 }
+  # 住所バリデーション
   validates :address, presence: true, length: { maximum: 50 }
+  # 御朱印の種類ラジオボタンバリデーション
   validates :goshuin_status, presence: true
+  # ペット状況ラジオボタンバリデーション
   validates :pet_status, presence: true
+  # 郵便番号ハイフンありバリデーション（７桁）
+  validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/ }
+  # 電話番号ハイフンなしバリデーション（１０、１１桁）
+  validates :phone_number, format: { with: /\A\d{10,11}\z/ }
+
 
   #アソシエーション
   belongs_to :prefecture

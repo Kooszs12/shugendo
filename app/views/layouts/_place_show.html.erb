@@ -7,24 +7,24 @@
   <%= image_tag place.get_place_image, alt: 'Place Image', class: 'img-fluid' %>
 </div>
 <!--1段目のデータ表示-->
-<div class="row mt-3">
-  <div class="col-md-4">
+<div class="row mt-2">
+  <div class="col-md-3">
     <div>〒<%= place.postcode %></div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-7">
     <div>
       <!-- 表示させたいデータを連続で置くことで繋がって表示させることができる -->
       <%= place.prefecture.name %><%= place.address %>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-2">
     <div>☎︎<%= place.phone_number %></div>
   </div>
 </div>
 
 <!--2段目-->
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div><strong>御朱印状況:</strong> <%= place.goshuin_status_i18n %></div>
   </div>
   <div class="col-md-6">
@@ -33,9 +33,11 @@
 </div>
 
 <!--どっちがログインしているか判断-->
-<% if user_signed_in? %><!--userがログインしていたら-->
-  <%= link_to "編集", edit_place_path(place), class: "btn btn-sm btn-info mt-3" %>
-<% elsif admin_signed_in? %><!--adminがログインしていたら-->
-  <%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info mt-1" %>
-  <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
-<% end %>
+<div class="text-right">
+  <% if user_signed_in? %><!--userがログインしていたら-->
+    <%= link_to "編集", edit_place_path(place), class: "btn btn-sm btn-info w-25 mt-3" %>
+  <% elsif admin_signed_in? %><!--adminがログインしていたら-->
+    <%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info w-25 mt-1" %>
+    <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger  w-50" %>
+  <% end %>
+</div>

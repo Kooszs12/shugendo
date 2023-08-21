@@ -38,21 +38,6 @@
       <%= link_to 'ろぐあう', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
 
-  <!--ゲストログインの場合-->
-  <% elsif user_signed_in? %>
-    <li class="vertical-text text-info">
-      <%= link_to 'ほぉむ', root_path, class: "nav-link"%>
-    </li>
-
-    <li class="vertical-text .text-info ">
-      <%= link_to '寺社一覧', places_path, class: "nav-link" %>
-    </li>
-
-    <li class="vertical-text .text-info">
-      <%= link_to 'ろぐあうと', guest_sign_in_path, method: :post %>
-        <i class="fas fa-user-plus"></i>
-    </li>
-
   <!--ログインしていない場合-->
   <% else %>
     <li class="vertical-text text-info">

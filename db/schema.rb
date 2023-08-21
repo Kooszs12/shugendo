@@ -92,7 +92,9 @@ ActiveRecord::Schema.define(version: 2023_08_18_091715) do
     t.string "phone_number"
     t.string "got"
     t.string "sect"
-    t.integer "fee", default: 0
+    t.datetime "fee"
+    t.time "start_time"
+    t.time "end_time"
     t.integer "goshuin_status", null: false
     t.integer "pet_status", null: false
     t.datetime "created_at", precision: 6, null: false

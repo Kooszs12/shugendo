@@ -22,7 +22,11 @@ class CreatePlaces < ActiveRecord::Migration[6.1]
       # 宗派カラム
       t.string :sect
       # 拝観料カラム
-      t.integer :fee, default: 0 # 金額のカラムは, defaultを０にしておいた方がいい
+      t.datetime :fee, default: 0 # 金額のカラムは, defaultを０にしておいた方がいい
+      # 営業開始カラム
+      t.time :start_time
+      # 営業終了
+      t.time :end_time
       # 御朱印の種類カラム
       t.integer :goshuin_status, null: false #enum
       # ペットカラム
