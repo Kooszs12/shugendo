@@ -1,7 +1,10 @@
+<!--ユーザー詳細部分テンプレート-->
+<!--ユーザーがログインしていた場合-->
 <% if user_signed_in? %>
   <h2 class="text-center">新規投稿</h2>
   <!--d-flexで設定、justify-content-around均等割-->
   <div class="d-flex justify-content-around">
+    <!--プロフィールアイコン-->
     <%= link_to image_tag("place_new.png", size: "150x150"), new_place_path %>
     <%= link_to image_tag("godyuinn_new.png", size: "150x150"), new_goshuin_path %>
   </div>
@@ -9,6 +12,7 @@
 
 <div class="sidebar">
   <div class="user-profile text-center">
+    <!--ニックネーム-->
     <h3 class="user-nickname"><%= user.nickname %></h3>
     <% if user.image.attached? %>
       <%= image_tag user.image, class: "profile-image img-fluid rounded-circle" %>
@@ -18,24 +22,46 @@
   </div>
 
   <!--自己紹介-->
-  <div>
-    <p>自己紹介</p>
-    <%= user.introduction.present? ? user.introduction : "no-introduction" %>
+  <div class="mt-5">
+    <h5 class="text-center">
+      <i class="fas fa-user-ninja"></i>
+      自己紹介
+    </h5>
+    <!--自己紹介表示と自己紹介が空だった場合の表示-->
+    <%= user.introduction.present? ? user.introduction : "自己紹介はありません" %>
   </div>
 
+  <!--いいね部分テンプレート呼び出し-->
+  <%#= render "user/favorites/btn", user: user %>
+
   <div>
-  <!-- ユーザーがログインしている場合 -->
+  <!-- ユーザーがログインしていて且つ本人だった場合 -->
   <% if @user == current_user %>
-    <p class="mt-3">めぇる: <%= user.email %></p>
-    <p><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>
+    <h5 class="text-center mt-5">
+      <i class="far fa-envelope"></i>
+      めぇる
+    </h5>
+    <%= user.email %>
+    <p class="mt-5"><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>
+    <!--ゲストがログインしていた場合-->
     <% unless user.guest_user? %>
-      <p><%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "edit-profile-link" %></p>
+      <p class="text-center mt-5">
+        <i class="fal fa-pencil-alt"></i>
+        <%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "btn btn-info w-50" %>
+      </p>
     <% end %>
-    <p><%= link_to "退会", users_confirm_withdraw_path, class: "btn btn-secondary" %></p>
+    <p class="mt-5 text-right"><%= link_to "退会", users_confirm_withdraw_path, class: "btn btn-danger w-50" %></p>
   <% else admin_signed_in? %>
-    <p class="mt-3">めぇる: <%= user.email %></p>
-    <p><%= link_to "ゆぅざぁ編集", edit_admin_user_path(user), class: "edit-profile-link" %></p>
-    <p<%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %></p>
+    <h5 class="text-center mt-3">
+      <i class="far fa-envelope"></i>
+      めぇる
+    </h5>
+    <%= user.email %>
+    <p class=" text-center mt-5">
+      <i class="fal fa-pencil-alt"></i>
+      <%= link_to "ゆぅざぁ編集", edit_admin_user_path(user), class: "btn btn-info w-50" %>
+    </p>
+    <p class="mt-5 text-right"><%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger w-50" %></p>
   <% end %>
   </div>
 </div>
