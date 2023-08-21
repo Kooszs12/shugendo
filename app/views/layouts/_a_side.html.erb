@@ -20,8 +20,8 @@
 
 <h2 class=" text-center">検索めにゅう</h2>
 
-<div class="search" >
-  <!--キーワード検索-->
+<!--キーワード検索-->
+<div class="search text-center mt-4 md-3" >
   <%= form_with model: q, method: :get, url: search_path do |f| %>
     <div class="form-group">
       <!--検索するカラム-->
@@ -377,7 +377,7 @@
     </div>
 
     <!--御朱印の種類チェックボックス-->
-    <div class="form-group">
+    <div class="form-group mt-5">
       <!--   チェックボックスの表示切替ボタン   -->
       <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="kindButton">
         御朱印の種類<br>
@@ -399,7 +399,7 @@
     <div class="form-group">
       <!--   チェックボックスの表示切替ボタン   -->
       <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="petButton">
-        ペット<br>
+        ぺっと<br>
         <font color="gray">▼</font>
       </div>
       <%= f.label "" %>

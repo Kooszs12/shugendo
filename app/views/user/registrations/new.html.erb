@@ -1,36 +1,38 @@
 <!--ユーザー新規登録ページ-->
-<h2>新規登録</h2>
+<h2 class="text-center mb-5">新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "user/shared/error_messages", resource: resource %>
 
   <!--ニックネーム入力フォーム追加-->
-  <div class="field">
-    <%= f.label :ニックネーム %><br>
+  <div class="field mb-3">
+    <%= f.label :にっくねぇむ %>
     <%= f.text_field :nickname %>
   </div>
 
-  <div class="field">
-    <%= f.label :メールアドレス %><br />
+  <div class="field mb-3">
+    <%= f.label :めぇるあどれす %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード %>
+  <div class="field mb-3">
+    <%= f.label :ぱすわぁど %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字)</em>
-    <% end %><br />
+    <% end %>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-    <%= f.label :パスワード確認 %><br />
+  <div class="field mb-3">
+    <%= f.label :ぱすわぁど確認 %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
+  <div class="actions mt-3">
     <%= f.submit "新規登録" %>
   </div>
 <% end %>
 
-<%= render "user/shared/links" %>
+<div class="mt-2">
+  <%= render "user/shared/links" %>
+</div>
