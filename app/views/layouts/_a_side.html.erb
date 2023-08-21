@@ -8,13 +8,13 @@
   <h2 class="text-center">新規投稿</h2>
   <!--d-flexで設定、justify-content-around均等割-->
   <div class="d-flex justify-content-around">
-    <%= link_to image_tag("place_new", size: "150x150"), new_place_path %>
-    <%= link_to image_tag("godyuinn_new", size: "150x150"), new_goshuin_path %>
+    <%= link_to image_tag("place_new.png", size: "150x150"), new_place_path %>
+    <%= link_to image_tag("godyuinn_new.png", size: "150x150"), new_goshuin_path %>
   </div>
 <% elsif admin_signed_in? %>
   <h2 class="text-center">新規投稿</h2>
   <div class="text-center">
-    <%= link_to image_tag("place_new", size: "150x150"), new_admin_place_path %>
+    <%= link_to image_tag("place_new.png", size: "150x150"), new_admin_place_path %>
   </div>
 <% end %>
 
