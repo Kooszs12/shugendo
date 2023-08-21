@@ -2,7 +2,7 @@
 // 選択された画像を即反映させる
 // turbolinks:load イベントが発火したときに実行されるコード
 $(document).on('turbolinks:load', () => {
-  $('.area_btn').click(function(){
+  $('.area_btn').click(function(e){
     $('.area_overlay').show();
     $('.pref_area').show();
     var area = $(this).data('area');
@@ -21,7 +21,7 @@ $(document).on('turbolinks:load', () => {
       // 都道府県IDに応じて別ページに飛ばしたい場合はこんな風に書く↓
       // window.location.href = 'https://kinocolog.com/pref/' + id;
 
-      prefReset();
+      //prefReset();
     }
   });
 
