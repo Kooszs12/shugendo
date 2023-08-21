@@ -1,4 +1,4 @@
-<h2>ゆぅざぁ編集</h2>
+<h2 class="text-center">ゆぅざぁ編集</h2>
   <%= form_with model: user, url: target_path, method: :patch do |f| %>
     <!--バリデーションの部分テンプレート-->
     <!--formからmodelobjectを抜き出す-->
@@ -29,8 +29,9 @@
       <%= f.text_area :introduction, class: "form-control" %>
     </div>
 
-    <div class="btn-group ">
       <%= f.submit '更新', class: "btn btn-info ms-3" %>
-      <%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger ms-3 ml-3", data: { confirm: "本当に退会しますか？" }  %>
-    </div>
+      <div class="text-right">
+        <%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+      </div>
+
   <% end %>

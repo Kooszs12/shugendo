@@ -21,16 +21,17 @@ class User < ApplicationRecord
 
   # ゲストユーザーの生成
   def self.guest
-    find_or_create_by!(email: 'guest@example.com') do |user|
-      # パスワード生成
-      user.password = SecureRandom.urlsafe_base64
-      # ゲストニックネーム
-      user.nickname = '修験者'
-    end
+    user = User.find_or_initialize_by(email: 'guest@example.com', nickname: '修験者')
+
+    user.assign_attributes(password: SecureRandom.urlsafe_base64, is_deleted: false)
+    
+    user.save
+    
+    user
   end
 
    # ゲストログイン判断メソッド
-  def User.guest_user?
+  def guest_user?
     email == 'guest@example.com'
   end
 

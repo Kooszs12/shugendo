@@ -20,7 +20,7 @@
   <!--自己紹介-->
   <div>
     <p>自己紹介</p>
-    <%= user.introduction %>
+    <%= user.introduction.present? ? user.introduction : "no-introduction" %>
   </div>
 
   <div>
@@ -28,7 +28,9 @@
   <% if @user == current_user %>
     <p class="mt-3">めぇる: <%= user.email %></p>
     <p><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>
-    <p><%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "edit-profile-link" %></p>
+    <% unless user.guest_user? %>
+      <p><%= link_to "ゆぅざぁ編集", users_infomation_edit_path(user), class: "edit-profile-link" %></p>
+    <% end %>
     <p><%= link_to "退会", users_confirm_withdraw_path, class: "btn btn-secondary" %></p>
   <% else admin_signed_in? %>
     <p class="mt-3">めぇる: <%= user.email %></p>
