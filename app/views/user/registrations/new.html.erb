@@ -1,38 +1,48 @@
 <!--ユーザー新規登録ページ-->
-<h2 class="text-center mb-5">新規登録</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+      <h2 class="text-center mb-5">新規登録</h2>
+      <div class="card">
+        <div class="card-body">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "user/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "user/shared/error_messages", resource: resource %>
 
-  <!--ニックネーム入力フォーム追加-->
-  <div class="field mb-3">
-    <%= f.label :にっくねぇむ %>
-    <%= f.text_field :nickname %>
+            <!--ニックネーム入力フォーム追加-->
+            <div class="form-group">
+              <%= f.label :にっくねぇむ %>
+              <%= f.text_field :nickname, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :めぇるあどれす %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :ぱすわぁど %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> 文字)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :ぱすわぁど確認 %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="form-group text-center">
+              <%= f.submit "新規登録", class: 'btn btn-primary w-50' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <%= render "user/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field mb-3">
-    <%= f.label :めぇるあどれす %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field mb-3">
-    <%= f.label :ぱすわぁど %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字)</em>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field mb-3">
-    <%= f.label :ぱすわぁど確認 %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions mt-3">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
-<div class="mt-2">
-  <%= render "user/shared/links" %>
 </div>
