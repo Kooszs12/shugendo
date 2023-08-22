@@ -5,10 +5,11 @@
  <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
 </h2>
 
+<!--寺社一覧表示each-->
 <div class="mb-3">
   <% places.each do |place| %>
     <div class="card-body">
-      <h5 class="card-text text-center">
+      <h5 class="card-text">
         <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to place.name, admin_place_path(place) %>
         <% else %>
@@ -16,6 +17,26 @@
         <% end %>
       </h5>
 
+      <!--地方名/都道府県名表示-->
+      <div class="card-text">
+        <%= place.prefecture.area.name %>/<%= place.prefecture.name %>
+      </div>
+
+      <!--郵便番号＆住所表示-->
+      <div class="card-text">
+        <div class="row">
+          <!--郵便番号-->
+          <div class="col-md-3">
+            〒<%= place.postcode %>
+          </div>
+          <!--都道府県名住所-->
+          <div class="col-md-9 text-right">
+            <%= place.prefecture.name %><%= place.address %>
+          </div>
+        </div>
+      </div>
+
+    <!--画像表示-->
       <div class="card-img-bottom text-center">
         <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to admin_place_path(place) do %>
@@ -27,6 +48,7 @@
           <% end %>
         <% end %>
       </div>
+
     </div>
   <% end %>
 </div>
