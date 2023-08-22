@@ -117,6 +117,10 @@
       </div>
     </div>
 
-    <%= f.submit "検索開始" %>
+    <!--検索完了ボタン-->
+    <div class="search-done-btn">
+      <%= f.submit "検索開始", class: "btn-default btn-red" %>
+      <%= f.button "りせっと", type: "reset", class: "btn-default btn-gray" %>
+    </div>
   <% end %>
 </div>

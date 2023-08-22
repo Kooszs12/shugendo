@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
   def set_q
     @q = Place.ransack(params[:q])
   end
+  
 end
