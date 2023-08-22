@@ -70,7 +70,7 @@
               <div data-id="<%= prefecture.id %>">
                 <%= label_tag do %>
                   <%= prefecture.name %>
-                  <%= check_box_tag "q[prefecture_in][]", prefecture.name %>
+                  <%= check_box_tag "q[prefecture_id_in][]", prefecture.id %>
                 <% end %>
               </div>
             <% end %>
@@ -118,21 +118,25 @@
     </div>
 
     <!-- 選択した検索条件を表示 -->
-    <% if @selected_conditions.present? %>
-      <p>選択した検索条件：</p>
-      <ul>
-        <% @selected_conditions.each do |key, value| %>
-          <% if value.present? %>
-            <li><strong><%= key.to_s.humanize %>:</strong> <%= value %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
+    <div class="form-group">
+      <% if @selected_conditions.present? %>
+        <div class="selected-conditions">
+          <p><%= t('selected_conditions.title') %></p>
+          <ul>
+            <% @selected_conditions.each do |k, v| %>
+              <% if v.present? %>
+                <li><strong><%= t("selected_conditions.#{k}") %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
 
     <!--検索完了ボタン-->
     <div class="search-done-btn">
-      <%= f.submit "検索開始", class: "btn-default btn-red" %>
-      <%= f.button "りせっと", type: "reset", class: "btn-default btn-gray" %>
+      <%= f.submit "検索開始", class: "btn btn-info" %>
+      <%= f.button "りせっと", type: "reset", class: "btn btn-success ml-3" %>
     </div>
   <% end %>
 </div>

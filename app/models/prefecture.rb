@@ -6,5 +6,7 @@ class Prefecture < ApplicationRecord
   #アソシエーション(アソシエーションを記述するとバリデーションが設定される)
   belongs_to :area
   has_many :places
-
+  def self.ransackable_attributes(auth_object = nil)
+    ["area_id", "created_at", "id", "name", "updated_at"]
+  end
 end
