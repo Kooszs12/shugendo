@@ -12,9 +12,9 @@ class Place < ApplicationRecord
   # ペット状況ラジオボタンバリデーション
   validates :pet_status, presence: true
   # 郵便番号ハイフンありバリデーション（７桁）
-  validates :postcode, format: { with: /\A\d{3}[-]\d{4}\z/ }
+  validates :postcode, length: { maximum: 7 }
   # 電話番号ハイフンなしバリデーション（１０、１１桁）
-  validates :phone_number, format: { with: /\A\d{10,11}\z/ }
+  validates :phone_number, length: { maximum: 11 }
 
 
   #アソシエーション

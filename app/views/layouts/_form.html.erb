@@ -80,14 +80,14 @@
 
   <div class="form-group">
     <%= f.label :営業時間 %><br>
-    <%= f.time_select :start_time, class: "form-control w-25" %>
+    <%= f.time_select :start_time, { class: "form-control" }, { style: "width: 50px;" } %>
     〜
-    <%= f.time_select :end_time, class: "form-control w-25" %>
+    <%= f.time_select :end_time, { class: "form-control" }, { style: "width: 50px;" } %>
   </div>
 
   <div class="form-group">
     <%= f.label :拝観料 %>
-    <%= f.text_field :fee, placeholder: "大人料金", class: "form-control" %>
+    <%= f.text_field :fee, placeholder: "大人料金", class: "form-control", value:0 %>
   </div>
 
   <!--神様カラム-->

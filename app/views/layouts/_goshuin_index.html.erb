@@ -1,7 +1,7 @@
 <!-- ユーザーの御朱印一覧表示 -->
 <div class="mb-3">
   <!--カードデザインで投稿された御朱印を繰り返し表示-->
-  <div class="card rounded">
+  <div class="card rounded bg-transparent">
     <% goshuins.each do |goshuin| %>
       <div class="card-body">
         <div class="card-text">
@@ -46,9 +46,9 @@
 
         <!--下の段-->
         <div class="row">
-          <!--いいね部分テンプレート呼び出し-->
-          <div id="favorite_buttons_<%= goshuin.id %>">
-            <div class="card-text col-md-6">
+           <div class="card-text col-md-6">
+            <!--いいね部分テンプレート呼び出し-->
+            <div id="favorite_buttons_<%= goshuin.id %>">
               <% if user_signed_in? %>
                 <%= render "user/favorites/btn", goshuin: goshuin %>
               <% end %>
@@ -57,7 +57,7 @@
 
           <!--御朱印の種類-->
           <div class="card-text text-right col-md-6 mb-3">
-            <%= I18n.t('goshuin_status_i18n') %>
+            <%= goshuin.goshuin_status_i18n %>
           </div>
         </div>
 
