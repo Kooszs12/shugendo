@@ -5,6 +5,8 @@ class User::SearchesController < ApplicationController
     @q = Place.ransack(params[:q]) # 検索フォームから送られてきたパラメータ
     # クエリを実行して検索結果を取得し、重複を除いて @places に格納
     @places = @q.result(distinct: true)
+    # 検索状況をviewで表示させるための変数
+    @selected_conditions = params[:q]
 
     # 検索結果の有無による条件分岐
     if @places.empty? # 空かどうか判断している

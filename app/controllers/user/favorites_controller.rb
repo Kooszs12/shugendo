@@ -4,14 +4,14 @@ class User::FavoritesController < ApplicationController
     @goshuin = Goshuin.find(params[:goshuin_id])
     @favorite = current_user.favorites.new(goshuin_id: @goshuin.id) # @を追加
     @favorite.save
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   def destroy
     @goshuin = Goshuin.find(params[:goshuin_id])
     @favorite = current_user.favorites.find_by(goshuin_id: @goshuin.id) # @を追加
     @favorite.destroy
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   private

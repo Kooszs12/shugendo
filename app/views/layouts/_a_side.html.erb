@@ -117,6 +117,18 @@
       </div>
     </div>
 
+    <!-- 選択した検索条件を表示 -->
+    <% if @selected_conditions.present? %>
+      <p>選択した検索条件：</p>
+      <ul>
+        <% @selected_conditions.each do |key, value| %>
+          <% if value.present? %>
+            <li><strong><%= key.to_s.humanize %>:</strong> <%= value %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+
     <!--検索完了ボタン-->
     <div class="search-done-btn">
       <%= f.submit "検索開始", class: "btn-default btn-red" %>

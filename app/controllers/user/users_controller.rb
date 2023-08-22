@@ -10,7 +10,7 @@ class User::UsersController < ApplicationController
   def show
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ１０件表示）
     @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(10)
-
+    @goshuin = Goshuin.find(params[:id])
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }

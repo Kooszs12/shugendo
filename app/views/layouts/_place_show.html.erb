@@ -11,7 +11,7 @@
   <div class="col-md-4">
     <div>〒<%= place.postcode %></div>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 text-right">
     <div>
       <!-- 表示させたいデータを連続で置くことで繋がって表示させることができる -->
       <%= place.prefecture.name %><%= place.address %>
@@ -24,10 +24,10 @@
   <div class="col-md-3">
     <div>☎︎ <%= place.phone_number.insert(3, '-').insert(8, '-') %></div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 text-center">
     <div><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></div>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-5 text-right">
     <div><strong>拝観料:¥</strong> <%= place.fee %></div>
   </div>
 </div>

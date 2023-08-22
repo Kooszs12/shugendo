@@ -32,6 +32,11 @@ class Goshuin < ApplicationRecord
   # exists?で与えられた条件に合致するレコードが存在するか判断
   favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
+  
+  # 御朱印のいいね総数を獲得メソッド
+  def total_likes
+    self.favorites.count
+  end
 
   #
   attr_accessor :place_id2

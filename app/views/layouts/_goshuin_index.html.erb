@@ -1,66 +1,79 @@
 <!-- ユーザーの御朱印一覧表示 -->
 <div class="mb-3">
   <!--カードデザインで投稿された御朱印を繰り返し表示-->
-  <% goshuins.each do |goshuin| %>
-    <div class="card-body">
-      <div class="card-text">
-        <div class="d-flex justify-content-between">
-          <div>
-            <!-- ユーザーのマイページへのリンク -->
-            <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
-            <%= goshuin.place.prefecture.name %><!-- 御朱印を投稿したユーザーのニックネーム -->
-          </div>
+  <div class="card rounded">
+    <% goshuins.each do |goshuin| %>
+      <div class="card-body">
+        <div class="card-text">
+          <div class="d-flex justify-content-between">
+            <div>
+              <!-- ユーザーのマイページへのリンク -->
+              <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
+              <%= goshuin.place.prefecture.name %><!-- 御朱印を投稿したユーザーのニックネーム -->
+            </div>
 
-          <!--この部分テンプレートを使用している特定のページにのみ寺社名を表示させないIf-->
-          <% if params[:controller] != 'user/places' %>
-          <h5 class="card-title text-center">
-            <!--管理者がログインしていた場合-->
-            <% if admin_signed_in? %>
-              <%= link_to admin_place_path(goshuin.place) do %>
-                <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
+            <!--この部分テンプレートを使用している特定のページにのみ寺社名を表示させないIf-->
+            <% if params[:controller] != 'user/places' %>
+            <h5 class="card-title text-center ">
+              <!--管理者がログインしていた場合-->
+              <% if admin_signed_in? %>
+                <%= link_to admin_place_path(goshuin.place) do %>
+                  <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
+                <% end %>
+              <% else %><!--それ以外-->
+                <%= link_to place_path(goshuin.place) do %>
+                  <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
+                <% end %>
               <% end %>
-            <% else %><!--それ以外-->
-              <%= link_to place_path(goshuin.place) do %>
-                <%= goshuin.place.name %><!--投稿した御朱印の寺社名-->
-              <% end %>
+            </h5>
             <% end %>
-          </h5>
-          <% end %>
 
-          <div class="card-text">
-            心付け：￥<%= goshuin.price %><br>
-            参拝日：<%= goshuin.visit_day %>
+            <div class="card-text">
+              心付け：￥<%= goshuin.price %><br>
+              参拝日：<%= goshuin.visit_day %>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!--投稿された御朱印の画像-->
-      <div class="card-img-bottom text-center">
-        <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 500, height: 580 %>
-      </div>
-      <!--投稿された御朱印のメッセージ-->
-      <p class="card-text mb-5">
-        <%= goshuin.message %>
-      </p>
+        <!--投稿された御朱印の画像-->
+        <div class="card-img-bottom text-center mb-4 mt-3">
+          <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', width: 500, height: 580 %>
+        </div>
+        <!--投稿された御朱印のメッセージ-->
+        <p class="card-text mb-5">
+          <%= goshuin.message %>
+        </p>
 
-      <div class="card-text">
-        <% if user_signed_in? %>
-          <%= render "user/favorites/btn", goshuin: goshuin %>
-        <% end %>
-      </div>
+        <!--下の段-->
+        <div class="row">
+          <!--いいね部分テンプレート呼び出し-->
+          <div id="favorite_buttons_<%= goshuin.id %>">
+            <div class="card-text col-md-6">
+              <% if user_signed_in? %>
+                <%= render "user/favorites/btn", goshuin: goshuin %>
+              <% end %>
+            </div>
+          </div>
 
-      <div>
-        <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
-        <% if user_signed_in? && goshuin.user == current_user %>
-          <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
-          <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
-        <% else admin_signed_in? %>
-          <%#= link_to "編集", admin_edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
-          <%#= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
-        <% end %>
+          <!--御朱印の種類-->
+          <div class="card-text text-right col-md-6 mb-3">
+            <%= I18n.t('goshuin_status_i18n') %>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <!--ユーザーがログインしていて、かつ本人であった場合のみ表示される-->
+          <% if user_signed_in? && goshuin.user == current_user %>
+            <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mr-3" %>
+            <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+          <% else admin_signed_in? %>
+            <%#= link_to "編集", admin_edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
+            <%#= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <!-- ページネーション -->
