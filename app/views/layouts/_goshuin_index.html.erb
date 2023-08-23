@@ -1,8 +1,8 @@
 <!-- ユーザーの御朱印一覧表示 -->
 <div class="mb-3">
   <!--カードデザインで投稿された御朱印を繰り返し表示-->
-  <div class="card rounded bg-transparent">
-    <% goshuins.each do |goshuin| %>
+  <% goshuins.each do |goshuin| %>
+    <div class="card mb-3">
       <div class="card-body">
         <div class="card-text">
           <div class="d-flex justify-content-between">
@@ -41,7 +41,7 @@
         </div>
         <!--投稿された御朱印のメッセージ-->
         <p class="card-text mb-5">
-          <%= goshuin.message %>
+          <%= goshuin.message.present? ? goshuin.message: "文章はありません" %>
         </p>
 
         <!--下の段-->
@@ -72,8 +72,8 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 
 <!-- ページネーション -->

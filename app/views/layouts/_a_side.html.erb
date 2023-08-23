@@ -125,7 +125,7 @@
           <ul>
             <% @selected_conditions.each do |k, v| %>
               <% if v.present? %>
-                <li><strong><%= t("selected_conditions.#{k}") %></li>
+                <li><%= t("selected_conditions.#{k}") %></li>
               <% end %>
             <% end %>
           </ul>
