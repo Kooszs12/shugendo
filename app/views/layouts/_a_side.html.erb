@@ -34,109 +34,134 @@
 </div>
 
 <div class="search">
-  <!--絞り込み検索　form_withで囲んであげることによって絞り込み検索が可能-->
-  <%= form_with model: q, method: :get, url: search_path do |f| %>
-    <div class="form-group">
-      <%= f.label "" %>
-      <!--モデルの中のenmuカラムの中身をKeyとvarで分けて、繰り返しチェックボックスを作成する処理-->
-      <% Place.categories.each do |k, v| %>
-        <!--label_tagでチェックボックスと文字を囲むことで文字を押してもチェックが入るようになる-->
-        <%= label_tag do %>
-          <!--_inは完全一致。チェックが入ったら検索-->
+<!--絞り込み検索　form_withで囲んであげることによって絞り込み検索が可能-->
+<%= form_with model: q, method: :get, url: search_path do |f| %>
+  <div class="form-group">
+    <%= f.label "" %>
+    <!--モデルの中のenmuカラムの中身をKeyとvarで分けて、繰り返しチェックボックスを作成する処理-->
+    <% Place.categories.each do |k, v| %>
+      <!--label_tagでチェックボックスと文字を囲むことで文字を押してもチェックが入るようになる-->
+      <%= label_tag do %>
+        <!--_inは完全一致。チェックが入ったら検索-->
+        <% if params[:q].present? && params[:q][:category_in].present? && params[:q][:category_in].include?(v.to_s) %>
+          <%= check_box_tag "q[category_in][]", v, checked: true %>
+        <% else %>
           <%= check_box_tag "q[category_in][]", v %>
-          <!--表示するenumのkeyをGemを使用しないで日本語化して表示-->
-          <span><%= t "enums.place.category.#{k}" %></span>
         <% end %>
+        <!--表示するenumのkeyをGemを使用しないで日本語化して表示-->
+        <span><%= t "enums.place.category.#{k}" %></span>
       <% end %>
-    </div>
+    <% end %>
+  </div>
 
-    <!--地方検索-->
-    <div class="japan_map">
-      <%= image_tag "Map_of_Japan.png", alt: "日本地図", class:"w-100" %>
-      <span class="area_btn area1" data-area="1">北海道・東北</span>
-      <span class="area_btn area2" data-area="2">関東</span>
-      <span class="area_btn area3" data-area="3">中部</span>
-      <span class="area_btn area4" data-area="4">近畿</span>
-      <span class="area_btn area5" data-area="5">中国・四国</span>
-      <span class="area_btn area6" data-area="6">九州・沖縄</span>
+  <!--地方検索-->
+  <div class="japan_map">
+    <%= image_tag "Map_of_Japan.png", alt: "日本地図", class:"w-100" %>
+    <span class="area_btn area1" data-area="1">北海道・東北</span>
+    <span class="area_btn area2" data-area="2">関東</span>
+    <span class="area_btn area3" data-area="3">中部</span>
+    <span class="area_btn area4" data-area="4">近畿</span>
+    <span class="area_btn area5" data-area="5">中国・四国</span>
+    <span class="area_btn area6" data-area="6">九州・沖縄</span>
 
-      <!--都道府県検索-->
-      <div class="area_overlay"></div>
-      <div class="pref_area">
-        <!--北海道・東北地方-->
-        <% Area.includes(:prefectures).each do |area| %>
-          <div class="pref_list" data-list="<%= area.id %>">
-            <% area.prefectures.each do |prefecture| %>
-              <div data-id="<%= prefecture.id %>">
-                <%= label_tag do %>
-                  <%= prefecture.name %>
+    <!--都道府県検索-->
+    <div class="area_overlay"></div>
+    <div class="pref_area">
+      <!--北海道・東北地方-->
+      <% Area.includes(:prefectures).each do |area| %>
+        <div class="pref_list" data-list="<%= area.id %>">
+          <% area.prefectures.each do |prefecture| %>
+            <div data-id="<%= prefecture.id %>">
+              <%= label_tag do %>
+                <% if params[:q].present? && params[:q][:prefecture_id_in].present? && params[:q][:prefecture_id_in].include?(prefecture.id.to_s) %>
+                  <%= check_box_tag "q[prefecture_id_in][]", prefecture.id, checked: true %>
+                <% else %>
                   <%= check_box_tag "q[prefecture_id_in][]", prefecture.id %>
                 <% end %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <!--御朱印の種類チェックボックス-->
-    <div class="form-group mt-5">
-      <!--   チェックボックスの表示切替ボタン   -->
-      <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="kindButton">
-        御朱印の種類<br>
-        <font color="gray">▼</font>
-      </div>
-      <%= f.label "" %>
-      <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
-      <div class="checkboxes" id="kindButtonCheckboxes" style="display: none;">
-        <% Place.goshuin_statuses.each do |k, v| %>
-          <%= label_tag do %>
-            <%= check_box_tag "q[goshuin_status_in][]", v %>
-            <span><%= t "enums.place.goshuin_status.#{k}" %></span>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <!--ペットチェックボックス-->
-    <div class="form-group">
-      <!--   チェックボックスの表示切替ボタン   -->
-      <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="petButton">
-        ぺっと<br>
-        <font color="gray">▼</font>
-      </div>
-      <%= f.label "" %>
-      <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
-      <div class="checkboxes" id="petButtonCheckboxes" style="display: none;">
-        <% Place.pet_statuses.each do |k, v| %>
-          <%= label_tag do %>
-            <%= check_box_tag "q[pet_status_in][]", v %>
-            <span><%= t "enums.place.pet_status.#{k}" %></span>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <!-- 選択した検索条件を表示 -->
-    <div class="form-group">
-      <% if @selected_conditions.present? %>
-        <div class="selected-conditions">
-          <p><%= t('selected_conditions.title') %></p>
-          <ul>
-            <% @selected_conditions.each do |k, v| %>
-              <% if v.present? %>
-                <li><%= t("selected_conditions.#{k}") %></li>
+                <%= prefecture.name %>
+                <%#= check_box_tag "q[prefecture_id_in][]", prefecture.id %>
               <% end %>
-            <% end %>
-          </ul>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
+  </div>
 
-    <!--検索完了ボタン-->
-    <div class="search-done-btn">
-      <%= f.submit "検索開始", class: "btn btn-info" %>
-      <%= f.button "りせっと", type: "reset", class: "btn btn-success ml-3" %>
+  <!-- 選択した検索条件を表示 -->
+  <div class="form-group">
+    <% if @selected_conditions.present? %>
+      <div class="selected-conditions">
+        <p><%= t('selected_conditions.title') %></p>
+        <ul>
+          <% @selected_conditions.each do |k, v| %>
+            <% if v.present? %>
+              <li><%= t("selected_conditions.#{k}") %>
+                <% if k == "prefecture_id_in" %>
+                  <ul>
+                    <% Prefecture.where(id: v).each do |prefecture| %>
+                      <li><%= prefecture.name %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <!--御朱印の種類チェックボックス-->
+  <div class="form-group mt-5">
+    <!--   チェックボックスの表示切替ボタン   -->
+    <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="kindButton">
+      御朱印の種類<br>
+      <font color="gray">▼</font>
     </div>
-  <% end %>
+    <%= f.label "" %>
+    <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
+    <div class="checkboxes" id="kindButtonCheckboxes" style="display: none;">
+      <% Place.goshuin_statuses.each do |k, v| %>
+        <%= label_tag do %>
+          <% if params[:q].present? && params[:q][:goshuin_status_in].present? && params[:q][:goshuin_status_in].include?(v.to_s) %>
+            <%= check_box_tag "q[goshuin_status_in][]", v, checked: true %>
+          <% else %>
+            <%= check_box_tag "q[goshuin_status_in][]", v %>
+          <% end %>
+          <span><%= t "enums.place.goshuin_status.#{k}" %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!--ペットチェックボックス-->
+  <div class="form-group">
+    <!--   チェックボックスの表示切替ボタン   -->
+    <div class="checkbox-toggle mt-3 ml-auto mr-auto" id="petButton">
+      ぺっと<br>
+      <font color="gray">▼</font>
+    </div>
+    <%= f.label "" %>
+    <!--チェックボックスの表示と非表示を切り替えるためのコンテナ-->
+    <div class="checkboxes" id="petButtonCheckboxes" style="display: none;">
+      <% Place.pet_statuses.each do |k, v| %>
+        <%= label_tag do %>
+          <% if params[:q].present? && params[:q][:pet_status_in].present? && params[:q][:pet_status_in].include?(v.to_s) %>
+            <%= check_box_tag "q[pet_status_in][]", v, checked: true %>
+          <% else %>
+            <%= check_box_tag "q[pet_status_in][]", v %>
+          <% end %>
+          <span><%= t "enums.place.pet_status.#{k}" %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!--検索完了ボタン-->
+  <div class="search-done-btn">
+    <%= link_to "りせっと", root_path, class: "btn btn-success" %>
+    <%= f.submit "検索開始", class: "btn btn-info ml-4" %>
+  </div>
+<% end %>
 </div>

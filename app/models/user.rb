@@ -22,11 +22,8 @@ class User < ApplicationRecord
   # ゲストユーザーの生成
   def self.guest
     user = User.find_or_initialize_by(email: 'guest@example.com', nickname: '修験者')
-
     user.assign_attributes(password: SecureRandom.urlsafe_base64, is_deleted: false)
-    
     user.save
-    
     user
   end
 
@@ -40,4 +37,7 @@ class User < ApplicationRecord
     super && (is_deleted == false)
   end
 
+  def total_likes_count
+    goshuins.sum(&:total_likes)
+  end
 end

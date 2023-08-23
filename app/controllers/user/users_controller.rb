@@ -10,7 +10,7 @@ class User::UsersController < ApplicationController
   def show
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ１０件表示）
     @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(10)
-    @goshuin = Goshuin.find(params[:id])
+    @total_likes = @user.total_likes_count
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
@@ -50,12 +50,12 @@ class User::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:id, :gohuin_id, :nickname, :email, :introduction)
   end
-  
+
   def deleted_user_check
     @user = User.find_by(id: params[:id])
     redirect_to root_path if !@user || @user&.is_deleted?
   end
-  
+
   def guest_user_check
     redirect_to root_path if current_user.guest_user?
   end

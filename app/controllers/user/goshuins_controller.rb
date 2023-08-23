@@ -51,6 +51,7 @@ class User::GoshuinsController < ApplicationController
   def index
     @user = current_user
     @goshuins = @user.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @total_likes = @user.total_likes_count
   end
 
   # 御朱印編集ページ

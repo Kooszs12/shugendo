@@ -9,13 +9,13 @@
 <div class="mb-3">
   <% places.each do |place| %>
     <div class="card-body">
-      <h5 class="card-text">
+      <h4 class="card-text text-center">
         <% if admin_signed_in? %><!--adminがログインしていたら-->
           <%= link_to place.name, admin_place_path(place) %>
         <% else %>
           <%= link_to place.name, place_path(place) %>
         <% end %>
-      </h5>
+      </h4>
 
       <!--地方名/都道府県名表示-->
       <div class="card-text">
