@@ -37,36 +37,41 @@
   <div>
   <!-- ユーザーがログインしていて且つ本人だった場合 -->
   <% if @user == current_user %>
-    <h5 class="text-center mt-5">
-      <i class="far fa-envelope"></i>
-      めぇる
-    </h5>
-    <%= user.email %>
-    <p class="mt-5"><%= link_to "参拝日記", goshuins_path, class: "edit-profile-link" %></p>
-    <!--ゲストがログインしていた場合-->
+    <div class="text-center mt-5">
+      <%= link_to goshuins_path, class: "btn btn-success w-50" do %>
+        <i class="fas fa-shoe-prints"></i> 参拝日記
+      <% end %>
+    </div>
+
+    <!--ゲストがログインしているか判断-->
     <% unless user.guest_user? %>
+    <!--ユーザー編集-->
       <div class="text-center mt-5">
         <%= link_to users_infomation_edit_path, class: "btn btn-info w-50" do %>
           <i class="fas fa-pencil-alt"></i> ゆぅざぁ編集
         <% end %>
       </div>
     <% end %>
+    <!--退会-->
     <div class="mt-5 text-center">
-      <%= link_to "退会", users_confirm_withdraw_path, class: "btn btn-danger w-50" %>
+      <%= link_to users_confirm_withdraw_path, class: "btn btn-danger w-50" do %>
+        <i class="fas fa-dizzy"></i> 退会
+      <% end %>
     </div>
+
+  <!--adminがログインしていた場合-->
   <% elsif admin_signed_in? %>
-    <h5 class="text-center mt-3">
-      <i class="far fa-envelope"></i>
-      めぇる
-    </h5>
-    <%= user.email %>
+    <!--ユーザー編集-->
     <div class=" text-center mt-5">
       <%= link_to edit_admin_user_path(user), class: "btn btn-info w-50" do %>
         <i class="fas fa-pencil-alt"></i> ゆぅざぁ編集
       <% end %>
     </div>
+    <!--退会-->
     <div class="mt-5 text-center">
-      <%= link_to "退会", admin_user_path(id: user), method: :delete, class: "btn btn-danger w-50", data: {confirm: "退会させても良いですか？"} %>
+      <%= link_to admin_user_path(id: user), method: :delete, class: "btn btn-danger w-50", data: {confirm: "退会させても良いですか？"} do %>
+        <i class="fas fa-dizzy"></i> 退会
+      <% end %>
     </div>
   <% end %>
   </div>

@@ -1,32 +1,34 @@
+<!--ユーザー編集ページ-->
 <h2 class="text-center">ゆぅざぁ編集</h2>
-  <%= form_with model: user, url: target_path, method: :patch do |f| %>
-    <!--バリデーションの部分テンプレート-->
-    <!--formからmodelobjectを抜き出す-->
-    <%= render "layouts/error_messages", model: f.object %>
+<%= form_with model: user, url: target_path, method: :patch do |f| %>
+  <!--バリデーションの部分テンプレート-->
+  <!--formからmodelobjectを抜き出す-->
+  <%= render "layouts/error_messages", model: f.object %>
 
-    <div class="form-group">
-      <!--画像サイズのブートストラップ-->
-      <div class="text-center">
-        <%= image_tag @user.get_goshuin_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle profile-img mb-3" %>
-      </div>
-       <%= f.file_field :image, id: "imageField" %>
+  <!--アイコン編集-->
+  <div class="form-group">
+    <!--画像サイズのブートストラップ-->
+    <div class="text-center">
+      <%= image_tag @user.get_goshuin_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle profile-img mb-3" %>
     </div>
+    <!--アイコンフォーム-->
+     <%= f.file_field :image, id: "imageField" %>
+  </div>
 
-    <!--名前の編集-->
+  <!--ニックネーム編集-->
 　   <div class="form-group mt-3">
-      <%= f.label :にっくねぇむ %>
-      <%= f.text_field :nickname, class: "form-control" %>
-    </div>
+    <%= f.label :にっくねぇむ %>
+    <%= f.text_field :nickname, class: "form-control" %>
+  </div>
 
-    <!--自己紹介-->
-    <div class="form-group mt-3">
-      <%= f.label :自己紹介 %>
-      <%= f.text_area :introduction, class: "form-control" %>
-    </div>
+  <!--自己紹介編集-->
+  <div class="form-group mt-3">
+    <%= f.label :自己紹介 %>
+    <%= f.text_area :introduction, class: "form-control" %>
+  </div>
 
-      <%= f.submit '更新', class: "btn btn-info w-25 ms-3" %>
-      <div class="text-right">
-        <%= link_to "退会", user_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
-      </div>
-
-  <% end %>
+  <!--更新ボタン-->
+  <div class="text-center mt-5">
+    <%= f.submit '更新', class: "btn btn-info w-25" %>
+  </div>
+<% end %>
