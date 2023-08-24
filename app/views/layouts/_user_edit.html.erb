@@ -6,8 +6,8 @@
 
     <div class="form-group">
       <!--画像サイズのブートストラップ-->
-      <div class="w-50">
-        <%= image_tag @user.get_goshuin_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle mb-3" %>
+      <div class="text-center">
+        <%= image_tag @user.get_goshuin_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle profile-img mb-3" %>
       </div>
        <%= f.file_field :image, id: "imageField" %>
     </div>

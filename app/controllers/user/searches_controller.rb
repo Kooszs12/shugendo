@@ -4,9 +4,12 @@ class User::SearchesController < ApplicationController
     # Ransackを使用してクエリを構築
     @q = Place.ransack(params[:q]) # 検索フォームから送られてきたパラメータ
     # クエリを実行して検索結果を取得し、重複を除いて @places に格納
-    @places = @q.result(distinct: true)
+    @places = @q.result(distinct: true).joins(:prefecture).order(prefecture_id: :asc)
     # 検索状況をviewで表示させるための変数
     @selected_conditions = params[:q] || {}  # 選択した検索条件を格納する変数
+    pp '-------------------'
+    # @selected_conditions_for_view = params[:q] || {}
+    # pp @selected_conditions_for_view.delete(:goshuin_status_in)
 
     # 検索結果の有無による条件分岐
     if @places.empty? # 空かどうか判断している

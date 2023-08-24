@@ -26,6 +26,7 @@
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
+    font-size: calc(5px + .5vw);
 }
 
 /* ボタン配置（使用する日本地図画像により微調整） */
@@ -114,9 +115,9 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 480px){
-    /* スマホユーザー向けにボタン文字サイズを調整 */
-    .japan_map .area_btn{
-        font-size: 4vw;
-    }
-}
+// @media screen and (max-width: 480px){
+//     /* スマホユーザー向けにボタン文字サイズを調整 */
+//     .japan_map .area_btn{
+//         font-size: 4vw;
+//     }
+// }

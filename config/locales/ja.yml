@@ -25,8 +25,11 @@ ja: # 日本語の設定を行う
         multiple: "複数"
         other: "その他"
   selected_conditions:
-    title: '【選択した都道府県】'
+    title: '【選択した条件】'
+    category_in: 'カテゴリー'
     prefecture_id_in: '都道府県'
+    goshuin_status_in: '御朱印の種類'
+    pet_status_in: 'ペットの入場'
   date:
     abbr_day_names:
     - 日
@@ -282,8 +285,8 @@ ja: # 日本語の設定を行う
         action: アカウントのロック解除
         greeting: "%{recipient}様"
         instruction: アカウントのロックを解除するには下のリンクをクリックしてください。
-        message: ログイン失敗が繰り返されたため、アカウントはロッ��されています。
-        subject: アカウントのロック解除について
+        message: ログイン失敗が繰り返されたため、アカウン��はロッ��されています。
+        subject: アカウントのロック解��について
     omniauth_callbacks:
       failure: "%{kind} アカウントによる認証に失敗しました。理由��（%{reason}）"
       success: "%{kind} アカウントによる認証に成功しました。"

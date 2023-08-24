@@ -16,15 +16,18 @@
           <% @places.each do |place| %>
             <div class="col-md-6">
               <div class="card mb-3">
+                <%= image_tag place.get_place_image, class: "card-img-top card-img-place", alt: "Place Image" %>
                 <div class="card-body">
-                  <div class="card-img-top">
-                    <%= image_tag place.get_place_image, class: "card-img-top", alt: "Place Image" %>
-                  </div>
-                  <div class="d-flex flex-row align-items-center">
+                  <!--<div class="card-img-top">-->
+                    <%#= image_tag place.get_place_image, class: "card-img-top", alt: "Place Image" %>
+                  <!--</div>-->
+                  <div class="">
                     <h5 class="mr-2 card-title">
                       <%= link_to place.name, place_path(place.id) %>
                     </h5>
-                    <p class="text-right"><%= place.prefecture.name %></p>
+                    <div class="text-right">
+                      <small class="text-black-50"><%= place.prefecture.name %></small>
+                    </div>
                   </div>
                 </div>
               </div>

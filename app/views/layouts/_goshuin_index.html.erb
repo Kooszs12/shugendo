@@ -50,11 +50,13 @@
         <div class="row">
           <div class="card-text col-md-6">
             <!-- いいね部分テンプレート呼び出し -->
-            <div id="favorite_buttons_<%= goshuin.id %>">
-              <% if user_signed_in? %>
+            <% if user_signed_in? %>
+              <div id="favorite_buttons_<%= goshuin.id %>">
                 <%= render "user/favorites/btn", goshuin: goshuin %>
-              <% end %>
-            </div>
+              </div>
+            <% else %>
+              <%= goshuin.favorites.count %> いいね
+            <% end %>
           </div>
 
           <!-- 御朱印の種類 -->

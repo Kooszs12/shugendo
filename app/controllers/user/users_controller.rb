@@ -49,7 +49,7 @@ class User::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:id, :gohuin_id, :nickname, :email, :introduction)
+    params.require(:user).permit(:id, :gohuin_id, :nickname, :email, :introduction, :image)
   end
 
   def deleted_user_check

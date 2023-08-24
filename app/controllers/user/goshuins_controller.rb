@@ -97,7 +97,7 @@ class User::GoshuinsController < ApplicationController
       params.require(:goshuin)[:place_id] = params[:place_id2]
     end
 
-    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image)
+    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image).merge(user_id: current_user.id)
   end
 
 end

@@ -23,9 +23,16 @@ class User::PlacesController < ApplicationController
     end
   end
 
-  # 寺社一覧
   def index
-    @places = Place.all.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    if params[:prefecture_id]
+      @places = Place.where(prefecture_id: params[:prefecture_id]).page(params[:page]).per(10)
+    elsif params[:area_id]
+      @places = Place.joins(:prefecture).where(prefecture: {area_id: params[:area_id]})
+                      .order(prefecture_id: :asc).page(params[:page]).per(10)
+    else
+    # 都道府県順に表示させる
+      @places = Place.joins(:prefecture).order(prefecture_id: :asc).page(params[:page]).per(10)
+    end
   end
 
   # 寺社詳細ページ（関連した御朱印の表示）
@@ -58,7 +65,25 @@ class User::PlacesController < ApplicationController
    private
 
   def place_params
-    params.require(:place).permit(:prefecture_id, :user_id, :admin_id, :category, :name, :address, :postcode, :phone_number, :got, :sect, :goshuin_status, :pet_status, :image, :fee, :start_time, :end_time)
+    params.require(:place).permit(
+      :prefecture_id,
+      :category,
+      :name,
+      :address,
+      :postcode,
+      :phone_number,
+      :got,
+      :sect,
+      :goshuin_status,
+      :pet_status,
+      :image,
+      :fee,
+      :start_time,
+      :end_time
+      ).merge(
+        user_id: user_signed_in? ? current_user.id : nil,
+        admin_id: admin_signed_in? ? current_admin.id : nil
+      )
   end
 
 end

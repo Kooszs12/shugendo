@@ -7,40 +7,21 @@
   <%= image_tag place.get_place_image, alt: 'Place Image', class: 'img-fluid' %>
 </div>
 <!--1段目のデータ表示-->
-<div class="row mt-">
-  <div class="col-md-4">
-    <div>〒<%= place.postcode %></div>
-  </div>
-  <div class="col-md-8 text-right">
-    <div>
-      <!-- 表示させたいデータを連続で置くことで繋がって表示させることができる -->
-      <%= place.prefecture.name %><%= place.address %>
-    </div>
-  </div>
-</div>
-
-<!--2段目-->
-<div class="row">
-  <div class="col-md-3">
-    <div>☎︎ <%= place.phone_number %></div>
-  </div>
-  <div class="col-md-4 text-center">
-    <div><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></div>
-  </div>
-  <div class="col-md-5 text-right">
-    <div><strong>拝観料:¥</strong> <%= place.fee %></div>
-  </div>
-</div>
-
-<!--３段目-->
-<div class="row">
-  <div class="col-md-6">
-    <div><strong>御朱印種類:</strong> <%= place.goshuin_status_i18n %></div>
-  </div>
-  <div class="col-md-6">
-    <div><strong>ぺっと状況:</strong> <%= place.pet_status_i18n %></div>
-  </div>
-</div>
+<ul class="list-unstyled my-5" style="line-height: 2.5;">
+  <% unless place.postcode.blank? %>
+    <li>〒<%= place.postcode.to_s.insert(3, "-") %></li>
+  <% end %>
+  <li><%= place.prefecture.name %><%= place.address %></li>
+  <% unless place.phone_number.blank? %>
+    <li>☎︎ <%= place.phone_number %></li>]
+  <% end %>
+  <% unless place.start_time.blank? || place.end_time %>
+    <li><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></li>
+  <% end %>
+  <li><strong>拝観料:¥</strong> <%= place.fee %></li>
+  <li><strong>御朱印種類:</strong> <%= place.goshuin_status_i18n %></li>
+  <li><strong>ぺっと状況:</strong> <%= place.pet_status_i18n %></li>
+</ul>
 
 <!--どっちがログインしているか判断-->
 <div class="text-right">

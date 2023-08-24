@@ -22,7 +22,7 @@ class Admin::PlacesController < ApplicationController
   end
 
   def index
-    @places = Place.all.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @places = Place.order(updated_at: :desc).page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
   end
 
   def show

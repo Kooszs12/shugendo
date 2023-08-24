@@ -93,14 +93,35 @@
     <% if @selected_conditions.present? %>
       <div class="selected-conditions">
         <p><%= t('selected_conditions.title') %></p>
-        <ul>
+        <ul class="ml-3">
           <% @selected_conditions.each do |k, v| %>
             <% if v.present? %>
               <li><%= t("selected_conditions.#{k}") %>
+                <% if k == "category_in" %>
+                  <ul style="margin-bottom: 0.5rem; margin-left: 1rem;">
+                    <% v.each do |key| %>
+                      <li><%= Place.categories_i18n[Place.categories.key(key.to_i).to_sym] %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
                 <% if k == "prefecture_id_in" %>
-                  <ul>
+                  <ul style="margin-bottom: 0.5rem; margin-left: 1rem;">
                     <% Prefecture.where(id: v).each do |prefecture| %>
                       <li><%= prefecture.name %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+                <% if k == "goshuin_status_in" %>
+                  <ul style="margin-bottom: 0.5rem; margin-left: 1rem;">
+                    <% v.each do |key| %>
+                      <li><%= Place.goshuin_statuses_i18n[Place.goshuin_statuses.key(key.to_i).to_sym] %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+                <% if k == "pet_status_in" %>
+                  <ul style="margin-bottom: 0.5rem; margin-left: 1rem;">
+                    <% v.each do |key| %>
+                      <li><%= Place.pet_statuses_i18n[Place.pet_statuses.key(key.to_i).to_sym] %></li>
                     <% end %>
                   </ul>
                 <% end %>
