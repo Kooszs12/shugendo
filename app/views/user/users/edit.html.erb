@@ -5,7 +5,7 @@
     <!-- 左側のコラム (幅: 5カラム) -->
     <div class="col-md-4">
       <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
-      <%= render 'b_side', user: @user %>
+      <%= render 'b_side', user: @user, total_likes: @total_likes %>
     </div>
 
     <!--編集表示-->

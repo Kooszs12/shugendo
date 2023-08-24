@@ -14,11 +14,9 @@
   <div class="user-profile text-center">
     <!--ニックネーム-->
     <h3 class="user-nickname"><%= user.nickname %></h3>
-    <% if user.image.attached? %>
-      <%= image_tag user.image, class: "profile-image img-fluid rounded-circle" %>
-    <% else %>
-      <%= image_tag "profile_no_image.png", class: "profile-image img-fluid rounded-circle" %>
-    <% end %>
+    <div class="w-100">
+      <%= image_tag user.get_goshuin_image, class: "profile-image img-fluid rounded-circle" %>
+    </div>
   </div>
 
   <div class="card-text text-right">
@@ -35,9 +33,6 @@
     <!--自己紹介表示と自己紹介が空だった場合の表示-->
     <%= user.introduction.present? ? user.introduction : "自己紹介はありません" %>
   </div>
-
-  <!--いいね部分テンプレート呼び出し-->
-  <%#= render "user/favorites/btn", user: user %>
 
   <div>
   <!-- ユーザーがログインしていて且つ本人だった場合 -->

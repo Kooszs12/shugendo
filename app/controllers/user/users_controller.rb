@@ -19,6 +19,7 @@ class User::UsersController < ApplicationController
   # プロフィール編集
   def edit
     @user = current_user
+    @total_likes = @user.total_likes_count
   end
 
   def update
