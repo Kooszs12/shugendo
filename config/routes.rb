@@ -20,8 +20,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/" => "homes#top"
-     #検索
+    #検索
     get "search" => "searches#search"
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]

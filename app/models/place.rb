@@ -22,25 +22,31 @@ class Place < ApplicationRecord
   has_many :goshuins
 
   #enum設定
+  # 寺社（shrine: 神社　temple: お寺）
   enum category: { shrine: 0, temple: 1 }
+  # 御朱印の種類（note: 書き置き, direct_writing: 直書き, limited: 限定, multiple: 複数, other: その他）
   enum goshuin_status: { note: 0, direct_writing: 1, limited: 2, multiple: 3, other: 4}
+  # ペット入場（ok: OK, ng: NG, not_clea: 不明）
   enum pet_status: { ok: 0, ng: 1, not_clea: 2 }
 
   #imageカラム
   has_one_attached :image
 
-  #添付される画像がなかった場合のメソッド
+  # プロフィールアイコンが存在するかどうか判断するメソッド
   def get_place_image
-    (image.attached?) ? image : 'no_image'
+    # 存在しなかった場合no_image.pngを使用
+    (image.attached?) ? image : 'no_image.png'
   end
 
 # 検索許可
   def self.ransackable_attributes(auth_object = nil)
+    # 検索許可するカラム
     ["address", "category", "goshuin_status", "got", "name", "pet_status", "phone_number", "postcode", "sect"]
   end
 
 # アソシエーション先の検索許可
   def self.ransackable_associations(auth_object = nil)
+    # 検索許可するカラム
     ["goshuins", "prefecture"]
   end
 

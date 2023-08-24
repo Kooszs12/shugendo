@@ -1,14 +1,16 @@
 # ユーザー：御朱印関連
 class User::GoshuinsController < ApplicationController
 
+  # アクセス制限
   before_action :authenticate_user!
 
   # 御朱印投稿ページ
   def new
+    # 空の変数作成
     @goshuin = Goshuin.new
-    # 神社data
+    # 神社データ（セレクトボックスの中身）
     @jinja= Place.where(category: 0)
-    # お寺data
+    # お寺データ（セレクトボックスの中身）
     @otera= Place.where(category: 1)
   end
 
@@ -16,12 +18,6 @@ class User::GoshuinsController < ApplicationController
   def create
     # フォームからのデータを使って新しい Goshuin オブジェクトを作成
     @goshuin = Goshuin.new(goshuin_params)
-
-    # もし place_id が nil の場合、params から place_id2 を取得して代入
-    #if @goshuin[:place_id].nil?
-      #@goshuin[:place_id] = params[:place_id2]
-    #end
-
     # 神社データの取得（category: 0 でフィルタリング）
     @jinja = Place.where(category: 0)
     # お寺データの取得（category: 1 でフィルタリング）
@@ -29,6 +25,7 @@ class User::GoshuinsController < ApplicationController
 
     # レスポンスの形式に応じて処理を分岐
     respond_to do |format|
+      # データが保存された場合
       if @goshuin.save
         format.html do
           # 成功時にフラッシュメッセージを設定し、詳細ページにリダイレクト
@@ -40,6 +37,7 @@ class User::GoshuinsController < ApplicationController
         format.html do
           # 失敗時にフラッシュメッセージを設定し、新規投稿フォームを再表示
           flash.now[:alert] = "失敗しました"
+          # 新規投稿ページへ遷移
           render :new
         end
         format.json { render json: @goshuin.errors, status: :unprocessable_entity }
@@ -49,41 +47,62 @@ class User::GoshuinsController < ApplicationController
 
   # ユーザー参拝日記（ログインしているユーザーのみ）
   def index
+    # ログインしているユーザーデータを角の
     @user = current_user
+    # ログインしているユーザーの御朱印データを格納
     @goshuins = @user.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    # ユーザーが保持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
   end
 
   # 御朱印編集ページ
   def edit
+    # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
+    # 上記の御朱印に関連付いたplaceモデルに存在するcategoryカラムを格納
     @category = @goshuin.place.category
-    @jinja = Place.where(category: 0) # 神社data
-    @otera = Place.where(category: 1) # お寺data
+    # 神社データ（セレクトボックスの中身）
+    @jinja = Place.where(category: 0)
+    # お寺データの（セレクトボックスの中身）
+    @otera = Place.where(category: 1)
   end
 
-  # 御朱印編集機能
+  # 御朱印更新機能
   def update
+    # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
-    @jinja = Place.where(category: 0) # 神社data
-    @otera = Place.where(category: 1) # お寺data
+     # 神社データ（セレクトボックスの中身）
+    @jinja = Place.where(category: 0)
+    @otera = Place.where(category: 1)
 
+    # 更新された場合
     if @goshuin.update(goshuin_params)
+      # 成功メッセージ
       flash[:notice] = "編集されました"
-      redirect_to place_path(@goshuin[:place_id]) # 関連する寺社の詳細ページに遷移
+      # 関連する寺社の詳細ページに遷移
+      redirect_to place_path(@goshuin[:place_id])
+    # 失敗した場合
     else
+      # 失敗メッセージ
       flash.now[:alert] = "失敗しました"
+      # 編集ページへ遷移
       render :edit
     end
   end
 
   # 御朱印削除機能
   def destroy
+    # 特定の御朱印詳細データを格納
     @goshuin = Goshuin.find(params[:id])
+    # 削除成功した場合
     if @goshuin.destroy
+      #
       redirect_to goshuins_path
-      flash[:notice] = "削除完了しました。"
+      # 成功メッセージ
+      flash[:notice] = "削除完了しました"
+    # 失敗した場合
     else
+      # 失敗メッセージ
       flash.now[:alert] = "削除失敗しました"
       render :index
     end
