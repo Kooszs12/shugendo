@@ -27,6 +27,8 @@ class Admin::UsersController < ApplicationController
   def edit
     # 特定ユーザーの情報格納
     @user = User.find(params[:id])
+    # 特定のユーザーが保持している御朱印についたいいねの総数を格納
+    @total_likes = @user.total_likes_count
   end
 
   # ユーザー情報更新
@@ -60,7 +62,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:id, :gohuin_id, :nickname, :email)
+    params.require(:user).permit(:id, :gohuin_id, :nickname, :email, :introduction)
   end
 
 end

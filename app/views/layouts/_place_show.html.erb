@@ -6,29 +6,41 @@
 <div class="text-center">
   <%= image_tag place.get_place_image, alt: 'Place Image', class: 'img-fluid' %>
 </div>
-<!--1段目のデータ表示-->
+
+<!--寺社詳細データ表示-->
 <ul class="list-unstyled my-5" style="line-height: 2.5;">
+  <!--データが空でない場合-->
   <% unless place.postcode.blank? %>
+    <!--郵便番号-->
     <li>〒<%= place.postcode.to_s.insert(3, "-") %></li>
   <% end %>
   <li><%= place.prefecture.name %><%= place.address %></li>
+  <!--データが空でない場合-->
   <% unless place.phone_number.blank? %>
+    <!--電話番号-->
     <li>☎︎ <%= place.phone_number %></li>]
   <% end %>
+  <!--データが空でない場合-->
   <% unless place.start_time.blank? || place.end_time %>
+    <!--営業時間：開始時間〜終了時間-->
     <li><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></li>
   <% end %>
+  <!--拝観料-->
   <li><strong>拝観料:¥</strong> <%= place.fee %></li>
+  <!--御朱印の種類-->
   <li><strong>御朱印種類:</strong> <%= place.goshuin_status_i18n %></li>
+  <!--ペット状況-->
   <li><strong>ぺっと状況:</strong> <%= place.pet_status_i18n %></li>
 </ul>
 
 <!--どっちがログインしているか判断-->
 <div class="text-right">
-  <% if user_signed_in? %><!--userがログインしていたら-->
+  <!--userがログインしていたら-->
+  <% if user_signed_in? %>
     <%= link_to "編集", edit_place_path(place), class: "btn btn-sm btn-info w-25 mt-3" %>
-  <% elsif admin_signed_in? %><!--adminがログインしていたら-->
+  <!--adminがログインしていたら-->
+  <% elsif admin_signed_in? %>
     <%= link_to "編集", edit_admin_place_path(place), class: "btn btn-sm btn-info w-25 mt-1" %>
-    <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger  w-50" %>
+    <%= link_to "削除", admin_place_path(place), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger w-25 ml-3" %>
   <% end %>
 </div>

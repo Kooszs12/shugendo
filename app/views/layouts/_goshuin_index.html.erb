@@ -50,12 +50,13 @@
         <div class="row">
           <div class="card-text col-md-6">
             <!-- いいね部分テンプレート呼び出し -->
+            <!--ユーザーがログインしていた場合-->
             <% if user_signed_in? %>
               <div id="favorite_buttons_<%= goshuin.id %>">
                 <%= render "user/favorites/btn", goshuin: goshuin %>
               </div>
             <% else %>
-              <%= goshuin.favorites.count %> いいね
+              <i class="fas fa-heart" aria-hidden="true"></i><%= goshuin.favorites.count %> いいね
             <% end %>
           </div>
 

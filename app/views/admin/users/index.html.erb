@@ -1,35 +1,42 @@
-<!-- 管理者側寺社ページのコンテナ -->
+<!-- 管理者側ユーザー一覧ページのコンテナ -->
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
-    <!-- 左側のコラム (幅: 5カラム) -->
-    <div class="col-md-5">
+    <!-- 左側のコラム (幅: 4カラム) -->
+    <div class="col-md-4">
       <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
       <%= render 'layouts/a_side', q: @q %>
     </div>
+
     <!-- 右側のコラム (幅: 7カラム) -->
-    <div class="col-md-6 offset-lg-1">
-      <h2 class="text-center ">会員一覧</h2>
+    <div class="col-md-7 offset-lg-1">
+      <!--題名-->
+      <h2 class="text-center mb-5">会員一覧</h2>
       <table class = "table table-striped">
-      <thead class = "thead-light">
-        <div class = "row justify-content-center mt-3">
-          <tr>
-            <th>会員番号</th>
-            <th>にっくねぇむ</th>
-            <th>めぇるあどれす</th>
-            <th>退会状況</th>
-            <th colspan="4"></th>
-          </tr>
-        </div>
-      <thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.id %></td>
-            <td><%= link_to user.nickname, admin_user_path(user.id) %></td>
-            <td><%= user.email %></td>
-            <td><%= user.is_deleted ? '退会' : '有効' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <thead class = "thead-light">
+          <div class = "row justify-content-center mt-3">
+            <tr>
+              <th>ID</th>
+              <th>にっくねぇむ</th>
+              <th>めぇるあどれす</th>
+              <th>状況</th>
+              <th colspan="4"></th>
+            </tr>
+          </div>
+        <thead>
+        <tbody>
+          <!--ユーザー情報を繰り返し表示-->
+          <% @users.each do |user| %>
+            <tr>
+              <!--ユーザーID-->
+              <td><%= user.id %></td>
+              <!--ニックネーム（ユーザー詳細へ遷移）-->
+              <td><%= link_to user.nickname, admin_user_path(user.id) %></td>
+              <!--メールアドレス-->
+              <td><%= user.email %></td>
+              <!--退会状況-->
+              <td><%= user.is_deleted ? '退会' : '有効' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>

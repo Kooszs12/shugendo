@@ -82,17 +82,19 @@ class Admin::PlacesController < ApplicationController
 
   def place_params
     params.require(:place).permit(
-  :prefecture_id,
-  :user_id,
-  :admin_id,
-  :category,
-  :name,
-  :address,
-  :postcode,
-  :phone_number,
-  :got,
-  :sect,
-  :goshuin_status,
-  :pet_status,
-  :image)
+    :prefecture_id,
+    :user_id,
+    :admin_id,
+    :category,
+    :name,
+    :address,
+    :postcode,
+    :phone_number,
+    :got,
+    :sect,
+    :goshuin_status,
+    :pet_status,
+    :image)
   end
+
+end

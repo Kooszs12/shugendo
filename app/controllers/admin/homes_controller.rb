@@ -1,4 +1,5 @@
 class Admin::HomesController < ApplicationController
+
   # アクセス制限
   before_action :authenticate_admin!
 
