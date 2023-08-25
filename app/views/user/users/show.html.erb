@@ -13,7 +13,7 @@
     <div class="col-md-7 offset-lg-1">
       <!--present:御朱印が存在する場合-->
       <% if @goshuins.present? %>
-        <h2 class="text-center">
+        <h2 class="text-center mb-5">
           <%= @goshuins.first.user.nickname %>御朱印一覧
         </h2>
         <%= render 'layouts/goshuin_index', goshuins: @goshuins %>

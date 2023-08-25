@@ -10,22 +10,25 @@
 
     <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
+      <!--当て嵌まる検索条件が存在するかどうか判断-->
       <% if @places.any? %>
         <h2 class="text-center mb-5">検索結果</h2>
         <div class="row">
+          <!--検索条件に当て嵌まった結果を繰り返し表示-->
           <% @places.each do |place| %>
+            <!--二つに分けて表示させる-->
             <div class="col-md-6">
               <div class="card mb-3">
+                <!--対応した画像を表示-->
                 <%= image_tag place.get_place_image, class: "card-img-top card-img-place", alt: "Place Image" %>
                 <div class="card-body">
-                  <!--<div class="card-img-top">-->
-                    <%#= image_tag place.get_place_image, class: "card-img-top", alt: "Place Image" %>
-                  <!--</div>-->
                   <div class="">
                     <h5 class="mr-2 card-title">
+                      <!--対応した寺社名を表示-->
                       <%= link_to place.name, place_path(place.id) %>
                     </h5>
                     <div class="text-right">
+                      <!--対応した都道府県名を表示（smallで文字を小さくして表示）-->
                       <small class="text-black-50"><%= place.prefecture.name %></small>
                     </div>
                   </div>
@@ -35,6 +38,7 @@
           <% end %>
         </div>
       <% else %>
+        <!--それ以外の場合はこれを表示-->
         <h2 class="text-center mb-5">該当する結果はありません</h2>
       <% end %>
     </div>

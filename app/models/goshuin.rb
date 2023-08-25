@@ -7,8 +7,11 @@ class Goshuin < ApplicationRecord
   validates :goshuin_status, presence: true
 
   # アソシエーション
+  # ユーザーとのアソシエーション
   belongs_to :user
+  # placeとのアソシエーション
   belongs_to :place
+  # いいねとのアソシエーション
   has_many :favorites, dependent: :destroy
 
   #enum設定
@@ -24,7 +27,8 @@ class Goshuin < ApplicationRecord
 
   #添付される画像がなかった場合のメソッド
   def get_goshuin_image
-    (image.attached?) ? image : 'gosyuin_no_image'
+    # 御朱印画像が存在しなかった場合gosyuin_no_image.pngを使用
+    (image.attached?) ? image : 'gosyuin_no_image.png'
   end
 
   # ユーザーが投稿に対していいねしたか判断（同じユーザーが同じ投稿にいいねを何度もさせない仕組み）
@@ -32,7 +36,7 @@ class Goshuin < ApplicationRecord
   # exists?で与えられた条件に合致するレコードが存在するか判断
   favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
-  
+
   # 御朱印のいいね総数を獲得メソッド
   def total_likes
     self.favorites.count

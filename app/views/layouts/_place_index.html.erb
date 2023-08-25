@@ -1,30 +1,31 @@
 <!--寺社一覧部分テンプレート-->
-<h2 class="text-center">
- <i class="fa-solid fa-torii-gate" style="color: #d9204f;"></i>
- 寺社一覧
- <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
+<h2 class="text-center mb-5">
+  <i class="fa-solid fa-torii-gate" style="color: #d9204f;"></i>
+  寺社一覧
+  <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
 </h2>
 
-<!--寺社一覧表示each-->
-<%# places.each do |place| %>
-  <!--<h2 class="text-center">-->
-    <%#= prefecture %>
-  <!--</h2>-->
-
-  <div class="mb-3">
-    <% places.each do |place| %>
-      <div class="card-body">
+<div class="mb-3">
+  <!--寺社一覧を繰り返し表示-->
+  <% places.each do |place| %>
+    <div class="card mb-5">
+      <div class="card-header">
         <h4 class="card-text text-center">
-          <% if admin_signed_in? %><!--adminがログインしていたら-->
+          <!--adminがログインしていたら-->
+          <% if admin_signed_in? %>
+            <!--寺社名でadminコントローラーへ-->
             <%= link_to place.name, admin_place_path(place) %>
           <% else %>
+            <!--寺社名userコントローラーへ-->
             <%= link_to place.name, place_path(place) %>
           <% end %>
         </h4>
 
         <!--地方名/都道府県名表示-->
         <div class="card-text">
+          <!--地方名を押すとその地方だけの一覧を表示-->
           <%= link_to place.prefecture.area.name, places_path(area_id: place.prefecture.area_id) %>/
+          <!--都道府県を押すとその都道府県だけの一覧を表示-->
           <%= link_to place.prefecture.name, places_path(prefecture_id: place.prefecture_id) %>
         </div>
 
@@ -35,30 +36,33 @@
             <div class="col-md-3">
               〒<%= place.postcode %>
             </div>
-            <!--都道府県名住所-->
+            <!--都道府県名＋住所-->
             <div class="col-md-9 text-right">
               <%= place.prefecture.name %><%= place.address %>
             </div>
           </div>
         </div>
+      </div>
 
-      <!--画像表示-->
+        <!--画像表示-->
+      <div class="card-body mt-5">
         <div class="card-img-bottom text-center">
-          <% if admin_signed_in? %><!--adminがログインしていたら-->
+          <!--adminがログインしていたら-->
+          <% if admin_signed_in? %>
             <%= link_to admin_place_path(place) do %>
               <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
             <% end %>
           <% else %>
+            <!--それ以外-->
             <%=  link_to place_path(place) do %>
              <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
             <% end %>
           <% end %>
         </div>
-
       </div>
-    <% end %>
-  </div>
-<%# end %>
+    </div>
+  <% end %>
+</div>
 
 <!-- ページネーション -->
 <div class="d-flex justify-content-center">
