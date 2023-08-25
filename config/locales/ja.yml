@@ -26,7 +26,7 @@ ja: # 日本語の設定を行う
         other: "その他"
   selected_conditions:
     title: '【選択した条件】'
-    category_in: 'カテゴリー'
+    category_in: '寺社'
     prefecture_id_in: '都道府県'
     goshuin_status_in: '御朱印の種類'
     pet_status_in: 'ペットの入場'
