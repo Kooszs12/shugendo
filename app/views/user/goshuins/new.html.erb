@@ -21,8 +21,12 @@
         <!--御朱印画像投稿-->
         <div class="form-group">
           <!--画像サイズのブートストラップ-->
-          <div class="text-center">
-            <%= image_tag @goshuin.get_goshuin_image, alt: 'Place Image', class: "img-fluid mb-3" %>
+          <div class="w-50">
+            <% if @goshuin.image.attached? %>
+              <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+            <% else %>
+              <%= image_tag "gosyuin_no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
+            <% end %>
           </div>
           <!--御朱印画像投稿フォーム-->
           <%= f.file_field :image, id: "imageField" %>

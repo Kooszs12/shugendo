@@ -20,6 +20,8 @@ class Admin::GoshuinsController < ApplicationController
     @jinja = Place.where(category: 0)
     @otera = Place.where(category: 1)
 
+    goshuin_params[:user_id] = @goshuin.user_id
+
     # 更新された場合
     if @goshuin.update(goshuin_params)
       # 成功メッセージ
@@ -60,8 +62,6 @@ class Admin::GoshuinsController < ApplicationController
       params.require(:goshuin)[:place_id] = params[:place_id2]
     end
 
-    params.require(:goshuin).permit(:admin_id, :user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image)
-    .merge(user_id: current_user.id)
-    .marge(admin_id)
+    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image)
   end
 end

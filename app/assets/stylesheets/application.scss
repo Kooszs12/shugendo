@@ -33,20 +33,24 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  // フォントを使えるようにする
   font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
 }
 
+// ヘッダーの背景
 .header_image {
   background-image: image-url('23208622.png'); /* Corrected the URL */
   background-size: 100% 100%;
   height: 200px;
 }
 
+// ヘッダーのリンクを縦書き
 .vertical-text {
   writing-mode: vertical-rl; /* テキストを縦書きにする */
   white-space: nowrap; /* テキストが折り返されないようにする */
 }
 
+// 全体の背景
 .background {
   background-image: image-url('wasi_green.jpg');
   background-size: 100% 100%;
@@ -86,6 +90,7 @@ main {
   border: 1px solid skyblue;
 }
 
+// フッターの背景
 footer {
   opacity: 0.8;
   background-image: image-url('23532707.png'); /* Corrected the URL */
@@ -94,20 +99,26 @@ footer {
   padding: 50px 0;
 }
 
+// プロフィール画像サイズ（!important;：bootstrapより優先）
 .profile-img {
   width: 200px !important;
   height: 200px !important;
+  // 中央切り取り
   object-fit: cover;
 }
 
+// admin側のユーザー一覧で表示されるユーザーアイコンサイズ
 .profile-icon {
   width: 50px !important;
   height: 50px !important;
+  // 中央切り取り
   object-fit: cover;
 }
 
+// 検索結果の画像サイズ
 .card-img-place {
   width: 100% !important;
   height: 150px !important;
+  // 中央切り取り
   object-fit: cover;
 }

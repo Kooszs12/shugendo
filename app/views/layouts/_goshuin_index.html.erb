@@ -41,7 +41,7 @@
         </div>
         <!-- 投稿された御朱印のメッセージ -->
         <p class="card-text mb-5">
-          <%= goshuin.message.present? ? goshuin.message : "文章はありません" %>
+          <%= goshuin.message.present? ? safe_join(goshuin.message.split("\n"), tag(:br)) : "文章はありません" %>
         </p>
       </div>
 

@@ -7,13 +7,18 @@
 
   <!--アイコン編集-->
   <div class="form-group">
-    <!--画像サイズのブートストラップ-->
-    <div class="text-center">
-      <%= image_tag @user.get_profile_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle mb-3 profile-img " %>
+      <!--画像サイズのブートストラップ-->
+      <div class="w-50">
+        <!--画像カラムが空かどうか判断-->
+        <% if @user.image.attached? %><!--入っていた場合-->
+          <%= image_tag @user.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid rounded-circle mb-3" %>
+        <% else %><!--入っていない場合-->
+          <%= image_tag "profile_no_image.png", id: 'imagePreview', class: "img-fluid rounded-circle mb-3" %>
+        <% end %>
+      </div>
+       <%= f.file_field :image, id: "imageField" %>
     </div>
-    <!--アイコンフォーム-->
-     <%= f.file_field :image, id: "imageField" %>
-  </div>
+
 
   <!--ニックネーム編集-->
 　   <div class="form-group mt-3">

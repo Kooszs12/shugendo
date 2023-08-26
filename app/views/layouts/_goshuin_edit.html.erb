@@ -7,12 +7,17 @@
 
   <!--御朱印投稿画像編集-->
   <div class="form-group">
-    <!--画像サイズのブートストラップ-->
-    <div class="text-center">
-      <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', class: "img-fluid mb-3" %>
-    </div>
-    <!--御朱印画像投稿フォーム-->
-    <%= f.file_field :image, id: "imageField" %>
+  <!--画像サイズのブートストラップ-->
+  <div class="w-50">
+    <% if goshuin.image.attached? %>
+      <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+    <% else %>
+      <%= image_tag "gosyuin_no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
+    <% end %>
+  </div>
+  <!--御朱印投稿画像編集フォーム-->
+  <%= f.file_field :image, id: "imageField" %>
+</div>
 
     <!-- 寺社選択ラジオボタン -->
     <div class="form-group mt-3">
