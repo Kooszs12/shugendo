@@ -38,9 +38,7 @@ class Admin::UsersController < ApplicationController
     # ユーザー情報が更新される時
     if @user.update(user_params)
       # 管理者向けの詳細ページに戻る
-      redirect_to admin_user_path(@user)
-      # 成功メッセージ
-      flash[:notice] = "編集されました"
+      redirect_to admin_user_path(@user), notice: "編集されました"
     else
       # 警告メッセージ
       flash.now[:alert] = "失敗しました"
@@ -56,9 +54,7 @@ class Admin::UsersController < ApplicationController
     # is_deletedカラムを!@userで反転させてturu(退会)時はfalse（有効）に変更。falseの時はturuに変更
     @user.update(is_deleted: !@user.is_deleted)
     # 成功メッセージ
-    flash[:notice] = "退会処理を実行いたしました"
-    # ユーザー一覧ページに戻る
-    redirect_to admin_users_path
+    redirect_to admin_users_path, notice: "退会処理を実行いたしました"
   end
 
   def user_params

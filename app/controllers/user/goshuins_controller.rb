@@ -96,10 +96,8 @@ class User::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     # 削除成功した場合
     if @goshuin.destroy
-      #
-      redirect_to goshuins_path
       # 成功メッセージ
-      flash[:notice] = "削除完了しました"
+      redirect_to goshuins_path, notice: "削除完了しました"
     # 失敗した場合
     else
       # 失敗メッセージ

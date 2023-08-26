@@ -7,10 +7,10 @@
 
   <!--御朱印投稿画像編集-->
   <div class="form-group">
-  <!--画像サイズのブートストラップ-->
-  <div class="w-50">
+  <!--JavaScriptで動的な画像選択の場合モデルで記述したメソッドが使用できない-->
+  <div class="w-100">
     <% if goshuin.image.attached? %>
-      <%= image_tag goshuin.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
+      <%= image_tag goshuin.image, style: "width: 50;", id: 'imagePreview', class: "img-fluid mb-3" %>
     <% else %>
       <%= image_tag "gosyuin_no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
     <% end %>

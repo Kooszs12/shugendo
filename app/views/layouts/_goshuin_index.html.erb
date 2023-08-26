@@ -2,13 +2,15 @@
 <div class="mb-3">
   <!-- カードデザインで投稿された御朱印を繰り返し表示 -->
   <% goshuins.each do |goshuin| %>
-    <div class="card mb-3">
+    <div class="card mb-5">
       <div class="card-header">
         <div class="d-flex justify-content-between">
           <div>
             <!-- ユーザーのマイページへのリンク -->
-            <%= link_to goshuin.user.nickname, users_mypage_path(id: goshuin.user.id), class: "user-profile-link" %><br>
-            <%= goshuin.place.prefecture.name %><!-- 御朱印を投稿したユーザーのニックネーム -->
+            <%= link_to users_mypage_path(id: goshuin.user.id), class: "user-profile-link" do %>
+              <%= goshuin.user.is_deleted ? "#{goshuin.user.nickname}(退会済み)" : goshuin.user.nickname %><br>
+            <% end %>
+            <%= goshuin.place.prefecture.name %>
           </div>
 
           <!-- この部分テンプレートを使用している特定のページにのみ寺社名を表示させないIf -->
@@ -41,7 +43,7 @@
         </div>
         <!-- 投稿された御朱印のメッセージ -->
         <p class="card-text mb-5">
-          <%= goshuin.message.present? ? safe_join(goshuin.message.split("\n"), tag(:br)) : "文章はありません" %>
+          <%= goshuin.message.present? ? safe_join(goshuin.message.split("\n"), tag(:br)) : "この御朱印にはメッセージはありません" %>
         </p>
       </div>
 
@@ -65,14 +67,14 @@
             <%= goshuin.goshuin_status_i18n %>
           </div>
 
-          <div class="text-right">
+          <div class="offset-md-9">
             <!-- ユーザーがログインしていて、かつ本人であった場合のみ表示される -->
             <% if user_signed_in? && goshuin.user == current_user %>
-              <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mr-3" %>
-              <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
-            <% else admin_signed_in? %>
-              <%= link_to "編集", edit_admin_goshuin_path(goshuin), class: "btn btn-sm btn-info" %>
-              <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+              <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-info mr-3" %>
+              <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger" %>
+            <% elsif admin_signed_in? %>
+              <%= link_to "編集", edit_admin_goshuin_path(goshuin), class: "btn btn-info mr-3" %>
+              <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger" %>
             <% end %>
           </div>
         </div>

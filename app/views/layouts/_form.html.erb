@@ -21,20 +21,22 @@
   <%= render "layouts/error_messages", model: f.object %>
 
   <!--フォーム内の関連する入力フィールドやラベルをまとめてグループ化、フォームをスタイリッシュにレイアウトしたり、<label>を使用してフォームと対応するラベルを関連付ける-->
-  <div class="form-group">
-    <!--画像サイズのブートストラップ-->
-    <div class="w-50">
-      <% if place.image.attached? %>
-        <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
-      <% else %>
-        <%= image_tag "no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
-      <% end %>
+
+  <!--画像サイズのブートストラップ-->
+  <div class="row">
+    <div class="col-12">
+    <% if place.image.attached? %>
+      <%= image_tag place.image, style: "width: 50%;", id: 'imagePreview', class: "img-fluid mb-3" %>
+    <% else %>
+      <%= image_tag "no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
+    <% end %>
     </div>
-    <%= f.file_field :image, id: "imageField" %>
   </div>
+  <%= f.file_field :image, id: "imageField" %>
+
 
   <!--寺社選択ラジオボタン-->
-  <div class="form-group">
+  <div class="form-group mt-3">
     <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
       <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
     <% end %>

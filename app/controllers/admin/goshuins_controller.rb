@@ -1,5 +1,8 @@
 class Admin::GoshuinsController < ApplicationController
 
+  # アクセス制限
+  before_action :authenticate_admin!
+
   # 御朱印編集ページ
   def edit
     # 特定の御朱印データを格納
@@ -25,9 +28,7 @@ class Admin::GoshuinsController < ApplicationController
     # 更新された場合
     if @goshuin.update(goshuin_params)
       # 成功メッセージ
-      flash[:notice] = "編集されました"
-      # 関連する寺社の詳細ページに遷移
-      redirect_to admin_place_path(@goshuin[:place_id])
+      redirect_to admin_place_path(@goshuin[:place_id]), notice: "編集されました"
     # 失敗した場合
     else
       # 失敗メッセージ
@@ -43,15 +44,11 @@ class Admin::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     # 削除成功した場合
     if @goshuin.destroy
-      #
-      redirect_to root_path
-      # 成功メッセージ
-      flash[:notice] = "削除完了しました"
+      redirect_to root_path, notice: "削除完了しました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "削除失敗しました"
-      redirect_to root_path
+      redirect_to root_path, alert: "削除失敗しました"
     end
   end
 

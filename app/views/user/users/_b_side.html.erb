@@ -26,12 +26,12 @@
 
   <!--自己紹介-->
   <div class="mt-5">
-    <h5 class="text-center">
+    <h5 class="text-center mb-3">
       <i class="fas fa-user-ninja"></i>
       自己紹介
     </h5>
     <!--自己紹介表示と自己紹介が空だった場合の表示-->
-    <%= user.introduction.present? ? user.introduction : "自己紹介はありません" %>
+    <%= user.introduction.present? ? safe_join(user.introduction.split("\n"), tag(:br)) : "自己紹介はありません" %>
   </div>
 
   <div>

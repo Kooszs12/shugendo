@@ -17,9 +17,7 @@ class Admin::PlacesController < ApplicationController
     #保存が成功したら
     if @place.save
       # 寺社詳細ページへ遷移
-      redirect_to admin_place_path(@place)
-      # 成功メッセージ
-      flash[:notice] = "投稿されました"
+      redirect_to admin_place_path(@place), notice: "投稿されました"
     #失敗したら
     else
       # 失敗メッセージ
@@ -57,9 +55,7 @@ class Admin::PlacesController < ApplicationController
     # 更新に成功したら
     if @place.update(place_params)
         # 更新された寺社詳細ページへ遷移
-        redirect_to admin_place_path(@place)
-        # 成功メッセージ
-        flash[:notice] = "編集されました"
+        redirect_to admin_place_path(@place), notice: "編集されました"
     else
       # 失敗メッセージ
       flash.now[:alert] = "失敗しました"

@@ -40,4 +40,5 @@ class User < ApplicationRecord
   def total_likes_count
     goshuins.sum(&:total_likes)
   end
+  
 end

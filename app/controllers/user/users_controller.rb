@@ -33,9 +33,7 @@ class User::UsersController < ApplicationController
     # 更新されたら
     if @user.update(user_params)
       # 本人のマイページへ戻る
-      redirect_to users_mypage_path(@user)
-      # 成功メッセージ
-      flash[:notice] = "編集されました"
+      redirect_to users_mypage_path(@user), notice: "編集されました"
     else
       # 警告メッセージ
       flash.now[:alert] = "失敗しました"
@@ -58,9 +56,7 @@ class User::UsersController < ApplicationController
     @user.update(is_deleted: true)
     reset_session
     # 成功メッセージ
-    flash[:notice] = "退会処理を実行いたしました"
-    # Topページへ戻る
-    redirect_to root_path
+    redirect_to root_path, notice: "退会処理を実行いたしました"
   end
 
   private
