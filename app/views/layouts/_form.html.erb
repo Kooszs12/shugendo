@@ -22,13 +22,13 @@
 
   <!--フォーム内の関連する入力フィールドやラベルをまとめてグループ化、フォームをスタイリッシュにレイアウトしたり、<label>を使用してフォームと対応するラベルを関連付ける-->
 
-  <!--画像サイズのブートストラップ-->
+  <!--画像フォーム-->
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 w-100">
     <% if place.image.attached? %>
-      <%= image_tag place.image, style: "width: 50%;", id: 'imagePreview', class: "img-fluid mb-3" %>
+      <%= image_tag place.image, style: "width: 50;", id: 'imagePreview', class: "img-fluid mb-3" %>
     <% else %>
-      <%= image_tag "no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
+      <%= image_tag "no_image.png", style: "width: 50;", id: 'imagePreview', class: "img-fluid mb-3" %>
     <% end %>
     </div>
   </div>

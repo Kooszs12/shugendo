@@ -8,12 +8,12 @@
   <!--アイコン編集-->
   <div class="form-group">
       <!--画像サイズのブートストラップ-->
-      <div class="w-50">
+      <div class="text-center">
         <!--画像カラムが空かどうか判断-->
         <% if @user.image.attached? %><!--入っていた場合-->
-          <%= image_tag @user.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid rounded-circle mb-3" %>
+          <%= image_tag @user.image, id: 'imagePreview', class: "img-fluid rounded-circle mb-3 profile-img" %>
         <% else %><!--入っていない場合-->
-          <%= image_tag "profile_no_image.png", id: 'imagePreview', class: "img-fluid rounded-circle mb-3" %>
+          <%= image_tag "profile_no_image.png", id: 'imagePreview', class: "img-fluid rounded-circle mb-3 profile-img" %>
         <% end %>
       </div>
        <%= f.file_field :image, id: "imageField" %>
