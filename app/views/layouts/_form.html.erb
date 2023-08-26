@@ -1,3 +1,5 @@
+<!--寺社投稿・編集部分テンプレート-->
+<!--placeJavaScript反映-->
 <%= javascript_pack_tag 'place' %>
 
 <!--変数を新たに設定（コードを楽にするため）-->
@@ -21,13 +23,10 @@
   <!--フォーム内の関連する入力フィールドやラベルをまとめてグループ化、フォームをスタイリッシュにレイアウトしたり、<label>を使用してフォームと対応するラベルを関連付ける-->
   <div class="form-group">
     <!--画像サイズのブートストラップ-->
-    <div class="w-50">
-      <% if place.image.attached? %>
-        <%= image_tag place.image, style: "max-width: 200px;", id: 'imagePreview', class: "img-fluid mb-3" %>
-      <% else %>
-        <%= image_tag "no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
-      <% end %>
+    <div class="text-center mb-3">
+      <%= image_tag place.get_place_image, alt: 'Place Image', width: 500, height: 300 %>
     </div>
+    <!--画像ふぇーむ-->
     <%= f.file_field :image, id: "imageField" %>
   </div>
 

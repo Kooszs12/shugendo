@@ -9,9 +9,9 @@ class User::GoshuinsController < ApplicationController
     # 空の変数作成
     @goshuin = Goshuin.new
     # 神社データ（セレクトボックスの中身）
-    @jinja= Place.where(category: 0)
+    @jinja = Place.where(category: 0)
     # お寺データ（セレクトボックスの中身）
-    @otera= Place.where(category: 1)
+    @otera = Place.where(category: 1)
   end
 
   # 御朱印投稿機能
@@ -111,7 +111,6 @@ class User::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-
     if params.require(:goshuin)[:category] == 'temple'
       params.require(:goshuin)[:place_id] = params[:place_id2]
     end

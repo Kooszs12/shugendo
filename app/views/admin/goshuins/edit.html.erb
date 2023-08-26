@@ -1,4 +1,6 @@
-<!-- 管理者側寺社投稿ページのコンテナ -->
+<!--JavaScriptのgoshuinを適用-->
+<%= javascript_pack_tag 'goshuin' %>
+
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
@@ -9,9 +11,7 @@
     </div>
     <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
-      <h2 class="text-center mb-5">寺社新規投稿</h2>
-      <!-- 寺社フォーム部分テンプレートを描画 -->
-      <%= render 'layouts/form', models: [:admin, @place], submit: "投稿" %><!--submit: "投稿"はsubmitボタンの名前を-->
+      <%= render 'layouts/goshuin_edit', goshuin: @goshuin, jinja: @jinja, otera: @otera, category: @category, target_path: admin_goshuin_path %>
     </div>
   </div>
 </div>

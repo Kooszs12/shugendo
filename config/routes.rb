@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :goshuins, only: [:edit, :update, :destroy]
   end
 
   scope module: :user do

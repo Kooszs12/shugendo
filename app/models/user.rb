@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   #添付される画像がなかった場合のメソッド
-  def get_goshuin_image
+  def get_profile_image
     (image.attached?) ? image : 'profile_no_image'
   end
 

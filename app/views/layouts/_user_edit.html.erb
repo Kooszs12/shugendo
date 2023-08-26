@@ -9,7 +9,7 @@
   <div class="form-group">
     <!--画像サイズのブートストラップ-->
     <div class="text-center">
-      <%= image_tag @user.get_goshuin_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle profile-img mb-3" %>
+      <%= image_tag @user.get_profile_image, style: "max-width: 300px;", id: 'imagePreview', class: "img-fluid rounded-circle mb-3 profile-img " %>
     </div>
     <!--アイコンフォーム-->
      <%= f.file_field :image, id: "imageField" %>

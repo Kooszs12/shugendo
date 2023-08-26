@@ -71,8 +71,8 @@
               <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mr-3" %>
               <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
             <% else admin_signed_in? %>
-              <%#= link_to "編集", admin_edit_goshuin_path(goshuin), class: "btn btn-sm btn-info mt-3" %>
-              <%#= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
+              <%= link_to "編集", edit_admin_goshuin_path(goshuin), class: "btn btn-sm btn-info" %>
+              <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-sm btn-danger" %>
             <% end %>
           </div>
         </div>

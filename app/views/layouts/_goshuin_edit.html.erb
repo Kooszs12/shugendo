@@ -1,0 +1,88 @@
+<!--御朱印編集ページ-->
+<!--題名-->
+<h2 class="text-center mb-5">御朱印編集</h2>
+<%= form_with model: goshuin, url: target_path do |f| %>
+  <!--バリデーションの部分テンプレート呼び出し-->
+  <%= render "layouts/error_messages", model: f.object %>
+
+  <!--御朱印投稿画像編集-->
+  <div class="form-group">
+    <!--画像サイズのブートストラップ-->
+    <div class="text-center">
+      <%= image_tag goshuin.get_goshuin_image, alt: 'Place Image', class: "img-fluid mb-3" %>
+    </div>
+    <!--御朱印画像投稿フォーム-->
+    <%= f.file_field :image, id: "imageField" %>
+
+    <!-- 寺社選択ラジオボタン -->
+    <div class="form-group mt-3">
+      <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last, { checked:category } do |b| %>
+        <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
+      <% end %>
+    </div>
+
+    <!--神社選択フォーム -->
+    <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
+      <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
+      <!--神社のデータをセレクトボックス内に表示-->
+      <%= f.select :place_id, jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: goshuin.place.id }, { class: "form-control" } %>
+    </div>
+
+    <!--お寺名セレクトボックス-->
+    <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
+      <!--見た目上は一つでもHTML上で二つセレクトボックスが存在するため同じ名前は使用できない-->
+      <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
+      <!--名前を変えたのでform_withから外してselect_tagをしようしてお寺のデータをセレクトボックス内に表示-->
+      <%= select_tag :place_id2, options_for_select(otera.map { |place| [place.name, place.id] }, selected: goshuin.place.id), class: "form-control" %>
+    </div>
+
+    <!--上記セレクトボックスが存在しなかった場合寺社を投稿してもらうためのlink_to-->
+    <div class="d-flex mb-3">
+      <%= link_to "寺社投稿", new_place_path, class: "btn btn-success mr-1" %>
+      <p class="ml-1">選択肢がない場合はお手数ですが寺社投稿お願いします</p>
+    </div>
+
+    <!--参拝日カレンダーフォーム-->
+    <div class="form-group">
+      <%= f.label :参拝日 %>
+      <!--f.date_fieldでカレンダーフォーム-->
+      <%= f.date_field :visit_day, class: "form-control" %>
+    </div>
+
+    <!--御朱印料金フォーム-->
+    <div class="form-group">
+      <%= f.label :心付け %>
+      <%= f.text_field :price, placeholder: "心付け", class: "form-control" %>
+    </div>
+
+    <!--御朱印の種類選択セレクトボックス-->
+    <div class="form-group">
+      <%= f.label :御朱印の種類 %><font color="red">*必須</font>
+      <!--invertで送るデータと表示させるデータを反転させる-->
+      <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
+    </div>
+
+    <!--投稿メッセージフォーム-->
+    <div class="form-group">
+      <%= f.label :めっせぇじ %>
+      <!--text_area：text_fieldより長い文章を入力できるフォーム-->
+      <%= f.text_area :message, placeholder: "ご自由にどうぞ", class: "form-control" %>
+    </div>
+
+    <!--投稿・非公開ラジオボタン-->
+    <div class="form-group">
+      <%= f.collection_radio_buttons :status, Goshuin.statuses_i18n, :first, :last do |b| %>
+        <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
+      <% end %>
+    </div>
+
+    <!--編集ボタン-->
+    <%= f.submit :編集, class: "btn btn-info w-25 mr-5" %>
+    <!--削除リンク-->
+    <% if user_signed_in? %>
+      <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+    <% elsif admin_signed_in? %>
+      <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+    <% end %>
+  </div>
+<% end %>
