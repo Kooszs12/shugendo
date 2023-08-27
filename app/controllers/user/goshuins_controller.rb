@@ -50,7 +50,7 @@ class User::GoshuinsController < ApplicationController
     # ログインしているユーザーデータを角の
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
-    @goshuins = @user.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @goshuins = @user.goshuins.page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
     # ユーザーが保持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
   end

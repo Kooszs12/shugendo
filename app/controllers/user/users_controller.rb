@@ -11,8 +11,8 @@ class User::UsersController < ApplicationController
 
   # ユーザーマイページ。誰でも閲覧可能
   def show
-    # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ１０件表示）
-    @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(10)
+    # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ5件表示）
+    @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
     # ユーザーが所持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }

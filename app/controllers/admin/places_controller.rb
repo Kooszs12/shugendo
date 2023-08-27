@@ -30,7 +30,7 @@ class Admin::PlacesController < ApplicationController
   # 寺社一覧ページ
   def index
     # order(updated_at: :desc)で更新日順に表示
-    @places = Place.order(updated_at: :desc).page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @places = Place.order(updated_at: :desc).page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
   end
 
   # 寺社詳細ページ
@@ -38,7 +38,7 @@ class Admin::PlacesController < ApplicationController
     # 特定の寺社データ格納
     @place = Place.find(params[:id])
     # 上記の寺社が持つ御朱印のデータを格納
-    @goshuins = @place.goshuins.page(params[:page]).per(10) # ページネーションを適用（１ページ１０件表示）
+    @goshuins = @place.goshuins.page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
   end
 

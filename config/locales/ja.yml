@@ -30,6 +30,13 @@ ja: # 日本語の設定を行う
     prefecture_id_in: '都道府県'
     goshuin_status_in: '御朱印の種類'
     pet_status_in: 'ペットの入場'
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   date:
     abbr_day_names:
     - 日
@@ -241,7 +248,6 @@ ja: # 日本語の設定を行う
       place:
         name: 寺社名
         address: 住所(市区町村)
-        goshuin_status: 御朱印の種類
         pet_status: ペット入場
         prefecture: 都道府県
       goshuin:
