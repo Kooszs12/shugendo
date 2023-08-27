@@ -30,7 +30,10 @@
 - ​気になる場所を記録しておきたい時
 
 ## 設計書
-- 後程作成
+- ER図<br>
+<img width="1281" alt="スクリーンショット 2023-08-27 20 50 40" src="https://github.com/Kooszs12/shugendo/assets/134023430/5b5cb019-e376-4a2f-84ab-fda3c788abc2">
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1-BZKaTNKeX3Ml3q61Mv8g7hDEjQ9Mvlcb6R2ypmWR6w/edit#gid=2063784659
 ​
 ## 開発環境
 - OS：Linux(CentOS)<br>
@@ -40,4 +43,5 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-- 現在不明
+- サイト内の画像や写真は下記を使用しております。<br>
+https://www.ac-illust.com/
