@@ -1,1 +1,111 @@
 @use '~bootstrap/scss/bootstrap';
+
+@import 'custom';
+
+/*imagine_YOKOHAMAのWEBフォント対応定義*/
+@font-face {
+  font-family: "imagine YOKOHAMA";
+  font-style: normal;
+  src: font-url('imagine_YOKOHAMA.otf');
+}
+
+/*HannariMincho-RegularのWEBフォント対応定義*/
+@font-face {
+  font-family: "HannariMincho-Regular";
+  font-style: normal;
+  src: font-url('HannariMincho-Regular.otf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // フォントを使えるようにする
+  font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+}
+
+// ヘッダーの背景
+.header_image {
+  background-image: image-url('23208622.png'); /* Corrected the URL */
+  background-size: 100% 100%;
+  height: 200px;
+}
+
+// ヘッダーのリンクを縦書き
+.vertical-text {
+  writing-mode: vertical-rl; /* テキストを縦書きにする */
+  white-space: nowrap; /* テキストが折り返されないようにする */
+}
+
+// 全体の背景
+.background {
+  background-image: image-url('wasi_green.jpg');
+  background-size: 100% 100%;
+  background-blend-mode: lighten;
+  background-color: rgba(255, 255, 255,  0.8);/*４つ目で背景のみを透明化*/
+}
+
+/*フッターを下に固定させるためのCSS*/
+.wrapper{
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+main {
+  /*position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
+  background-size: cover;
+  background-size: contain;
+  padding: 50px 0; /* 上下に余白を追加 */
+}
+
+.checkbox-toggle {
+  max-width: 362px;
+  padding: 1em;
+  text-align: center;
+  cursor: pointer;
+  background-color: skyblue;
+}
+
+/* チェックボックス */
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 1px solid skyblue;
+}
+
+// フッターの背景
+footer {
+  opacity: 0.8;
+  background-image: image-url('23532707.png'); /* Corrected the URL */
+  background-size: 100% 100%;
+  height: 300px;
+  padding: 50px 0;
+}
+
+// プロフィール画像サイズ（!important;：bootstrapより優先）
+.profile-img {
+  width: 200px !important;
+  height: 200px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
+
+// admin側のユーザー一覧で表示されるユーザーアイコンサイズ
+.profile-icon {
+  width: 50px !important;
+  height: 50px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
+
+// 検索結果の画像サイズ
+.card-img-place {
+  width: 100% !important;
+  height: 150px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
