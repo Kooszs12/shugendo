@@ -2,7 +2,7 @@ class Goshuin < ApplicationRecord
 
   # バリデーション
   # メッセージの文字数制限
-  validates :message, length: { maximum: 200 }
+  validates :message, length: { maximum: 250 }
   # 御朱印の種類はなしはNG
   validates :goshuin_status, presence: true
 

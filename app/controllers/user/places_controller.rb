@@ -22,7 +22,7 @@ class User::PlacesController < ApplicationController
     #失敗したら
     else
       # 失敗メッセージ
-      flash.now[:alert] = "failed"
+      flash.now[:alert] = "失敗しました"
       # 新規投稿ページへ遷移
       render :new
     end
