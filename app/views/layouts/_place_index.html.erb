@@ -46,16 +46,16 @@
 
         <!--画像表示-->
       <div class="card-body">
-        <div class="card-img-bottom text-center">
+        <div class="card-img-bottom text-center w-100">
           <!--adminがログインしていたら-->
           <% if admin_signed_in? %>
             <%= link_to admin_place_path(place) do %>
-              <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
+              <%= image_tag place.get_place_image, alt: 'Place Image', class: "w-100" %>
             <% end %>
           <% else %>
             <!--それ以外-->
             <%=  link_to place_path(place) do %>
-             <%= image_tag place.get_place_image, alt: 'Place Image', width: 580, height: 300 %>
+             <%= image_tag place.get_place_image, alt: 'Place Image', class: "w-100" %>
             <% end %>
           <% end %>
         </div>
