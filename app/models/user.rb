@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   #添付される画像がなかった場合のメソッド
   def get_profile_image
-    (image.attached?) ? image : 'profile_no_image'
+    (image.attached?) ? image : 'profile_no_image.png'
   end
 
   # ゲストユーザーの生成
@@ -40,5 +40,5 @@ class User < ApplicationRecord
   def total_likes_count
     goshuins.sum(&:total_likes)
   end
-  
+
 end
