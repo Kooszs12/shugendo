@@ -90,7 +90,16 @@ class Admin::PlacesController < ApplicationController
     :sect,
     :goshuin_status,
     :pet_status,
-    :image)
+    :image,
+    :fee,
+    :start_time,
+    :end_time
+    ).merge(
+        # ユーザーIDが存在するかどうか判断。存在しなかった場合nil
+        user_id: user_signed_in? ? current_user.id : nil,
+        # アドミンIDが存在するかどうか判断。存在しなかった場合nil
+        admin_id: admin_signed_in? ? current_admin.id : nil
+      )
   end
 
 end
