@@ -23,14 +23,14 @@
   <!--データが空でない場合-->
   <% if place.start_time.present? && place.end_time.present? %>
   <!--営業時間：開始時間〜終了時間-->
-    <li><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></li>
+    <li><strong>営業時間：</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></li>
   <% end %>
   <!--拝観料-->
-  <li><strong>拝観料:¥</strong> <%= place.fee %></li>
+  <li><strong>拝観料：¥</strong> <%= place.fee %></li>
   <!--御朱印の種類-->
-  <li><strong>御朱印種類:</strong> <%= place.goshuin_status_i18n %></li>
+  <li><strong>御朱印種類：</strong> <%= place.goshuin_status_i18n %></li>
   <!--ペット状況-->
-  <li><strong>ぺっと状況:</strong> <%= place.pet_status_i18n %></li>
+  <li><strong>ぺっと状況：</strong> <%= place.pet_status_i18n %></li>
 </ul>
 
 <!--どっちがログインしているか判断-->
