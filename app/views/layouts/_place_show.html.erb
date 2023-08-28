@@ -21,8 +21,8 @@
     <li>☎︎ <%= place.phone_number %></li>
   <% end %>
   <!--データが空でない場合-->
-  <% unless place.start_time.blank? || place.end_time %>
-    <!--営業時間：開始時間〜終了時間-->
+  <% if place.start_time.present? && place.end_time.present? %>
+  <!--営業時間：開始時間〜終了時間-->
     <li><strong>営業時間:</strong> <%= place.start_time.strftime('%H:%M') %>〜<%= place.end_time.strftime('%H:%M') %></li>
   <% end %>
   <!--拝観料-->
