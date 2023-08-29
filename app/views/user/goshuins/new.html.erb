@@ -38,6 +38,10 @@
             <% end %>
           </div>
 
+          <div class="form-group mt-3">
+            <%= collection_select(:prefectures, :prefectures, Prefecture.all, :id, :name, {prompt: "都道府県を選択してください"}, {class: 'form-control'}) %>
+          </div>
+
           <!--神社名セレクトボックス-->
           <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
             <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>

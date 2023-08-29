@@ -106,6 +106,15 @@ class User::GoshuinsController < ApplicationController
     end
   end
 
+  def places_json
+    if params[:cat] == "shrine"
+      places = Place.joins(:prefecture).where(category: 0, prefecture_id: params[:pref]) # 神社
+    else
+      places = Place.joins(:prefecture).where(category: 1, prefecture_id: params[:pref]) # お寺
+    end
+    render json: places
+  end
+
   private
 
   def goshuin_params
