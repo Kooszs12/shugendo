@@ -1,5 +1,6 @@
 class Place < ApplicationRecord
-
+  scope :shrine, -> { where(category: 0).joins(:prefecture).order(prefecture_id: :asc) }
+  scope :temple, -> { where(category: 1).joins(:prefecture).order(prefecture_id: :asc) }
   #バリデーション設定
   # カテゴリーラジオボタンバリデーション
   validates :category, presence: true

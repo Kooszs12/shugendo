@@ -1,6 +1,6 @@
 <!--御朱印新規投稿ページ-->
 <!--JavaScript呼び出し-->
-<%= javascript_pack_tag 'goshuin_re' %>
+<%#= javascript_pack_tag 'goshuin_re' %>
 
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
@@ -12,91 +12,10 @@
     </div>
     <!-- 右側のコラム (幅: 7カラム) -->
     <div class="col-md-7 offset-lg-1">
-      <!--題名-->
-      <h2 class="text-center mb-5">御朱印投稿</h2>
-      <%= form_with model: @goshuin do |f| %>
-        <!--バリデーションの部分テンプレート呼び出し-->
-        <%= render "layouts/error_messages", model: f.object %>
-
-        <!--御朱印画像投稿-->
-        <div class="form-group">
-          <!--画像サイズのブートストラップ-->
-          <div class="w-100">
-            <% if @goshuin.image.attached? %>
-              <%= image_tag @goshuin.image, style: "width: 50%;", id: 'imagePreview', class: "img-fluid mb-3" %>
-            <% else %>
-              <%= image_tag "gosyuin_no_image.png", id: 'imagePreview', class: "img-fluid mb-3" %>
-            <% end %>
-          </div>
-          <!--御朱印画像投稿フォーム-->
-          <%= f.file_field :image, id: "imageField" %>
-
-          <!--寺社選択ラジオボタン（ここで選択することによってセレクトボックスの中身が変わる）-->
-          <div class="form-group mt-3">
-            <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last do |b| %>
-              <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
-            <% end %>
-          </div>
-
-          <div class="form-group mt-3">
-            <%= collection_select(:prefectures, :prefectures, Prefecture.all, :id, :name, {prompt: "都道府県を選択してください"}, {class: 'form-control'}) %>
-          </div>
-
-          <!--神社名セレクトボックス-->
-          <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-            <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= f.select :place_id, @jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください" }, { class: "form-control" } %>
-          </div>
-
-          <!--お寺名セレクトボックス-->
-          <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-            <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
-            <%= select_tag :place_id2, options_for_select(@otera.map { |place| [place.name, place.id] }, selected: params[:place_id2]), prompt: "選択してください", class: "form-control" %>
-          </div>
-
-          <!--セレクトボックスの中になかった場合の寺社投稿ボタン-->
-          <div class="d-flex mb-3">
-            <%= link_to "寺社投稿", new_place_path, class: "btn btn-success mr-1" %>
-            <p class="ml-1">選択肢がない場合はお手数ですが寺社投稿お願いします</p>
-          </div>
-
-          <!--参拝日カレンダーフォーム-->
-          <div class="form-group">
-            <%= f.label :参拝日 %>
-            <%= f.date_field :visit_day, class: "form-control" %>
-          </div>
-
-          <!--御朱印料金フォーム-->
-          <div class="form-group">
-            <%= f.label :心付け %>
-            <%= f.text_field :price, placeholder: "心付け", class: "form-control" %>
-          </div>
-
-          <!--御朱印の種類選択セレクトボックス-->
-          <div class="form-group">
-            <%= f.label :御朱印の種類 %><font color="red">*必須</font>
-            <%= f.select :goshuin_status, Place.goshuin_statuses_i18n.invert, { prompt: "選択してください" }, { class: "form-control" } %>
-          </div>
-
-          <!--投稿メッセージフォーム-->
-          <div class="form-group">
-            <%= f.label :めっせぇじ %>
-            <%= f.text_area :message, placeholder: "ご自由にどうぞ", class: "form-control" %>
-          </div>
-
-          <!--投稿・非公開ラジオボタン-->
-          <div class="form-group">
-            <%= f.collection_radio_buttons :status, Goshuin.statuses_i18n, :first, :last do |b| %>
-              <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
-            <% end %>
-          </div>
-
-          <!--投稿ボタン-->
-          <div class="text-center">
-            <%= f.submit :投稿, class: "btn btn-info w-25" %>
-          </div>
-        <% end %>
+      <%= render 'layouts/goshuin_edit', goshuin: @goshuin,
+                                         target_path: goshuins_path,
+                                         title: "投稿"%>
+     
       </div>
-    </div>
   </div>
 </div>

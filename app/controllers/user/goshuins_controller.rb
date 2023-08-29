@@ -9,9 +9,9 @@ class User::GoshuinsController < ApplicationController
     # 空の変数作成
     @goshuin = Goshuin.new
     # 神社データ（セレクトボックスの中身）
-    @jinja = Place.where(category: 0).joins(:prefecture).order(prefecture_id: :asc)
+    #@jinja = Place.jinja
     # お寺データ（セレクトボックスの中身）
-    @otera = Place.where(category: 1).joins(:prefecture).order(prefecture_id: :asc)
+    #@otera = Place.otera
   end
 
   # 御朱印投稿機能
@@ -60,11 +60,11 @@ class User::GoshuinsController < ApplicationController
     # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
     # 上記の御朱印に関連付いたplaceモデルに存在するcategoryカラムを格納
-    @category = @goshuin.place.category
+    #@category = @goshuin.place.category
     # 神社データ（セレクトボックスの中身）
-    @jinja = Place.where(category: 0).joins(:prefecture).order(prefecture_id: :asc)
+    #@jinja = Place.where(category: 0).joins(:prefecture).order(prefecture_id: :asc)
     # お寺データの（セレクトボックスの中身）
-    @otera = Place.where(category: 1).joins(:prefecture).order(prefecture_id: :asc)
+    #@otera = Place.where(category: 1).joins(:prefecture).order(prefecture_id: :asc)
   end
 
   # 御朱印更新機能
@@ -118,11 +118,6 @@ class User::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-    if params.require(:goshuin)[:category] == 'temple'
-      params.require(:goshuin)[:place_id] = params[:place_id2]
-    end
-
-    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image).merge(user_id: current_user.id)
+    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :goshuin_status, :status, :image).merge(user_id: current_user.id)
   end
-
 end

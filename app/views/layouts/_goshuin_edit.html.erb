@@ -1,6 +1,6 @@
 <!--御朱印編集ページ-->
 <!--題名-->
-<h2 class="text-center mb-5">御朱印編集</h2>
+<h2 class="text-center mb-5">御朱印<%= title %></h2>
 <%= form_with model: goshuin, url: target_path do |f| %>
   <!--バリデーションの部分テンプレート呼び出し-->
   <%= render "layouts/error_messages", model: f.object %>
@@ -20,25 +20,32 @@
 </div>
 
     <!-- 寺社選択ラジオボタン -->
-    <div class="form-group mt-3">
-      <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last, { checked:category } do |b| %>
+    <div class="form-group mt-3" id="categoryCheckBoxes">
+      <%= f.collection_radio_buttons :category, Place.categories_i18n, :first, :last, { checked: goshuin.place&.category || Place.categories_i18n.first[0] }, {} do |b| %>
         <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
       <% end %>
     </div>
 
-    <!--神社選択フォーム -->
-    <div class="form-group" id="zinzya"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-      <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
-      <!--神社のデータをセレクトボックス内に表示-->
-      <%= f.select :place_id, jinja.map { |place| [place.name, place.id] }, { prompt: "選択してください", selected: goshuin.place.id }, { class: "form-control" } %>
+    <% prefectures = Prefecture.all %>
+    <% prefectures_json = prefectures.map{|prefecture| { id: prefecture.id, name: prefecture.name } }.to_json %>
+    
+    <div class="form-group mt-3">
+      <%= f.collection_select(:prefectures, prefectures, :id, :name, {prompt: "都道府県を選択してください", selected: goshuin.place&.prefecture_id}, {class: 'form-control', 'data-json': prefectures_json, id: 'prefectureSelectForm'}) %>
     </div>
 
-    <!--お寺名セレクトボックス-->
-    <div class="form-group" id="otera"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
-      <!--見た目上は一つでもHTML上で二つセレクトボックスが存在するため同じ名前は使用できない-->
-      <%= f.label :place2, "寺社名<font color='red'>*必須</font>".html_safe %>
-      <!--名前を変えたのでform_withから外してselect_tagをしようしてお寺のデータをセレクトボックス内に表示-->
-      <%= select_tag :place_id2, options_for_select(otera.map { |place| [place.name, place.id] }, selected: goshuin.place.id), class: "form-control" %>
+    <% categories = Place.categories_i18n.keys.map(&:to_sym) %>
+    <% places = {} %>
+    <% categories.each do |o| %>
+      <% target = eval("Place.#{o}") %>
+      <% places[o] = target.map{|place| { id: place.id, name: place.name, category: place.category, prefecture_id: place.prefecture_id } } %>
+    <% end %>
+    <% places_json = places.to_json %>
+
+    <!--神社選択フォーム -->
+    <div class="form-group"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
+      <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
+      <!--神社のデータをセレクトボックス内に表示-->
+      <%= f.select :place_id, Place.all.map{ |place| [place.name, place.id] }, { prompt: "選択してください", selected: goshuin.place&.id }, { class: "form-control", "data-json": places_json, id: "placeSelectForm" } %>
     </div>
 
     <!--上記セレクトボックスが存在しなかった場合寺社を投稿してもらうためのlink_to-->
@@ -80,14 +87,18 @@
         <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
       <% end %>
     </div>
-
-    <!--編集ボタン-->
-    <%= f.submit :編集, class: "btn btn-info w-25 mr-5" %>
-    <!--削除リンク-->
-    <% if user_signed_in? %>
-      <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
-    <% elsif admin_signed_in? %>
-      <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+      <!--編集ボタン-->
+      <%= f.submit title, class: "btn btn-info w-25 mr-5" %>
+    <% if params[:action] == "edit" %>
+      <!--削除リンク-->
+      <% if user_signed_in? %>
+        <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+      <% elsif admin_signed_in? %>
+        <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+      <% end %>
     <% end %>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'goshuin_form' %>
+

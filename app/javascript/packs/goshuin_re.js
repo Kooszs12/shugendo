@@ -2,7 +2,7 @@
 $(document).ready(function() {
   //寺社選択でセレクトボックスの中身変更
   // デフォルトで表示されているセレクトボックスの表示を消す
-  $('#otera').hide();　//.hide();で表示されているセレクトボックスを消す
+  //$('#otera').hide();　//.hide();で表示されているセレクトボックスを消す
   // ラジオボタンをデフォルトでチェックされているようにする
    //'input[name="goshuin[category]"でラジオボタンを選択、[value="shrine"]デフォルトの値を持ってきて、.prop('checked', true)これでどんなことをさせるか決めた
   $('input[name="goshuin[category]"][value="shrine"]').prop('checked', true);
