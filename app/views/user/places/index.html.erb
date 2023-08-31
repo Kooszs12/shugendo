@@ -11,8 +11,54 @@
 
     <!-- 寺社一覧表示 -->
     <div class="col-md-7 offset-md-1"> <!-- 右側のコラム (幅: 7カラム) -->
-      <!--寺社一覧テンプレート呼び出し-->
-      <%= render 'layouts/place_index', places: @places %>
+
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">寺社一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">神社一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section3">お寺一覧</a>
+          </li>
+        </ul>
+
+        <!--ユーザー投稿一覧-->
+        <div class="tab-content mt-3">
+          <div id="section1" class="tab-pane fade show active">
+            <%= render 'layouts/place_index', places: @places %>
+          </div>
+          <!--全体公開投稿一覧-->
+          <div id="section2" class="tab-pane fade">
+            <%= render 'layouts/place_index', places: @shrine %>
+          </div>
+          <!--非公開投稿一覧-->
+          <div id="section3" class="tab-pane fade">
+            <%= render 'layouts/place_index', places: @temple %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  // ページが読み込まれたときに現在のタブを復元
+  $(document).ready(function() {
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+      $('.nav-link').removeClass('active');
+      $('.tab-pane').removeClass('show active');
+      $('#' + activeTab).addClass('show active');
+      $('a[href="#' + activeTab + '"]').addClass('active');
+    }
+  });
+
+  // タブがクリックされたときにタブの状態を保存
+  $('.nav-link').click(function() {
+    var tabId = $(this).attr('href').substr(1); // クリックされたタブのIDを取得
+    localStorage.setItem('activeTab', tabId);
+  });
+</script>

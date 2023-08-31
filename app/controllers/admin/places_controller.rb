@@ -29,8 +29,12 @@ class Admin::PlacesController < ApplicationController
 
   # 寺社一覧ページ
   def index
+    page = params[:page]
+    per = 5
     # order(updated_at: :desc)で更新日順に表示
-    @places = Place.order(updated_at: :desc).page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
+    @places = Place.order(updated_at: :desc).page(page).per(per) # ページネーションを適用（１ページ5件表示）
+    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(per)
+    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(per)
   end
 
   # 寺社詳細ページ

@@ -29,6 +29,10 @@
     font-size: calc(5px + .5vw);
 }
 
+.japan_map .area_btn:hover{
+    font-size: calc(6px + .5vw);
+}
+
 /* ボタン配置（使用する日本地図画像により微調整） */
 .japan_map .area_btn.area1{ /*北海道・東北地方*/
     top: 30%;
@@ -108,7 +112,7 @@
 .japan_map .pref_list > div{
     box-sizing: border-box;
     width: 50%;
-    border: 1px solid #CCC;
+    // border: 1px solid #CCC;
     font-weight: bold;
     text-align: center;
     padding: 0.5em;
