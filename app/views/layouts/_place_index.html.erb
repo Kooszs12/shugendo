@@ -6,6 +6,13 @@
 </h2>
 
 <div class="mb-3">
+  <div class="mb-3 text-center">
+    <%= link_to '都道府県順', places_path(sort_option: 'prefecture') %>&nbsp;|&nbsp;
+    <%= link_to '最新順', places_path(sort_option: 'latest') %>&nbsp;|&nbsp;
+    <%= link_to '古い順', places_path(sort_option: 'old') %>&nbsp;|&nbsp;
+    <%= link_to '御朱印数順', places_path(sort_option: 'goshuin_count') %>
+  </div>
+
   <!--寺社一覧を繰り返し表示-->
   <% places.each do |place| %>
     <div class="card mb-5">
@@ -14,10 +21,24 @@
           <!--adminがログインしていたら-->
           <% if admin_signed_in? %>
             <!--寺社名でadminコントローラーへ-->
-            <%= link_to place.name, admin_place_path(place) %>
+            <%= link_to admin_place_path(place) do %>
+              <% if place.category == 'shrine' %>
+                <i class="fa-solid fa-torii-gate" style="color: #d9204f;"></i>
+              <% else %>
+                <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
+              <% end %>
+              <%= place.name %>
+            <% end %>
           <% else %>
             <!--寺社名userコントローラーへ-->
-            <%= link_to place.name, place_path(place) %>
+            <%= link_to place_path(place) do %>
+              <% if place.category == 'shrine' %>
+                <i class="fa-solid fa-torii-gate" style="color: #d9204f;"></i>
+              <% else %>
+                <i class="fa-solid fa-vihara" style="color: #1ca68f;"></i>
+              <% end %>
+              <%= place.name %>
+            <% end %>
           <% end %>
         </h4>
 

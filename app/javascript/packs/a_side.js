@@ -1,7 +1,7 @@
 // 日本地図の地方文字をクリックすると都道府県が表示される仕組み
 // 選択された画像を即反映させる
 // turbolinks:load イベントが発火したときに実行されるコード
-$(document).on('turbolinks:load', () => {
+$(document).on('turbolinks:load', function() {
   $('.area_btn').click(function(e){
     $('.area_overlay').show();
     $('.pref_area').show();
@@ -34,9 +34,14 @@ $(document).on('turbolinks:load', () => {
 
 // セレクトボックスの中にチェックボックス
   // クリックしたら発火
-  $('.checkbox-toggle').on('click', (e) => {
-    const targetName = $(e.target).attr('id')
-    $(`#${targetName}Checkboxes`).slideToggle();
-    $(`#${targetName}Checkboxes`).css('display', 'flex');
+  $('.checkbox-toggle').click(function () {
+    const targetName = $(this).attr('id')
+    if ($(`#${targetName}Checkboxes`).is(':hidden')) {
+      $(`#${targetName}Checkboxes`).slideDown();
+    } else {
+      $(`#${targetName}Checkboxes`).slideUp();
+    }
+
+    // $(`#${targetName}Checkboxes`).css('display', 'flex');
   });
 });

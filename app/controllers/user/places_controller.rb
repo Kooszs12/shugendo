@@ -30,14 +30,28 @@ class User::PlacesController < ApplicationController
 
   # 寺社一覧ページ
   def index
+
+    page = params[:page]
+    per = 5
+
     if params[:prefecture_id]
-      @places = Place.where(prefecture_id: params[:prefecture_id]).page(params[:page]).per(5)
+      @places = Place.prefecture_nd(params[:prefecture_id], page, per)
     elsif params[:area_id]
-      @places = Place.joins(:prefecture).where(prefecture: {area_id: params[:area_id]})
-                      .order(prefecture_id: :asc).page(params[:page]).per(5)
+      @places = Place.area_nd(params[:area_id], page, per)
     else
-    # 都道府県順に表示させる
-      @places = Place.joins(:prefecture).order(prefecture_id: :asc).page(params[:page]).per(5)
+      # ソート条件に基づいてソートされた場所を返す
+      case params[:sort_option]
+        when 'prefecture'
+          @places = Place.prefecture(page, per)
+        when 'latest'
+          @places = Place.latest(page, per)
+        when 'old'
+          @places = Place.old(page, per)
+        when 'goshuin_count'
+          @places = Place.goshuin_count(page, per)
+        else
+          @places = Place.page(page).per(per)
+      end
     end
   end
 
@@ -45,7 +59,7 @@ class User::PlacesController < ApplicationController
   def show
     # 特定の寺社詳細データ格納
     @place = Place.find(params[:id])
-    # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ5件表示）
+    # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ件表示）
     @goshuins = @place.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
