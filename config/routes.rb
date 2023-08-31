@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     # 寺社関連
     resources :places, only: [:new, :create, :index, :show, :edit, :update]
+    get "places_json" => "goshuins#places_json"
     # 御朱印関連
     resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy] do
       # いいね関連

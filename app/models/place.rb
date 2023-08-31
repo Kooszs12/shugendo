@@ -1,5 +1,19 @@
 class Place < ApplicationRecord
 
+  scope :shrine, -> { where(category: 0).joins(:prefecture).order(prefecture_id: :asc) }
+  scope :temple, -> { where(category: 1).joins(:prefecture).order(prefecture_id: :asc) }
+
+  # ----- Narrow down (絞り込み) -----
+  scope :prefecture_nd, -> (pref_id, page, per) { where(prefecture_id: pref_id).page(page).per(per) }
+  scope :area_nd, -> (area_id, page, per) { joins(:prefecture).where(prefecture: {area_id: area_id})
+                                            .order(prefecture_id: :asc).page(page).per(per) }
+
+  # ----- SORT -----
+  scope :prefecture, -> (page, per) { joins(:prefecture).order(prefecture_id: :asc).page(page).per(per) }
+  scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
+  scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
+  scope :goshuin_count, -> (page, per) { joins(:goshuins).group(:place_id).order('COUNT(goshuins.id) DESC').page(page).per(per) }
+
   #バリデーション設定
   # カテゴリーラジオボタンバリデーション
   validates :category, presence: true

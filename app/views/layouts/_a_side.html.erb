@@ -1,8 +1,8 @@
 <!--新規投稿＆検索サイドバー-->
 <!--a_sideのJavaScript適用-->
-<%= javascript_pack_tag 'a_side' %>
+<%#= javascript_pack_tag 'a_side' %>
 <!--custom.CSS適用-->
-<%= stylesheet_link_tag "custom", :media => "all" %>
+<%#= stylesheet_link_tag "custom", :media => "all" %>
 
 <!--ユーザーがログインしているか判断-->
 <% if user_signed_in? %>
@@ -30,13 +30,15 @@
 <div class="search text-center mt-4 md-3" >
   <!--キーワード検索フォーム-->
   <%= form_with model: q, method: :get, url: search_path do |f| %>
-    <div class="form-group">
+    <div class="input-group mb-3">
       <!--検索するカラム-->
-      <%= f.search_field :name_or_address_or_postcode_or_phone_number_cont, placeholder: "きぃわぁど検索" %>
-      <!--検索ボタン-->
-      <%= f.button type: :submit, class: "search-button" do %>
-        <i class="fa-solid fa-magnifying-glass" style="color: #17d0d3;"></i>
-      <% end %>
+      <%= f.search_field :name_or_address_or_postcode_or_phone_number_cont, placeholder: "きぃわぁど検索", class: "form-control" %>
+      <div class="input-group-append">
+        <!--検索ボタン-->
+        <%= f.button type: :submit, class: "btn btn-outline-secondary" do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

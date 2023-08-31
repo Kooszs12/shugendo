@@ -16,6 +16,7 @@
         <h2 class="text-center mb-5">
           <%= @goshuins.first.user.nickname %>御朱印一覧
         </h2>
+        <!--御朱印一覧部分テンプレート呼び出し-->
         <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
       <% end %>
     </div>

@@ -16,7 +16,7 @@ class Goshuin < ApplicationRecord
 
   #enum設定
   # 寺社種類：{神社＝０　お寺＝１}
-  enum category: { shrine: 0, temple: 1 }
+  #enum category: { shrine: 0, temple: 1 }
    # 御朱印種類：{書き置き＝０　直書き＝１ 限定＝２ 複数＝３ その他＝４ }
   enum goshuin_status: { note: 0, direct_writing: 1, limited: 2, multiple: 3, other: 4}
    # 公開・非公開：{公開＝０　非公開＝１}
@@ -41,8 +41,4 @@ class Goshuin < ApplicationRecord
   def total_likes
     self.favorites.count
   end
-
-  #
-  attr_accessor :place_id2
-
 end

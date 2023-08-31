@@ -10,7 +10,35 @@
     <!--編集表示-->
     <div class="col-md-7 offset-lg-1">
       <h2 class="text-center mb-5">参拝日記</h2>
-        <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <!-- タブ表示 -->
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#section1">投稿一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section2">全体公開中一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section3">非公開中一覧</a>
+          </li>
+        </ul>
+
+        <!--ユーザー投稿一覧-->
+        <div class="tab-content mt-3">
+          <div id="section1" class="tab-pane fade show active">
+            <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+          </div>
+          <!--全体公開投稿一覧-->
+          <div id="section2" class="tab-pane fade">
+            <%= render 'layouts/goshuin_index', goshuins: @release_goshuins %>
+          </div>
+          <!--非公開投稿一覧-->
+          <div id="section3" class="tab-pane fade">
+            <%= render 'layouts/goshuin_index', goshuins: @private_goshuins %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
