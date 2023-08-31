@@ -8,20 +8,12 @@ class User::GoshuinsController < ApplicationController
   def new
     # 空の変数作成
     @goshuin = Goshuin.new
-    # 神社データ（セレクトボックスの中身）
-    #@jinja = Place.jinja
-    # お寺データ（セレクトボックスの中身）
-    #@otera = Place.otera
   end
 
   # 御朱印投稿機能
   def create
     # フォームからのデータを使って新しい Goshuin オブジェクトを作成
     @goshuin = Goshuin.new(goshuin_params)
-    # 神社データの取得（category: 0 でフィルタリング）
-    @jinja = Place.where(category: 0)
-    # お寺データの取得（category: 1 でフィルタリング）
-    @otera = Place.where(category: 1)
 
     # レスポンスの形式に応じて処理を分岐
     respond_to do |format|
@@ -50,7 +42,9 @@ class User::GoshuinsController < ApplicationController
     # ログインしているユーザーデータを角の
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
-    @goshuins = @user.goshuins.page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
+    @goshuins = @user.goshuins.order(created_at: :desc).page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
+    @release_goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
+    @private_goshuins = @user.goshuins.where(status: "private_status").order(created_at: :desc).page(params[:page]).per(5)
     # ユーザーが保持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
   end
@@ -59,22 +53,12 @@ class User::GoshuinsController < ApplicationController
   def edit
     # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
-    # 上記の御朱印に関連付いたplaceモデルに存在するcategoryカラムを格納
-    #@category = @goshuin.place.category
-    # 神社データ（セレクトボックスの中身）
-    #@jinja = Place.where(category: 0).joins(:prefecture).order(prefecture_id: :asc)
-    # お寺データの（セレクトボックスの中身）
-    #@otera = Place.where(category: 1).joins(:prefecture).order(prefecture_id: :asc)
   end
 
   # 御朱印更新機能
   def update
     # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
-     # 神社データ（セレクトボックスの中身）
-    @jinja = Place.where(category: 0)
-    @otera = Place.where(category: 1)
-
     # 更新された場合
     if @goshuin.update(goshuin_params)
       # 成功メッセージ
@@ -106,14 +90,14 @@ class User::GoshuinsController < ApplicationController
     end
   end
 
-  def places_json
-    if params[:cat] == "shrine"
-      places = Place.joins(:prefecture).where(category: 0, prefecture_id: params[:pref]) # 神社
-    else
-      places = Place.joins(:prefecture).where(category: 1, prefecture_id: params[:pref]) # お寺
-    end
-    render json: places
-  end
+  # def places_json
+  #   if params[:cat] == "shrine"
+  #     places = Place.joins(:prefecture).where(category: 0, prefecture_id: params[:pref]) # 神社
+  #   else
+  #     places = Place.joins(:prefecture).where(category: 1, prefecture_id: params[:pref]) # お寺
+  #   end
+  #   render json: places
+  # end
 
   private
 
