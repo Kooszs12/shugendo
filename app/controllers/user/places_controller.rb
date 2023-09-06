@@ -53,6 +53,10 @@ class User::PlacesController < ApplicationController
           @places = Place.page(page).per(per)
       end
     end
+    
+    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(5)
+    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(5)
+    
   end
 
   # 寺社詳細ページ（関連した御朱印の表示）
