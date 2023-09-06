@@ -11,6 +11,7 @@
 
     <!-- 寺社一覧表示 -->
     <div class="col-md-7 offset-md-1"> <!-- 右側のコラム (幅: 7カラム) -->
+      <!--タブ機能-->
       <div class="tabs">
         <ul class="nav nav-tabs">
           <li class="nav-item">
@@ -24,18 +25,18 @@
           </li>
         </ul>
 
-        <!--ユーザー投稿一覧-->
+        <!--寺社一覧タブ-->
         <div class="tab-content mt-3">
           <div id="section1" class="tab-pane fade show active">
-            <%= render 'layouts/place_index', places: @places %>
+            <%= render 'layouts/place_index', places: @places, title: '寺社' %>
           </div>
-          <!--全体公開投稿一覧-->
+          <!--神社一覧タブ-->
           <div id="section2" class="tab-pane fade">
-            <%= render 'layouts/place_index', places: @shrine %>
+            <%= render 'layouts/place_index', places: @shrine, title: '神社' %>
           </div>
-          <!--非公開投稿一覧-->
+          <!--お寺一覧タブ-->
           <div id="section3" class="tab-pane fade">
-            <%= render 'layouts/place_index', places: @temple %>
+            <%= render 'layouts/place_index', places: @temple, title: 'お寺' %>
           </div>
         </div>
       </div>
