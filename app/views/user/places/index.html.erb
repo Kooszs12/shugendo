@@ -60,5 +60,8 @@
   $('.nav-link').click(function() {
     var tabId = $(this).attr('href').substr(1); // クリックされたタブのIDを取得
     localStorage.setItem('activeTab', tabId);
+    const currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('page', 1);
+    window.location.href = currentUrl.toString();
   });
 </script>
