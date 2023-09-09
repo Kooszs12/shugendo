@@ -1,3 +1,5 @@
+<!--タブ機能のjavascript適用-->
+<%= javascript_pack_tag 'place_index' %>
 <!-- 管理者側寺社一覧ページのコンテナ -->
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
@@ -43,22 +45,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  // ページが読み込まれたときに現在のタブを復元
-  $(document).ready(function() {
-    var activeTab = localStorage.getItem('activeTab');
-    if (activeTab) {
-      $('.nav-link').removeClass('active');
-      $('.tab-pane').removeClass('show active');
-      $('#' + activeTab).addClass('show active');
-      $('a[href="#' + activeTab + '"]').addClass('active');
-    }
-  });
-
-  // タブがクリックされたときにタブの状態を保存
-  $('.nav-link').click(function() {
-    var tabId = $(this).attr('href').substr(1); // クリックされたタブのIDを取得
-    localStorage.setItem('activeTab', tabId);
-  });
-</script>

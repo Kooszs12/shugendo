@@ -1,3 +1,4 @@
+// タブ機能
 // ページが読み込まれたときに現在のタブを復元
 $(document).ready(function() {
   var activeTab = localStorage.getItem('activeTab');
