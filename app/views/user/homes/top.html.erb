@@ -13,7 +13,8 @@
       <div class="mb-3 text-center">
         <%= link_to '最新順', root_path(sort_option: 'latest') %>&nbsp;|&nbsp;
         <%= link_to '古い順', root_path(sort_option: 'old') %>&nbsp;|&nbsp;
-        <%#= link_to '人気順', places_path(sort_option: 'goshuin_count') %>
+        <!--いいね数の多い順-->
+        <%= link_to '人気順', root_path(sort_option: 'most_liked') %>
       </div>
       <!--全ての御朱印投稿呼び出し-->
       <%= render 'layouts/goshuin_index', goshuins: @goshuins %>

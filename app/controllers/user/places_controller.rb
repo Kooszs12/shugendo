@@ -75,6 +75,9 @@ class User::PlacesController < ApplicationController
         @goshuins = @place.goshuins.latest(page, per)
       when 'old'
         @goshuins = @place.goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @place.goshuins.most_liked(page, per)
       else
         @goshuins = @place.goshuins.page(page).per(per)
     end

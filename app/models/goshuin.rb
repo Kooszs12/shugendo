@@ -5,6 +5,8 @@ class Goshuin < ApplicationRecord
   scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
   # 古い順
   scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
+  # 人気順
+  scope :most_liked, ->(page, per) { left_joins(:favorites).select("goshuins.*, COUNT(favorites.id) AS like_count").group("goshuins.id").order("like_count DESC").page(page).per(per) }
 
   # バリデーション
   # メッセージの文字数制限

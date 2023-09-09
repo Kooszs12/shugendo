@@ -15,6 +15,8 @@ class User::HomesController < ApplicationController
         @goshuins = Goshuin.latest(page, per)
       when 'old'
         @goshuins = Goshuin.old(page, per)
+      when 'most_liked'
+        @goshuins = Goshuin.most_liked(page, per)
       else
         @goshuins = Goshuin.page(page).per(per)
     end

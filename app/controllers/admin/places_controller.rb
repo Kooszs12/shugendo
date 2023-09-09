@@ -49,15 +49,17 @@ class Admin::PlacesController < ApplicationController
 
     # ソート条件に基づいてソートされた場所を返す
     case params[:sort_option]
-    # 新着順
-    when 'latest'
-      @goshuins = @goshuins.order(created_at: :desc)
-    # 古い順
-    when 'old'
-      @goshuins = @goshuins.order(created_at: :asc)
-    else
-      # デフォルトは最新順
-      @goshuins = @goshuins.order(created_at: :desc)
+     # 新着順
+      when 'latest'
+        @goshuins = @place.goshuins.latest(page, per)
+      # 古い順
+      when 'old'
+        @goshuins = @place.goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @place.goshuins.most_liked(page, per)
+      else
+        @goshuins = @place.goshuins.page(page).per(per)
     end
   end
 
