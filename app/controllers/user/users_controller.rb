@@ -11,6 +11,8 @@ class User::UsersController < ApplicationController
 
   # ユーザーマイページ。誰でも閲覧可能
   def show
+    page = params[:page]
+    per = 5
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ5件表示）
     @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
     # ユーザーが所持している御朱印についたいいねの総数を格納
@@ -18,6 +20,19 @@ class User::UsersController < ApplicationController
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
+
+    # ソート条件に基づいてソートされた場所を返す
+    case params[:sort_option]
+      when 'latest'
+        @goshuins = @user.goshuins.latest(page, per)
+      when 'old'
+        @goshuins = @user.goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @user.goshuins.most_liked(page, per)
+      else
+
+    end
   end
 
   # プロフィール編集
