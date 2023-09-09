@@ -13,6 +13,13 @@
     <div class="col-md-7 offset-lg-1">
       <%= render 'layouts/place_show', place: @place %>
       <h2 class="text-center mb-5 mt-5">御朱印一覧</h2>
+      <!--ソート機能-->
+      <div class="mb-3 text-center">
+        <%= link_to '最新順', root_path(sort_option: 'latest') %>&nbsp;|&nbsp;
+        <%= link_to '古い順', root_path(sort_option: 'old') %>&nbsp;|&nbsp;
+        <%#= link_to '人気順', places_path(sort_option: 'goshuin_count') %>
+      </div>
+      <!--関連した寺社の御朱印一覧表示-->
       <%= render 'layouts/goshuin_index' ,goshuins: @goshuins %>
     </div>
   </div>
