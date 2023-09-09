@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_18_091715) do
+ActiveRecord::Schema.define(version: 2023_09_09_104027) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,6 +110,17 @@ ActiveRecord::Schema.define(version: 2023_08_18_091715) do
     t.index ["area_id"], name: "index_prefectures_on_area_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "place_id", null: false
+    t.string "reason"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["place_id"], name: "index_reports_on_place_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -133,4 +144,6 @@ ActiveRecord::Schema.define(version: 2023_08_18_091715) do
   add_foreign_key "goshuins", "users"
   add_foreign_key "places", "prefectures"
   add_foreign_key "prefectures", "areas"
+  add_foreign_key "reports", "places"
+  add_foreign_key "reports", "users"
 end

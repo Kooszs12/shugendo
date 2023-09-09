@@ -33,7 +33,9 @@ class Place < ApplicationRecord
 
   #アソシエーション
   belongs_to :prefecture
-  has_many :goshuins
+  has_many :goshuins, dependent: :destroy
+  # 通報機能とのアソシエーション
+  has_many :reports, dependent: :destroy
 
   #enum設定
   # 寺社（shrine: 神社　temple: お寺）
