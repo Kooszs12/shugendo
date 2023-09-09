@@ -1,4 +1,10 @@
 class Goshuin < ApplicationRecord
+  
+  # ----- SORT（ソート） -----
+  # 新着順
+  scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
+  # 古い順
+  scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
 
   # バリデーション
   # メッセージの文字数制限

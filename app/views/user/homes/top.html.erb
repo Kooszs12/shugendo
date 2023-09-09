@@ -9,8 +9,14 @@
     <!-- 御朱印一覧表示 -->
     <div class="col-md-7 offset-lg-1">
       <h2 class="text-center mb-5">新着御朱印</h2>
-      <!--ソート機能追加-->
-       <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <!--ソート機能0-->
+      <div class="mb-3 text-center">
+        <%= link_to '最新順', root_path(sort_option: 'latest') %>&nbsp;|&nbsp;
+        <%= link_to '古い順', root_path(sort_option: 'old') %>&nbsp;|&nbsp;
+        <%#= link_to '人気順', places_path(sort_option: 'goshuin_count') %>
+      </div>
+      <!--全ての御朱印投稿呼び出し-->
+      <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
     </div>
   </div>
 </div>

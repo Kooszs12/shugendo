@@ -8,7 +8,7 @@ class Place < ApplicationRecord
   scope :area_nd, -> (area_id, page, per) { joins(:prefecture).where(prefecture: {area_id: area_id})
                                             .order(prefecture_id: :asc).page(page).per(per) }
 
-  # ----- SORT -----
+  # ----- SORT（ソート -----
   scope :prefecture, -> (page, per) { joins(:prefecture).order(prefecture_id: :asc).page(page).per(per) }
   scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
   scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
