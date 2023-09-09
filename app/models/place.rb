@@ -54,6 +54,12 @@ class Place < ApplicationRecord
     (image.attached?) ? image : 'no_image.png'
   end
 
+  # ユーザーが投稿に対して報告したか判断（同じユーザーが同じ投稿に報告を何度もさせない仕組み）
+  def report_by?(user)
+    # exists?で与えられた条件に合致するレコードが存在するか判断
+    reports.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
+  end
+
 # 検索許可
   def self.ransackable_attributes(auth_object = nil)
     # 検索許可するカラム

@@ -1,5 +1,5 @@
 class Goshuin < ApplicationRecord
-  
+
   # ----- SORT（ソート） -----
   # 新着順
   scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
@@ -41,8 +41,8 @@ class Goshuin < ApplicationRecord
 
   # ユーザーが投稿に対していいねしたか判断（同じユーザーが同じ投稿にいいねを何度もさせない仕組み）
   def favorited_by?(user)
-  # exists?で与えられた条件に合致するレコードが存在するか判断
-  favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
+    # exists?で与えられた条件に合致するレコードが存在するか判断
+    favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
 
   # 御朱印のいいね総数を獲得メソッド
