@@ -3,7 +3,7 @@
 $(document).ready(function() {
   var activeTab = localStorage.getItem('activeTab');
   if (activeTab) {
-    $('.nav-link').removeClass('active');
+    $('.js-tab-link').removeClass('active');
     $('.tab-pane').removeClass('show active');
     $('#' + activeTab).addClass('show active');
     $('a[href="#' + activeTab + '"]').addClass('active');
@@ -11,7 +11,7 @@ $(document).ready(function() {
 });
 
 // タブがクリックされたときにタブの状態を保存
-$('.nav-link').click(function() {
+$('.js-tab-link').click(function() {
   var tabId = $(this).attr('href').substr(1); // クリックされたタブのIDを取得
   localStorage.setItem('activeTab', tabId);
   const currentUrl = new URL(window.location);
