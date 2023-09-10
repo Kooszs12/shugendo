@@ -30,7 +30,6 @@ class User::PlacesController < ApplicationController
 
   # 寺社一覧ページ
   def index
-
     page = params[:page]
     per = 5
 
@@ -53,14 +52,16 @@ class User::PlacesController < ApplicationController
           @places = Place.page(page).per(per)
       end
     end
-    
+
     @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(5)
     @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(5)
-    
+
   end
 
   # 寺社詳細ページ（関連した御朱印の表示）
   def show
+    page = params[:page]
+    per = 5
     # 特定の寺社詳細データ格納
     @place = Place.find(params[:id])
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ件表示）
@@ -68,6 +69,18 @@ class User::PlacesController < ApplicationController
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
+    # ソート条件に基づいてソートされた場所を返す
+    case params[:sort_option]
+      when 'latest'
+        @goshuins = @place.goshuins.latest(page, per)
+      when 'old'
+        @goshuins = @place.goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @place.goshuins.most_liked(page, per)
+      else
+        @goshuins = @place.goshuins.page(page).per(per)
+    end
   end
 
   # 寺社編集ページ

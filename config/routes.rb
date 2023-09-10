@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   namespace :admin do
     #検索
     get "search" => "searches#search"
+     # 通報
+    resources :reports, only: [:index, :update]
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :goshuins, only: [:edit, :update, :destroy]
@@ -41,7 +43,9 @@ Rails.application.routes.draw do
      #検索
     get "search" => "searches#search"
     # 寺社関連
-    resources :places, only: [:new, :create, :index, :show, :edit, :update]
+    resources :places, only: [:new, :create, :index, :show, :edit, :update] do
+      resource :report, only: [:create, :destroy]
+    end
     get "places_json" => "goshuins#places_json"
     # 御朱印関連
     resources :goshuins, only: [:new, :create, :index, :edit, :update, :destroy] do

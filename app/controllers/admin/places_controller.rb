@@ -39,11 +39,28 @@ class Admin::PlacesController < ApplicationController
 
   # 寺社詳細ページ
   def show
+    page = params[:page]
+    per = 5
     # 特定の寺社データ格納
     @place = Place.find(params[:id])
     # 上記の寺社が持つ御朱印のデータを格納
-    @goshuins = @place.goshuins.page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
+    @goshuins = @place.goshuins.page(page).per(per) # ページネーションを適用（１ページ5件表示）
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
+
+    # ソート条件に基づいてソートされた場所を返す
+    case params[:sort_option]
+     # 新着順
+      when 'latest'
+        @goshuins = @place.goshuins.latest(page, per)
+      # 古い順
+      when 'old'
+        @goshuins = @place.goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @place.goshuins.most_liked(page, per)
+      else
+        @goshuins = @place.goshuins.page(page).per(per)
+    end
   end
 
   # 編集ページ

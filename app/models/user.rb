@@ -8,8 +8,11 @@ class User < ApplicationRecord
   validates :nickname, presence: true, length: { maximum: 10 }, uniqueness: true
 
   # アソシエーション
-  has_many :goshuins
+  has_many :goshuins, dependent: :destroy
+  # いいねとのアソシエーション
   has_many :favorites, dependent: :destroy
+  # 通報機能とのアソシエーション
+  has_many :reports, dependent: :destroy
 
   #画像カラム
   has_one_attached :image

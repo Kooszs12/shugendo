@@ -8,7 +8,7 @@ class Place < ApplicationRecord
   scope :area_nd, -> (area_id, page, per) { joins(:prefecture).where(prefecture: {area_id: area_id})
                                             .order(prefecture_id: :asc).page(page).per(per) }
 
-  # ----- SORT -----
+  # ----- SORT（ソート -----
   scope :prefecture, -> (page, per) { joins(:prefecture).order(prefecture_id: :asc).page(page).per(per) }
   scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
   scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
@@ -33,7 +33,9 @@ class Place < ApplicationRecord
 
   #アソシエーション
   belongs_to :prefecture
-  has_many :goshuins
+  has_many :goshuins, dependent: :destroy
+  # 通報機能とのアソシエーション
+  has_many :reports, dependent: :destroy
 
   #enum設定
   # 寺社（shrine: 神社　temple: お寺）
@@ -50,6 +52,12 @@ class Place < ApplicationRecord
   def get_place_image
     # 存在しなかった場合no_image.pngを使用
     (image.attached?) ? image : 'no_image.png'
+  end
+
+  # ユーザーが投稿に対して報告したか判断（同じユーザーが同じ投稿に報告を何度もさせない仕組み）
+  def report_by?(user)
+    # exists?で与えられた条件に合致するレコードが存在するか判断
+    reports.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
 
 # 検索許可

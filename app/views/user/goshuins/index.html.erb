@@ -1,3 +1,6 @@
+<!--タブ機能のjavascript適用-->
+<%= javascript_pack_tag 'place_index' %>
+
 <div class="container o-8column">
   <!--行を示す要素で、内部のコンテンツを行内に配置-->
   <div class="row">
@@ -14,13 +17,13 @@
       <div class="tabs">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#section1">投稿一覧</a>
+            <a class="nav-link js-tab-link active" data-toggle="tab" href="#section1">投稿一覧</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#section2">全体公開中一覧</a>
+            <a class="nav-link js-tab-link" data-toggle="tab" href="#section2">全体公開中一覧</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#section3">非公開中一覧</a>
+            <a class="nav-link js-tab-link" data-toggle="tab" href="#section3">非公開中一覧</a>
           </li>
         </ul>
 

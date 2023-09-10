@@ -22,20 +22,20 @@
 
   <!-- adminがログインしているか判断 -->
   <% elsif admin_signed_in? %>
-    <li class="vertical-text text-info">
-      <%= link_to 'ほぉむ', root_path, class: "nav-link" %>
+    <li class="text-info">
+      <%= link_to 'Home', root_path, class: "nav-link" %>
     </li>
 
-    <li class="vertical-text .text-info ">
+    <li class="text-info">
       <%= link_to '寺社一覧', admin_places_path, class: "nav-link" %>
     </li>
 
-    <li class="vertical-text .text-info ">
+    <li class="text-info">
       <%= link_to '会員一覧', admin_users_path, class: "nav-link" %>
     </li>
 
-    <li class="vertical-text .text-info ">
-      <%= link_to 'ろぐあうと', destroy_admin_session_path, method: :delete, class: "nav-link" %>
+    <li class="text-info">
+      <%= link_to 'Log out', destroy_admin_session_path, method: :delete, class: "nav-link" %>
     </li>
 
   <!--ログインしていない場合-->

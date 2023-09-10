@@ -1,5 +1,13 @@
 class Goshuin < ApplicationRecord
 
+  # ----- SORT（ソート） -----
+  # 新着順
+  scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
+  # 古い順
+  scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
+  # 人気順
+  scope :most_liked, ->(page, per) { left_joins(:favorites).select("goshuins.*, COUNT(favorites.id) AS like_count").group("goshuins.id").order("like_count DESC").page(page).per(per) }
+
   # バリデーション
   # メッセージの文字数制限
   validates :message, length: { maximum: 250 }
@@ -33,8 +41,8 @@ class Goshuin < ApplicationRecord
 
   # ユーザーが投稿に対していいねしたか判断（同じユーザーが同じ投稿にいいねを何度もさせない仕組み）
   def favorited_by?(user)
-  # exists?で与えられた条件に合致するレコードが存在するか判断
-  favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
+    # exists?で与えられた条件に合致するレコードが存在するか判断
+    favorites.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
 
   # 御朱印のいいね総数を獲得メソッド
