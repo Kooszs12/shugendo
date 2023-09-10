@@ -1,7 +1,10 @@
 class Admin::ReportsController < ApplicationController
-  def show
-  end
 
   def index
+    @reports = Report.all
   end
+
+  def update
+  end
+
 end

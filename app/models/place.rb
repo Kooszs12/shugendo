@@ -60,6 +60,16 @@ class Place < ApplicationRecord
     reports.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
   end
 
+  # report.idに指定したpleace.idが存在しているか判断
+  def place_report_by?
+    reports.exists?(place_id: id, status: 0)
+  end
+
+  # # 報告総数を獲得メソッド
+  # def total_reports
+  #   self.reports.count
+  # end
+
 # 検索許可
   def self.ransackable_attributes(auth_object = nil)
     # 検索許可するカラム
