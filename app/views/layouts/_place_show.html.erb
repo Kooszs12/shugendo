@@ -1,20 +1,13 @@
 <!-- 寺社詳細ページの部分テンプレート -->
 <!-- 保存されている寺社名を表示させている -->
-<div>
-  <h2 class="mb-5"><%= place.name %></h2>
-  <div class="text-right">
-    <% if place.report_by?(current_user) %>
-      <%= link_to place_report_path(place), method: :delete, data: { confirm: "管理者に報告してもよろしいでしょうか?" }, class: "text-warning" do %>
-        <i class="fas fa-bell"></i>報告
-      <% end %>
-    <% else %>
-      <%= link_to place_report_path(place), method: :delete, data: { confirm: "管理者への報告を取り消しますか?" }, class: "text-danger" do %>
-        <i class="fas fa-bell"></i>報告
-      <% end %>
-    <% end %>
+<div class="row">
+  <div class="col-8">
+    <h2 class="mb-3"><%= place.name %></h2>
   </div>
+  <span class="text-right d-flex align-items-end flex-row-reverse col-4" id="report_buttons_<%= place.id %>">
+    <%= render "user/reports/btn", place: place %>
+  </span>
 </div>
-
 
 <!--画像表示-->
 <div class="text-center w-100">
