@@ -4,7 +4,4 @@ class Admin::ReportsController < ApplicationController
     @reports = Report.all
   end
 
-  def update
-  end
-
 end

@@ -17,7 +17,6 @@
           <div class = "row justify-content-center mt-3">
             <tr>
               <th>寺社名</th>
-              <th>状況</th>
             </tr>
           </div>
         <thead>
@@ -28,8 +27,6 @@
             <tr>
               <!--寺社名（寺社詳細へ遷移）-->
               <td><%= link_to report.place.name, admin_place_path(report.place) %></td>
-              <!--状況-->
-              <td><%= report.status ? '未対応' : '対応済み' %></td>
             </tr>
           <% end %>
         </tbody>

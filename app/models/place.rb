@@ -55,20 +55,10 @@ class Place < ApplicationRecord
   end
 
   # ユーザーが投稿に対して報告したか判断（同じユーザーが同じ投稿に報告を何度もさせない仕組み）
-  def report_by?(user)
+  def report_by?
     # exists?で与えられた条件に合致するレコードが存在するか判断
-    reports.exists?(user_id: user.id) # ユーザーIDが一致するかの条件式
+    reports.exists?(place_id: id) # ユーザーIDが一致するかの条件式
   end
-
-  # report.idに指定したpleace.idが存在しているか判断
-  def place_report_by?
-    reports.exists?(place_id: id, status: 0)
-  end
-
-  # # 報告総数を獲得メソッド
-  # def total_reports
-  #   self.reports.count
-  # end
 
 # 検索許可
   def self.ransackable_attributes(auth_object = nil)

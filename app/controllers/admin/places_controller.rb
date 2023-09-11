@@ -78,8 +78,8 @@ class Admin::PlacesController < ApplicationController
     if @place.update(place_params)
         # @reportがnilか判断
         if @report.present?
-          # レポート更新
-          @report.update(status: 1)
+          # 寺社が更新されたらレポートを削除
+          @report.destroy
         end
         # 更新された寺社詳細ページへ遷移
         redirect_to admin_place_path(@place), notice: "編集されました"

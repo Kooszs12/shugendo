@@ -25,7 +25,7 @@
     <li class="text-info">
       <!--通知一覧数表示-->
       <%= link_to admin_reports_path, class: "nav-link" do %>
-        通知<%= Report.total_waiting %>
+        通知<%= Report.all.count %>
       <% end %>
     </li>
     <li class="text-info">
