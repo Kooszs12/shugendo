@@ -59,7 +59,7 @@
 
   <!--上記セレクトボックスが存在しなかった場合寺社を投稿してもらうためのlink_to-->
   <div class="d-flex mb-3">
-    <%= link_to "寺社投稿", new_place_path, class: "btn btn-success mr-1" %>
+    <%= link_to "寺社投稿", new_place_path, class: "btn btn-success mr-1 c-btn2" %>
     <p class="ml-1">選択肢がない場合はお手数ですが寺社投稿お願いします</p>
   </div>
 
@@ -96,8 +96,9 @@
       <%= b.label(class: "mr-2") { b.radio_button(class: "mr-1") + b.text } %>
     <% end %>
   </div>
-    <!--編集ボタン-->
-    <%= f.submit title, class: "btn btn-info w-25 mr-5" %>
+
+  <!--編集ボタン-->
+  <div class="text-center"><%= f.submit title, class: "btn btn-info w-50 mr-5 c-btn" %></div>
   <% if params[:action] == "edit" %>
     <!--削除リンク-->
     <% if user_signed_in? %>
