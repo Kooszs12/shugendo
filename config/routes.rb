@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     # 寺社関連
     resources :places, only: [:new, :create, :index, :show, :edit, :update] do
+      # report_urlにplace.idを持たせるためのネスト
       resource :report, only: [:create]
     end
     get "places_json" => "goshuins#places_json"

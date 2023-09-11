@@ -12,25 +12,13 @@
     <!-- ユーザー報告一覧表示 -->
     <div class="col-md-7 offset-md-1"> <!-- 右側のコラム (幅: 7カラム) -->
       <h2 class="text-center mb-5">報告一覧</h2>
-      <table class = "table table-striped">
-        <thead class = "thead-light">
-          <div class = "row justify-content-center mt-3">
-            <tr>
-              <th>寺社名</th>
-            </tr>
-          </div>
-        <thead>
-
-        <tbody>
-          <!--ユーザー情報を繰り返し表示-->
-          <% @reports.each do |report| %>
-            <tr>
-              <!--寺社名（寺社詳細へ遷移）-->
-              <td><%= link_to report.place.name, admin_place_path(report.place) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <ol>
+        <!--ユーザー情報を繰り返し表示-->
+        <% @reports.each do |report| %>
+          <!--寺社名（寺社詳細へ遷移）-->
+          <li class="text-center"><%= link_to report.place.name, admin_place_path(report.place) %></li>
+        <% end %>
+      </ol>
     </div>
   </div>
 </div>
