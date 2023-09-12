@@ -1,1 +1,207 @@
 @use '~bootstrap/scss/bootstrap';
+// 呼び出し
+@use 'custom';
+
+/*imagine_YOKOHAMAのWEBフォント対応定義*/
+@font-face {
+  font-family: "imagine YOKOHAMA";
+  font-style: normal;
+  src: url('../fonts/imagine_YOKOHAMA.otf');
+}
+
+/*HannariMincho-RegularのWEBフォント対応定義*/
+@font-face {
+  font-family: "HannariMincho-Regular";
+  font-style: normal;
+  src: url('../fonts/HannariMincho-Regular.otf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // フォントを使えるようにする
+  font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+  letter-spacing: .1rem;
+}
+
+// ヘッダーの背景
+.header_image {
+  background-image: url('../images/23208622.png'); /* Corrected the URL */
+  background-size: 100% 100%;
+  height: 200px;
+}
+
+// ヘッダーのリンクを縦書き
+.vertical-text {
+  writing-mode: vertical-rl; /* テキストを縦書きにする */
+  white-space: nowrap; /* テキストが折り返されないようにする */
+}
+
+// 全体の背景
+.background {
+  background-image: url('../images/wasi_green.jpg');
+  background-size: 100% 100%;
+  background-blend-mode: lighten;
+  background-color: rgba(255, 255, 255,  0.8);/*４つ目で背景のみを透明化*/
+}
+
+.c-txt {
+  position: relative;
+  z-index: 1;
+  // ::before（擬似要素)の場合は::
+  &::before {
+    background: #E0E0E0; /* 背景色を設定 */
+    content: ""; /* コンテンツがないことを示す空のコンテンツを設定 */
+    display: block; /* ブロック要素として表示 */
+    width: 100%; /* 幅を100%に設定 */
+    height: 100%; /* 高さを100%に設定 */
+    position: absolute; /* 絶対位置に配置 */
+    left: 0; /* 左端に配置 */
+    bottom: 0; /* 下端に配置 */
+    margin: auto; /* 自動的に中央に配置 */
+    transform: scale(0, 1); /* X軸方向に0倍、Y軸方向に1倍（横方向に0倍の縮小） */
+    transform-origin: right top; /* 変形の基準点を右上に設定 */
+    transition: transform .3s; /* 変形のアニメーションを0.3秒で設定 */
+    z-index: -1; /* zインデックスを-1に設定（背面に配置） */
+  }
+  // hover（擬似クラス）の場合は:
+  &:hover {
+    color: #fff;
+    &::before {
+      transform-origin: left top;
+      transform: scale(1, 1);
+    }
+  }
+}
+
+// .c-txt::before {
+//   background: #E0E0E0; /* 背景色を設定 */
+//   content: ""; /* コンテンツがないことを示す空のコンテンツを設定 */
+//   display: block; /* ブロック要素として表示 */
+//   width: 100%; /* 幅を100%に設定 */
+//   height: 100%; /* 高さを100%に設定 */
+//   position: absolute; /* 絶対位置に配置 */
+//   left: 0; /* 左端に配置 */
+//   bottom: 0; /* 下端に配置 */
+//   margin: auto; /* 自動的に中央に配置 */
+//   transform: scale(0, 1); /* X軸方向に0倍、Y軸方向に1倍（横方向に0倍の縮小） */
+//   transform-origin: right top; /* 変形の基準点を右上に設定 */
+//   transition: transform .3s; /* 変形のアニメーションを0.3秒で設定 */
+//   z-index: -1; /* zインデックスを-1に設定（背面に配置） */
+// }
+
+// .c-txt:hover {
+//   color: #fff;
+// }
+
+// .c-txt:hover::before {
+//   transform-origin: left top;
+//   transform: scale(1, 1);
+// }
+
+
+/*フッターを下に固定させるためのCSS*/
+.wrapper{
+  min-height: 100vh;
+  position: relative;/*←相対位置*/
+  padding-bottom: 120px;/*←footerの高さ*/
+  box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+main {
+  /*position: absolute;/*←絶対位置*/
+  bottom: 0; /*下に固定*/
+  background-size: cover;
+  background-size: contain;
+  padding: 50px 0; /* 上下に余白を追加 */
+}
+
+.c-btn {
+  box-shadow: 0 4px 0 #0c6f7f; // infoボタンの影
+}
+
+.c-btn2 {
+  box-shadow: 0 4px 0 #176b2a; // successボタンの影
+}
+
+.c-btn3 {
+  box-shadow: 0 4px 0 #B3001B; // successボタンの影
+}
+
+.c-btn:hover,
+.c-btn2:hover,
+.c-btn3:hover {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.checkbox-toggle {
+  max-width: 362px;
+  padding: 1em;
+  text-align: center;
+  cursor: pointer;
+  background-color: skyblue;
+}
+
+/* チェックボックス */
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 1px solid skyblue;
+}
+
+// フッターの背景
+footer {
+  opacity: 0.8;
+  background-image: url('../images/23532707.png'); /* Corrected the URL */
+  background-size: 100% 100%;
+  height: 300px;
+  padding: 50px 0;
+}
+
+// プロフィール画像サイズ（!important;：bootstrapより優先）
+.profile-img {
+  width: 200px !important;
+  height: 200px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
+
+// admin側のユーザー一覧で表示されるユーザーアイコンサイズ
+.profile-icon {
+  width: 50px !important;
+  height: 50px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
+
+// 検索結果の画像サイズ
+.card-img-place {
+  width: 100% !important;
+  height: 150px !important;
+  // 中央切り取り
+  object-fit: cover;
+}
+
+/*ページネーション自体のデザイン*/
+.pagination>li>a {
+  border: none !important;     /*枠線をなくす*/
+  color: #696969 !important;   /*文字の色を変える*/
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  background: #93c9ff !important;     /*背景の色を変える*/
+  border-radius: 15px !important;     /*角を丸くする*/
+}
+
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {
+  border-radius: 15px !important;    /*角を丸くする*/
+}
+
+.page-link {
+  background: transparent !important;
+}

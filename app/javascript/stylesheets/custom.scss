@@ -26,6 +26,10 @@
     font-weight: bold;
     text-align: center;
     white-space: nowrap;
+    font-size: calc(4px + .5vw);
+}
+
+.japan_map .area_btn:hover{
     font-size: calc(5px + .5vw);
 }
 
@@ -108,7 +112,7 @@
 .japan_map .pref_list > div{
     box-sizing: border-box;
     width: 50%;
-    border: 1px solid #CCC;
+    // border: 1px solid #CCC;
     font-weight: bold;
     text-align: center;
     padding: 0.5em;
