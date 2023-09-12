@@ -1,2 +1,24 @@
-<h1>Admin::Reports#index</h1>
-<p>Find me in app/views/admin/reports/index.html.erb</p>
+<!-- 管理者側寺社一覧ページのコンテナ -->
+<div class="container o-8column">
+  <!--行を示す要素で、内部のコンテンツを行内に配置-->
+  <div class="row">
+
+    <!--検索サイドバー-->
+    <div class="col-md-4"> <!-- 左側のコラム (幅: 5カラム) -->
+      <!-- 'layouts/a_side' テンプレートを描画してサイドバーを表示 -->
+      <%= render 'layouts/a_side', q: @q %>
+    </div>
+
+    <!-- ユーザー報告一覧表示 -->
+    <div class="col-md-7 offset-md-1"> <!-- 右側のコラム (幅: 7カラム) -->
+      <h2 class="text-center mb-5">報告一覧</h2>
+      <ol>
+        <!--ユーザー情報を繰り返し表示-->
+        <% @reports.each do |report| %>
+          <!--寺社名（寺社詳細へ遷移）-->
+          <li class="text-center"><%= link_to report.place.name, admin_place_path(report.place) %></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</div>

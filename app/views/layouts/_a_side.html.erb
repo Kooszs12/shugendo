@@ -1,9 +1,3 @@
-<!--新規投稿＆検索サイドバー-->
-<!--a_sideのJavaScript適用-->
-<%#= javascript_pack_tag 'a_side' %>
-<!--custom.CSS適用-->
-<%#= stylesheet_link_tag "custom", :media => "all" %>
-
 <!--ユーザーがログインしているか判断-->
 <% if user_signed_in? %>
   <!--題名-->
@@ -216,9 +210,9 @@
   <!--検索完了ボタン-->
   <div class="search-done-btn">
     <!--チェックボックスをデフォルトでリセットかけないようにするので、submitボタンを使用できずlinik_toに変更-->
-    <%= link_to "りせっと", root_path, class: "btn btn-success" %>
+    <%= link_to "りせっと", root_path, class: "btn btn-success c-btn2" %>
     <!--検索ボタン-->
-    <%= f.submit "検索開始", class: "btn btn-info ml-4" %>
+    <%= f.submit "検索開始", class: "btn btn-info ml-4 c-btn" %>
   </div>
 <% end %>
 </div>

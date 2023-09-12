@@ -3,13 +3,13 @@
 <% if user_signed_in? %>
   <% if goshuin.favorited_by?(current_user) %>
     <%= link_to goshuin_favorites_path(goshuin), method: :delete, remote: true do %>
-      <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+      <i class="fas fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
       <!--いいねの数を数えて表示-->
       <%= goshuin.favorites.count %> いいね
     <% end %>
   <% else %>
     <%= link_to goshuin_favorites_path(goshuin), method: :post, remote: true do %>
-      <i class="fas fa-heart" aria-hidden="true"></i>
+      <i class="far fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
       <!--いいねの数を数えて表示-->
       <%= goshuin.favorites.count %> いいね
     <% end %>

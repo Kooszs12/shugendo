@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     #検索
     get "search" => "searches#search"
      # 通報
-    resources :reports, only: [:index, :update]
+    resources :reports, only: [:index]
     resources :places, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :goshuins, only: [:edit, :update, :destroy]
@@ -44,7 +44,8 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     # 寺社関連
     resources :places, only: [:new, :create, :index, :show, :edit, :update] do
-      resource :report, only: [:create, :destroy]
+      # report_urlにplace.idを持たせるためのネスト
+      resource :report, only: [:create]
     end
     get "places_json" => "goshuins#places_json"
     # 御朱印関連

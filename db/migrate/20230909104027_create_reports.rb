@@ -3,9 +3,6 @@ class CreateReports < ActiveRecord::Migration[6.1]
     create_table :reports do |t|
       t.references :user, null: false, foreign_key: true
       t.references :place, null: false, foreign_key: true
-      # 対応状況
-      t.integer :status, default: 0, null: false
-
       t.timestamps
     end
   end

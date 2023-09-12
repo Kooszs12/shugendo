@@ -73,8 +73,14 @@ class Admin::PlacesController < ApplicationController
   def update
     # 特定の寺社データを格納
     @place = Place.find(params[:id])
+    @report = Report.find_by(place_id: params[:id])
     # 更新に成功したら
     if @place.update(place_params)
+        # @reportがnilか判断
+        if @report.present?
+          # 寺社が更新されたらレポートを削除
+          @report.destroy
+        end
         # 更新された寺社詳細ページへ遷移
         redirect_to admin_place_path(@place), notice: "編集されました"
     else

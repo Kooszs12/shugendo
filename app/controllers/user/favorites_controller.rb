@@ -12,10 +12,10 @@ class User::FavoritesController < ApplicationController
     @favorite.destroy
   end
 
-  private
+  # private
 
-  def favorite_params
-    params.require(:favorite).permit(:goshuin_id)
-  end
+  # def favorite_params
+  #   params.require(:favorite).permit(:goshuin_id)
+  # end
 
 end
