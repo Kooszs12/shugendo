@@ -98,15 +98,17 @@
   </div>
 
   <!--編集ボタン-->
-  <div class="text-center"><%= f.submit title, class: "btn btn-info w-50 mr-5 c-btn" %></div>
-  <% if params[:action] == "edit" %>
-    <!--削除リンク-->
-    <% if user_signed_in? %>
-      <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
-    <% elsif admin_signed_in? %>
-      <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25" %>
+  <div class="text-center">
+    <%= f.submit title, class: "btn btn-info w-25 mr-5 c-btn" %>
+    <% if params[:action] == "edit" %>
+      <!--削除リンク-->
+      <% if user_signed_in? %>
+        <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25 c-btn3" %>
+      <% elsif admin_signed_in? %>
+        <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger w-25 c-btn3" %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
 
 <%= javascript_pack_tag 'goshuin_form' %>

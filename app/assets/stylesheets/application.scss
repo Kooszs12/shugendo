@@ -65,7 +65,7 @@
 }
 
 .c-txt::before {
-  background: #ff701e; /* 背景色を設定 */
+  background: #E0E0E0; /* 背景色を設定 */
   content: ""; /* コンテンツがないことを示す空のコンテンツを設定 */
   display: block; /* ブロック要素として表示 */
   width: 100%; /* 幅を100%に設定 */
@@ -114,8 +114,13 @@ main {
   box-shadow: 0 4px 0 #176b2a; // successボタンの影
 }
 
+.c-btn3 {
+  box-shadow: 0 4px 0 #B3001B; // successボタンの影
+}
+
 .c-btn:hover,
-.c-btn2:hover {
+.c-btn2:hover,
+.c-btn3:hover {
   transform: translateY(4px);
   box-shadow: none;
 }
