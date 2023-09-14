@@ -82,10 +82,10 @@ class Admin::PlacesController < ApplicationController
           @report.destroy
         end
         # 更新された寺社詳細ページへ遷移
-        redirect_to admin_place_path(@place), notice: "編集されました"
+        redirect_to admin_place_path(@place), info: "編集されました"
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 失敗した寺社編集ページへ遷移
       render :edit
     end
@@ -98,7 +98,7 @@ class Admin::PlacesController < ApplicationController
     # 上記データを削除
     @place.destroy
     # 寺社一覧ページへ遷移
-    redirect_to admin_places_path
+    redirect_to admin_places_path, info: "削除しました"
   end
 
    private

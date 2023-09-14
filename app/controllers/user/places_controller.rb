@@ -16,13 +16,11 @@ class User::PlacesController < ApplicationController
     #保存が成功したら
     if @place.save
       # 作成した寺社詳細ページへ遷移
-      redirect_to place_path(@place)
-      # 成功メッセージ
-      flash[:notice] = "投稿されました"
-    #失敗したら
+      redirect_to place_path(@place), info: "投稿されました"
+    #失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 新規投稿ページへ遷移
       render :new
     end
@@ -96,13 +94,11 @@ class User::PlacesController < ApplicationController
     # 更新成功した場合
     if @place.update(place_params)
         # 更新に成功した寺社詳細ページへ遷移
-        redirect_to place_path(@place)
-        # 成功メッセージ
-        flash[:notice] = "更新されました"
+        redirect_to place_path(@place), info: "編集されました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 失敗した寺社編集ページへ遷移
       render :edit
     end

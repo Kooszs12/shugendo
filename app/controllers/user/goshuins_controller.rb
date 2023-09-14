@@ -21,14 +21,14 @@ class User::GoshuinsController < ApplicationController
       if @goshuin.save
         format.html do
           # 成功時にフラッシュメッセージを設定し、詳細ページにリダイレクト
-          flash[:notice] = "投稿されました"
-          redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
+          flash[:info] = "投稿されました"
+          redirect_to place_path(@goshuin.place), info: "投稿されました"  # 関連する寺社の詳細ページに遷移
         end
         format.json { render :show, status: :created, location: @goshuin }
       else
         format.html do
           # 失敗時にフラッシュメッセージを設定し、新規投稿フォームを再表示
-          flash.now[:alert] = "失敗しました"
+          flash.now[:danger] = "失敗しました"
           # 新規投稿ページへ遷移
           render :new
         end
@@ -61,14 +61,12 @@ class User::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     # 更新された場合
     if @goshuin.update(goshuin_params)
-      # 成功メッセージ
-      flash[:notice] = "編集されました"
       # 関連する寺社の詳細ページに遷移
-      redirect_to place_path(@goshuin[:place_id])
+      redirect_to place_path(@goshuin[:place_id]), info: "編集されました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 編集ページへ遷移
       render :edit
     end
@@ -81,11 +79,11 @@ class User::GoshuinsController < ApplicationController
     # 削除成功した場合
     if @goshuin.destroy
       # 成功メッセージ
-      redirect_to goshuins_path, notice: "削除完了しました"
+      redirect_to goshuins_path, info: "削除完了しました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "削除失敗しました"
+      flash.now[:danger] = "削除失敗しました"
       render :index
     end
   end

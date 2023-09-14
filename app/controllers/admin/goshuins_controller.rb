@@ -28,11 +28,11 @@ class Admin::GoshuinsController < ApplicationController
     # 更新された場合
     if @goshuin.update(goshuin_params)
       # 成功メッセージ
-      redirect_to admin_place_path(@goshuin[:place_id]), notice: "編集されました"
+      redirect_to admin_place_path(@goshuin[:place_id]), info: "編集されました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 編集ページへ遷移
       render :edit
     end
@@ -44,11 +44,11 @@ class Admin::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     # 削除成功した場合
     if @goshuin.destroy
-      redirect_to root_path, notice: "削除完了しました"
+      redirect_to root_path, info: "削除完了しました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      redirect_to root_path, alert: "削除失敗しました"
+      redirect_to root_path, danger: "削除失敗しました"
     end
   end
 

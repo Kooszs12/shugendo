@@ -53,10 +53,10 @@ class User::UsersController < ApplicationController
     # 更新されたら
     if @user.update(user_params)
       # 本人のマイページへ戻る
-      redirect_to users_mypage_path(@user), notice: "編集されました"
+      redirect_to users_mypage_path(@user), info: "編集されました"
     else
       # 警告メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 本人のプロフィール編集ページへ戻る
       render :edit
     end
@@ -76,7 +76,7 @@ class User::UsersController < ApplicationController
     @user.update(is_deleted: true)
     reset_session
     # 成功メッセージ
-    redirect_to root_path, notice: "ご利用ありがとうございました"
+    redirect_to root_path, info: "ご利用ありがとうございました"
   end
 
   private
