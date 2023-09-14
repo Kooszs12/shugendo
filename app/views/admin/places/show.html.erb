@@ -15,10 +15,10 @@
       <h2 class="text-center mt-5 mb-5">御朱印一覧</h2>
       <!--ソート機能-->
       <div class="mb-3 text-center">
-        <%= link_to '最新順', admin_place_path(sort_option: 'latest') %>&nbsp;|&nbsp;
-        <%= link_to '古い順', admin_place_path(sort_option: 'old') %>&nbsp;|&nbsp;
+        <%= link_to '最新順', admin_place_path(sort_option: 'latest'), class: sort_change('latest') %>&nbsp;|&nbsp;
+        <%= link_to '古い順', admin_place_path(sort_option: 'old'), class: sort_change('old') %>&nbsp;|&nbsp;
         <!--いいね数の多い順-->
-        <%= link_to '人気順', admin_place_path(sort_option: 'most_liked') %>
+        <%= link_to '人気順', admin_place_path(sort_option: 'most_liked'), class: sort_change('most_liked') %>
       </div>
       <!--関連した寺社の御朱印一覧表示-->
       <%= render 'layouts/goshuin_index', goshuins: @goshuins %>

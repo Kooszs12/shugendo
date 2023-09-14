@@ -17,11 +17,11 @@ class Admin::PlacesController < ApplicationController
     #保存が成功したら
     if @place.save
       # 寺社詳細ページへ遷移
-      redirect_to admin_place_path(@place), notice: "投稿されました"
+      redirect_to admin_place_path(@place), info: "投稿されました"
     #失敗したら
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 新規投稿ページへ遷移
       render :new
     end

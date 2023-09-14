@@ -2,12 +2,18 @@
 class User::UsersController < ApplicationController
 
   # アクセス制限をかけて、exceptで一部許可させる
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   # アクセス制限を特定のページでだけつける（only）
   # 退会したユーザーの詳細ページを閲覧できなくさせるアクセス制限
   before_action :deleted_user_check, only: [:show]
   # ゲストユーザーにアクセス制限
   before_action :guest_user_check, only: [:edit, :update]
+
+  # いいねをつけた投稿一覧表示
+  def index
+    @user = User.find(params[:id])
+    @goshuins = Goshuin.joins(:favorites).where(favorites: { user_id: @user.id }).page(params[:page]).per(5)
+  end
 
   # ユーザーマイページ。誰でも閲覧可能
   def show
@@ -31,7 +37,6 @@ class User::UsersController < ApplicationController
       when 'most_liked'
         @goshuins = @user.goshuins.most_liked(page, per)
       else
-
     end
   end
 

@@ -39,7 +39,7 @@ class User::GoshuinsController < ApplicationController
 
   # ユーザー参拝日記（ログインしているユーザーのみ）
   def index
-    # ログインしているユーザーデータを角の
+    # ログインしているユーザーデータを格納
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
     @goshuins = @user.goshuins.order(created_at: :desc).page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
@@ -89,15 +89,6 @@ class User::GoshuinsController < ApplicationController
       render :index
     end
   end
-
-  # def places_json
-  #   if params[:cat] == "shrine"
-  #     places = Place.joins(:prefecture).where(category: 0, prefecture_id: params[:pref]) # 神社
-  #   else
-  #     places = Place.joins(:prefecture).where(category: 1, prefecture_id: params[:pref]) # お寺
-  #   end
-  #   render json: places
-  # end
 
   private
 
