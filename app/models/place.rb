@@ -12,7 +12,7 @@ class Place < ApplicationRecord
   scope :prefecture, -> (page, per) { joins(:prefecture).order(prefecture_id: :asc).page(page).per(per) }
   scope :latest, -> (page, per) { order(created_at: :desc).page(page).per(per) }
   scope :old, -> (page, per) { order(created_at: :asc).page(page).per(per) }
-  scope :goshuin_count, -> (page, per) { joins(:goshuins).group(:place_id).order('COUNT(goshuins.id) DESC').page(page).per(per) }
+  scope :goshuin_count, -> (page, per) { left_outer_joins(:goshuins).group('places.id').order('COUNT(goshuins.id) DESC').page(page).per(per) }
 
   #バリデーション設定
   # カテゴリーラジオボタンバリデーション

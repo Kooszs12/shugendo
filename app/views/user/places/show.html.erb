@@ -17,7 +17,7 @@
       <!--ソート機能-->
       <div class="mb-3 text-center">
         <%= link_to '新着順', place_path(sort_option: 'latest'), class: sort_change('latest') %>&nbsp;|&nbsp;
-        <%= link_to '古い順', place_path(sort_option: 'old'), class: sort_change('most_liked') %>&nbsp;|&nbsp;
+        <%= link_to '古い順', place_path(sort_option: 'old'), class: sort_change('old') %>&nbsp;|&nbsp;
         <!--いいね数の多い順-->
         <%= link_to '人気順', place_path(sort_option: 'most_liked'), class: sort_change('most_liked') %>
       </div>
