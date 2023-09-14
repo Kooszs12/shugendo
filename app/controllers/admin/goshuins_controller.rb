@@ -19,10 +19,6 @@ class Admin::GoshuinsController < ApplicationController
   def update
     # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
-     # 神社データ（セレクトボックスの中身）
-    @jinja = Place.where(category: 0)
-    @otera = Place.where(category: 1)
-
     goshuin_params[:user_id] = @goshuin.user_id
 
     # 更新された場合
@@ -55,10 +51,7 @@ class Admin::GoshuinsController < ApplicationController
   private
 
   def goshuin_params
-    if params.require(:goshuin)[:category] == 'temple'
-      params.require(:goshuin)[:place_id] = params[:place_id2]
-    end
 
-    params.require(:goshuin).permit(:user_id, :place_id, :place_id2, :category, :message, :price, :visit_day, :goshuin_status, :status, :image)
+    params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :goshuin_status, :status, :image)
   end
 end
