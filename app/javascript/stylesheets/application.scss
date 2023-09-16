@@ -20,12 +20,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // フォントを使えるようにする
+  /* フォントを使えるようにする */
   font-family: 'imagine YOKOHAMA', 'HannariMincho-Regular', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
   letter-spacing: .1rem;
 }
 
-// ヘッダーの背景
+/* ヘッダーの背景 */
 .header_image {
   background-image: url('../images/23208622.png'); /* Corrected the URL */
   background-size: 100% 100%;
@@ -108,15 +108,15 @@ main {
 }
 
 .c-btn {
-  box-shadow: 0 4px 0 #0c6f7f; // infoボタンの影
+  box-shadow: 0 4px 0 #0c6f7f; /*infoボタンの影 */
 }
 
 .c-btn2 {
-  box-shadow: 0 4px 0 #176b2a; // successボタンの影
+  box-shadow: 0 4px 0 #176b2a; /*infoボタンの影 */
 }
 
 .c-btn3 {
-  box-shadow: 0 4px 0 #B3001B; // successボタンの影
+  box-shadow: 0 4px 0 #B3001B; /*infoボタンの影 */
 }
 
 .c-btn:hover,
@@ -135,11 +135,11 @@ main {
 }
 
 .c-tab {
-  background-color: #FFACBC !important;　/* カスタム背景色 */
+  background-color: #FFACBC !important; /* カスタム背景色 */
   color: #704214 !important; /* カスタム文字色 */
 }
 
-// 御朱印投稿数
+/* 御朱印投稿数 */
 .c-count {
   display: inline-block; /* インラインブロック要素に変更 */
   background-color: #ddd;
@@ -208,19 +208,19 @@ footer {
 
 /*ページネーション自体のデザイン*/
 .pagination>li>a {
-  border: none !important;     /*枠線をなくす*/
-  color: #696969 !important;   /*文字の色を変える*/
+  border: none !important; /*枠線をなくす*/
+  color: #696969 !important; /*文字の色を変える*/
 }
 
 /* 表示しているページ番号のデザイン */
 .pagination>.active>a {
-  background: #93c9ff !important;     /*背景の色を変える*/
-  border-radius: 15px !important;     /*角を丸くする*/
+  background: #93c9ff !important; /*背景の色を変える*/
+  border-radius: 15px !important; /*角を丸くする*/
 }
 
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {
-  border-radius: 15px !important;    /*角を丸くする*/
+  border-radius: 15px !important; /*角を丸くする*/
 }
 
 .page-link {
