@@ -14,7 +14,7 @@
       <!--present:御朱印が存在する場合-->
       <% if @goshuins.present? %>
         <h2 class="text-center mb-5">
-          <%= @goshuins.first.user.nickname %>御朱印一覧
+          <%= @goshuins.first.user.nickname %>御朱印一覧  <span class="c-count"><%= @num_of_goshuin > 99 ? "99+" : @num_of_goshuin %></span>
         </h2>
 
         <!--ソート機能-->
@@ -31,3 +31,7 @@
     </div>
   </div>
 </div>
+
+<style>
+
+</style>

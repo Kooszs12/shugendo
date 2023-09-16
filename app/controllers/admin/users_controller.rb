@@ -18,6 +18,8 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     # 特定ユーザーの関連付けられた御朱印情報を格納
     @goshuins = @user.goshuins.page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
+    # ユーザーが投稿した御朱印数を格納
+    @num_of_goshuin = @goshuins.count
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }

@@ -135,8 +135,20 @@ main {
 }
 
 .c-tab {
-  background-color: #FFACBC !important;/* カスタム背景色 */
+  background-color: #FFACBC !important;　/* カスタム背景色 */
   color: #704214 !important; /* カスタム文字色 */
+}
+
+// 御朱印投稿数
+.c-count {
+  display: inline-block; /* インラインブロック要素に変更 */
+  background-color: #ddd;
+  color: #fff;
+  font-size: 20px; /* カウント数が増えてもデザインが崩れないようにするため */
+  width: 50px; /* 丸の横幅 */
+  height: 50px; /* 丸の高さ */
+  line-height: 50px; /* 行の高さ指定。丸の中に数字を綺麗に収めるため */
+  border-radius: 50%; /* 丸くする */
 }
 
 .nav-tabs .nav-link.active {

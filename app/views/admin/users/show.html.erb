@@ -14,6 +14,7 @@
       <% if @goshuins.present? %>
         <h2 class="text-center mb-5">
           <%= @goshuins.first.user.nickname %>御朱印一覧
+          <p class="text-center mt-1 c-count"><%= @num_of_goshuin %></p>
         </h2>
 
         <!--ソート機能-->
