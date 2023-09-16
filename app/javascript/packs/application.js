@@ -21,6 +21,20 @@ Turbolinks.start()
 ActiveStorage.start()
 
 $(document).on('turbolinks:load', function() {
+  // 対象を指定して（セレクター)、イベントを設定
+  // var scrollTopButton = document.getElementById('js-scroll-top');
+  $('#js-scroll-top').click(function(e){
+    // メソッド定義（functionはdefみたいなもの）
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // スムーススクロールを有効にする
+      });
+    }
+    // メソッド名を記述して実行（）
+    scrollToTop();
+  });
+
   // 画像アップロードフィールドの変更イベントが発生したときの処理
   $('#imageField').on('change', (e) => {
     // 選択されたファイルを取得
@@ -42,4 +56,3 @@ $(document).on('turbolinks:load', function() {
   })
 
 });
-

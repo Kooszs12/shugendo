@@ -9,7 +9,6 @@
 
     <script src="https://kit.fontawesome.com/cb1a1fa502.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!--  jQueryをCDNで読み込み  -->
@@ -27,6 +26,9 @@
       <div class="header_image">
         <%= render "layouts/header" %>
       </div>
+
+      <div id="js-scroll-top" class="scroll-top"><i class="fas fa-chevron-up"></i></div>
+
       <!--フッターの位置を下に固定するためのブロック要素-->
       <div class="wrapper">
         <div class="container">
@@ -45,3 +47,19 @@
     <%= current_admin.inspect if Rails.env.development? %>
   </body>
 </html>
+
+<script>
+  // // ページの一番上にスクロールする関数
+  // function scrollToTop() {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth' // スムーススクロールを有効にする
+  //   });
+  // }
+
+  // // js-scroll-top 要素を取得
+  // var scrollTopButton = document.getElementById('js-scroll-top');
+
+  // // js-scroll-top 要素がクリックされたらページの一番上にスクロール
+  // scrollTopButton.addEventListener('click', scrollToTop);
+</script>
