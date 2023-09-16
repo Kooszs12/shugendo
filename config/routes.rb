@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     root "homes#top"
     # マイページ
     get 'users/mypage/:id' => 'users#show', as: :users_mypage
+    # いいね一覧
+    get 'users/favorites/index/:id' => 'users#index', as: :users_favorites_index
     # 会員編集ページ
     get 'users/infomation/edit' => 'users#edit'
     patch '/users/information' => 'users#update'

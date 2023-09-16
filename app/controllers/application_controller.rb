@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_q
 
+  # フラッシュメッセージのbootstrap
+  add_flash_types :success, :info, :warning, :danger
+
   protected
 
   #deveisで許可されていないからnicknameを許可してあげないといけない
@@ -17,5 +20,5 @@ class ApplicationController < ActionController::Base
   def set_q
     @q = Place.ransack(params[:q])
   end
-  
+
 end

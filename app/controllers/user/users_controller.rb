@@ -2,12 +2,18 @@
 class User::UsersController < ApplicationController
 
   # アクセス制限をかけて、exceptで一部許可させる
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   # アクセス制限を特定のページでだけつける（only）
   # 退会したユーザーの詳細ページを閲覧できなくさせるアクセス制限
   before_action :deleted_user_check, only: [:show]
   # ゲストユーザーにアクセス制限
   before_action :guest_user_check, only: [:edit, :update]
+
+  # いいねをつけた投稿一覧表示
+  def index
+    @user = User.find(params[:id])
+    @goshuins = Goshuin.joins(:favorites).where(favorites: { user_id: @user.id }).page(params[:page]).per(5)
+  end
 
   # ユーザーマイページ。誰でも閲覧可能
   def show
@@ -31,7 +37,6 @@ class User::UsersController < ApplicationController
       when 'most_liked'
         @goshuins = @user.goshuins.most_liked(page, per)
       else
-
     end
   end
 
@@ -48,10 +53,10 @@ class User::UsersController < ApplicationController
     # 更新されたら
     if @user.update(user_params)
       # 本人のマイページへ戻る
-      redirect_to users_mypage_path(@user), notice: "編集されました"
+      redirect_to users_mypage_path(@user), info: "編集されました"
     else
       # 警告メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 本人のプロフィール編集ページへ戻る
       render :edit
     end
@@ -71,7 +76,7 @@ class User::UsersController < ApplicationController
     @user.update(is_deleted: true)
     reset_session
     # 成功メッセージ
-    redirect_to root_path, notice: "ご利用ありがとうございました"
+    redirect_to root_path, info: "ご利用ありがとうございました"
   end
 
   private

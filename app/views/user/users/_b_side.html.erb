@@ -34,6 +34,13 @@
     <%= user.introduction.present? ? safe_join(user.introduction.split("\n"), tag(:br)) : "自己紹介はありません" %>
   </div>
 
+  <!--ユーザーが気に入った投稿一覧-->
+  <div class="text-center mt-5">
+    <%= link_to users_favorites_index_path(user), class: "btn btn-success w-50 c-btn2" do %>
+      <i class="fa-solid fa-heart"></i>いいね一覧
+    <% end %>
+  </div>
+
   <div>
   <!-- ユーザーがログインしていて且つ本人だった場合 -->
   <% if @user == current_user %>

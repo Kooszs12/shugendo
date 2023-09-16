@@ -21,14 +21,14 @@ class User::GoshuinsController < ApplicationController
       if @goshuin.save
         format.html do
           # 成功時にフラッシュメッセージを設定し、詳細ページにリダイレクト
-          flash[:notice] = "投稿されました"
+          flash[:info] = "投稿されました"
           redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
         end
         format.json { render :show, status: :created, location: @goshuin }
       else
         format.html do
           # 失敗時にフラッシュメッセージを設定し、新規投稿フォームを再表示
-          flash.now[:alert] = "失敗しました"
+          flash.now[:danger] = "失敗しました"
           # 新規投稿ページへ遷移
           render :new
         end
@@ -39,7 +39,7 @@ class User::GoshuinsController < ApplicationController
 
   # ユーザー参拝日記（ログインしているユーザーのみ）
   def index
-    # ログインしているユーザーデータを角の
+    # ログインしているユーザーデータを格納
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
     @goshuins = @user.goshuins.order(created_at: :desc).page(params[:page]).per(5) # ページネーションを適用（１ページ5件表示）
@@ -62,13 +62,13 @@ class User::GoshuinsController < ApplicationController
     # 更新された場合
     if @goshuin.update(goshuin_params)
       # 成功メッセージ
-      flash[:notice] = "編集されました"
+      flash[:info] = "編集されました"
       # 関連する寺社の詳細ページに遷移
       redirect_to place_path(@goshuin[:place_id])
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "失敗しました"
+      flash.now[:danger] = "失敗しました"
       # 編集ページへ遷移
       render :edit
     end
@@ -81,23 +81,14 @@ class User::GoshuinsController < ApplicationController
     # 削除成功した場合
     if @goshuin.destroy
       # 成功メッセージ
-      redirect_to goshuins_path, notice: "削除完了しました"
+      redirect_to goshuins_path, info: "削除完了しました"
     # 失敗した場合
     else
       # 失敗メッセージ
-      flash.now[:alert] = "削除失敗しました"
+      flash.now[:danger] = "削除失敗しました"
       render :index
     end
   end
-
-  # def places_json
-  #   if params[:cat] == "shrine"
-  #     places = Place.joins(:prefecture).where(category: 0, prefecture_id: params[:pref]) # 神社
-  #   else
-  #     places = Place.joins(:prefecture).where(category: 1, prefecture_id: params[:pref]) # お寺
-  #   end
-  #   render json: places
-  # end
 
   private
 

@@ -1,3 +1,5 @@
 <!--フラッシュメッセージの部分テンプレート-->
-<%= notice %><!--成功-->
-<%= alert %><!--警告-->
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %> text-center"><%= message %></div>
+<% end %>
+
