@@ -7,8 +7,14 @@
         <div class="d-flex justify-content-between">
           <div>
             <!-- ユーザーのマイページへのリンク -->
-            <%= link_to users_mypage_path(id: goshuin.user.id), class: "user-profile-link" do %>
-              <%= goshuin.user.is_deleted ? "#{goshuin.user.nickname}(退会済み)" : goshuin.user.nickname %><br>
+            <% if admin_signed_in? %>
+              <%= link_to admin_user_path(id: goshuin.user.id), class: "user-profile-link" do %>
+                <%= goshuin.user.is_deleted ? "#{goshuin.user.nickname}(退会済み)" : goshuin.user.nickname %><br>
+              <% end %>
+            <% else %>
+              <%= link_to users_mypage_path(id: goshuin.user.id), class: "user-profile-link" do %>
+                <%= goshuin.user.is_deleted ? "#{goshuin.user.nickname}(退会済み)" : goshuin.user.nickname %><br>
+              <% end %>
             <% end %>
             <%= goshuin.place.prefecture.name %>
           </div>
@@ -56,8 +62,9 @@
               <div id="favorite_buttons_<%= goshuin.id %>">
                 <%= render "user/favorites/btn", goshuin: goshuin %>
               </div>
+            <!--ログインしていない場合の表示-->
             <% else %>
-              <i class="fas fa-heart" aria-hidden="true" style="color: #f282cf;"></i><%= goshuin.favorites.count %> いいね
+              <i class="far fa-heart" aria-hidden="true" style="color: #f282cf;"></i><%= goshuin.favorites.count %> いいね
             <% end %>
           </div>
 

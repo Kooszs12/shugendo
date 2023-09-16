@@ -64,7 +64,7 @@ class User::PlacesController < ApplicationController
     # 特定の寺社詳細データ格納
     @place = Place.find(params[:id])
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ件表示）
-    @goshuins = @place.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
+    @goshuins = @place.goshuins.where(status: "release").page(page).per(per)
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
@@ -78,7 +78,7 @@ class User::PlacesController < ApplicationController
       when 'most_liked'
         @goshuins = @goshuins.most_liked(page, per)
       else
-        @goshuins = @goshuins.page(page).per(per)
+        @goshuins = @goshuins.order(created_at: :desc).page(page).per(per)
     end
   end
 

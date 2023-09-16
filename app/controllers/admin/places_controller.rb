@@ -28,13 +28,34 @@ class Admin::PlacesController < ApplicationController
   end
 
   # 寺社一覧ページ
+  # 寺社一覧ページ
   def index
     page = params[:page]
     per = 5
-    # order(updated_at: :desc)で更新日順に表示
-    @places = Place.order(updated_at: :desc).page(page).per(per) # ページネーションを適用（１ページ5件表示）
-    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(per)
-    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(per)
+
+    if params[:prefecture_id]
+      @places = Place.prefecture_nd(params[:prefecture_id], page, per)
+    elsif params[:area_id]
+      @places = Place.area_nd(params[:area_id], page, per)
+    else
+      # ソート条件に基づいてソートされた場所を返す
+      case params[:sort_option]
+        when 'prefecture'
+          @places = Place.prefecture(page, per)
+        when 'latest'
+          @places = Place.latest(page, per)
+        when 'old'
+          @places = Place.old(page, per)
+        when 'goshuin_count'
+          @places = Place.goshuin_count(page, per)
+        else
+          @places = Place.page(page).per(per)
+      end
+    end
+
+    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(5)
+    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(5)
+
   end
 
   # 寺社詳細ページ
@@ -44,22 +65,22 @@ class Admin::PlacesController < ApplicationController
     # 特定の寺社データ格納
     @place = Place.find(params[:id])
     # 上記の寺社が持つ御朱印のデータを格納
-    @goshuins = @place.goshuins.page(page).per(per) # ページネーションを適用（１ページ5件表示）
+    @goshuins = @place.goshuins.where(status: "release").page(page).per(per)
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
 
     # ソート条件に基づいてソートされた場所を返す
     case params[:sort_option]
      # 新着順
       when 'latest'
-        @goshuins = @place.goshuins.latest(page, per)
+        @goshuins = @gohusins.latest(page, per)
       # 古い順
       when 'old'
-        @goshuins = @place.goshuins.old(page, per)
+        @goshuins = @gohusins.old(page, per)
       # いいねの多い順
       when 'most_liked'
-        @goshuins = @place.goshuins.most_liked(page, per)
+        @goshuins = @gohusins.most_liked(page, per)
       else
-        @goshuins = @place.goshuins.page(page).per(per)
+        @goshuins = @goshuins.order(created_at: :desc).page(page).per(per)
     end
   end
 

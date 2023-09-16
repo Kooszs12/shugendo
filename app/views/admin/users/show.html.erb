@@ -8,9 +8,26 @@
       <%= render 'user/users/b_side', user: @user, total_likes: @total_likes %>
     </div>
 
-    <!--編集表示-->
+    <!--カレントユーザーが投稿した御朱印一覧表示-->
     <div class="col-md-7 offset-lg-1">
-      <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <!--present:御朱印が存在する場合-->
+      <% if @goshuins.present? %>
+        <h2 class="text-center mb-5">
+          <%= @goshuins.first.user.nickname %>御朱印一覧
+        </h2>
+
+        <!--ソート機能-->
+        <div class="mb-3 text-center">
+          <!--ソート機能に関してはID指定しなくても基本的には大丈夫-->
+          <%= link_to '新着順', admin_user_path(sort_option: 'latest'), class: sort_change('latest') %>&nbsp;|&nbsp;
+          <%= link_to '古い順', admin_user_path(sort_option: 'old'), class: sort_change('old') %>&nbsp;|&nbsp;
+          <!--いいね数の多い順-->
+          <%= link_to '人気順', admin_user_path(sort_option: 'most_liked'), class: sort_change('most_liked') %>
+        </div>
+
+          <!--御朱印一覧部分テンプレート呼び出し-->
+        <%= render 'layouts/goshuin_index', goshuins: @goshuins %>
+      <% end %>
     </div>
   </div>
 </div>

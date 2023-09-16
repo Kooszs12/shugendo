@@ -1,17 +1,16 @@
 <!--いいね部分テンプレート-->
-<!--ユーザーがログインしているか判断-->
-<% if user_signed_in? %>
-  <% if goshuin.favorited_by?(current_user) %>
-    <%= link_to goshuin_favorites_path(goshuin), method: :delete, remote: true do %>
-      <i class="fas fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
-      <!--いいねの数を数えて表示-->
-      <%= goshuin.favorites.count %> いいね
-    <% end %>
-  <% else %>
-    <%= link_to goshuin_favorites_path(goshuin), method: :post, remote: true do %>
-      <i class="far fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
-      <!--いいねの数を数えて表示-->
-      <%= goshuin.favorites.count %> いいね
-    <% end %>
+
+<% if goshuin.favorited_by?(current_user) %>
+  <%= link_to goshuin_favorites_path(goshuin), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
+    <!--いいねの数を数えて表示-->
+    <%= goshuin.favorites.count %> いいね
+  <% end %>
+<% else %>
+  <%= link_to goshuin_favorites_path(goshuin), method: :post, remote: true do %>
+    <i class="far fa-heart" aria-hidden="true" style="color: #f282cf;"></i>
+    <!--いいねの数を数えて表示-->
+    <%= goshuin.favorites.count %> いいね
   <% end %>
 <% end %>
+
