@@ -12,10 +12,7 @@
 
     <!--編集表示-->
     <div class="col-md-7 offset-lg-1">
-      <h2 class="text-center mb-5">
-        参拝日記
-        <p class="text-center mt-1 c-count"><%= @num_of_goshuin %></p>
-      </h2>
+      <h2 class="text-center mb-5">参拝日記</h2>    <span class="c-count"><%= @num_of_goshuin > 99 ? "99+" : @num_of_goshuin %></span>
       <!-- タブ表示 -->
       <div class="tabs">
         <ul class="nav nav-tabs d-flex justify-content-center">

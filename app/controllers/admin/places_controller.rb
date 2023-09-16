@@ -72,13 +72,13 @@ class Admin::PlacesController < ApplicationController
     case params[:sort_option]
      # 新着順
       when 'latest'
-        @goshuins = @gohusins.latest(page, per)
+        @goshuins = @goshuins.latest(page, per)
       # 古い順
       when 'old'
-        @goshuins = @gohusins.old(page, per)
+        @goshuins = @goshuins.old(page, per)
       # いいねの多い順
       when 'most_liked'
-        @goshuins = @gohusins.most_liked(page, per)
+        @goshuins = @goshuins.most_liked(page, per)
       else
         @goshuins = @goshuins.order(created_at: :desc).page(page).per(per)
     end
