@@ -27,6 +27,14 @@
           </li>
         </ul>
 
+        <!--ソート機能-->
+        <div class="mb-3 mt-3 text-center">
+          <%= link_to '参拝日最新順', goshuins_path(sort_option: 'latest_by_visit_day'), class: sort_change('latest_by_visit_day') %>&nbsp;|&nbsp;
+          <%= link_to '参拝日古い順', goshuins_path(sort_option: 'old_by_visit_day'), class: sort_change('old_by_visit_day') %>&nbsp;|&nbsp;
+          <!--いいね数の多い順-->
+          <%= link_to '人気順', goshuins_path(sort_option: 'most_liked'), class: sort_change('most_liked') %>
+        </div>
+
         <!--ユーザー投稿一覧-->
         <div class="tab-content mt-3">
           <div id="section1" class="tab-pane fade show active">
