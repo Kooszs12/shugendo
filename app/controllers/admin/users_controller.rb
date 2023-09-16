@@ -12,6 +12,8 @@ class Admin::UsersController < ApplicationController
 
   # ユーザー詳細
   def show
+    page = params[:page]
+    per = 5
     # 特定ユーザー情報格納
     @user = User.find(params[:id])
     # 特定ユーザーの関連付けられた御朱印情報を格納
@@ -21,6 +23,18 @@ class Admin::UsersController < ApplicationController
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
     # 特定のユーザーが保持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
+    # ソート条件に基づいてソートされた場所を返す
+    case params[:sort_option]
+      when 'latest'
+        @goshuins = @goshuins.latest(page, per)
+      when 'old'
+        @goshuins = @goshuins.old(page, per)
+      # いいねの多い順
+      when 'most_liked'
+        @goshuins = @goshuins.most_liked(page, per)
+      else
+        @goshuins = @goshuins.order(created_at: :desc).page(page).per(per)
+    end
   end
 
   # ユーザー編集

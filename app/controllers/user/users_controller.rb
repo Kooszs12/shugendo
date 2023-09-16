@@ -20,7 +20,7 @@ class User::UsersController < ApplicationController
     page = params[:page]
     per = 5
     # 公開された御朱印のデータを取得し、ページネーションを適用（１ページ5件表示）
-    @goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
+    @goshuins = @user.goshuins.where(status: "release").page(page).per(per)
     # ユーザーが所持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
@@ -30,13 +30,14 @@ class User::UsersController < ApplicationController
     # ソート条件に基づいてソートされた場所を返す
     case params[:sort_option]
       when 'latest'
-        @goshuins = @user.goshuins.latest(page, per)
+        @goshuins = @goshuins.latest(page, per)
       when 'old'
-        @goshuins = @user.goshuins.old(page, per)
+        @goshuins = @goshuins.old(page, per)
       # いいねの多い順
       when 'most_liked'
-        @goshuins = @user.goshuins.most_liked(page, per)
+        @goshuins = @goshuins.most_liked(page, per)
       else
+        @goshuins = @goshuins.order(created_at: :desc).page(page).per(per)
     end
   end
 
