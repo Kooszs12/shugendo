@@ -23,6 +23,8 @@ class User::UsersController < ApplicationController
     @goshuins = @user.goshuins.where(status: "release").page(page).per(per)
     # ユーザーが所持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
+    # ユーザーが投稿した御朱印数を格納
+    @num_of_goshuin = @goshuins.count
     @goshuin_names = @goshuins.map { |goshuin| goshuin.place.name }
     @goshuin_users = @goshuins.map { |goshuin| goshuin.user.nickname }
     @goshuin_prefectures = @goshuins.map { |goshuin| goshuin.place.prefecture }
