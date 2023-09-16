@@ -22,7 +22,7 @@ class User::GoshuinsController < ApplicationController
         format.html do
           # 成功時にフラッシュメッセージを設定し、詳細ページにリダイレクト
           flash[:info] = "投稿されました"
-          redirect_to place_path(@goshuin.place), info: "投稿されました"  # 関連する寺社の詳細ページに遷移
+          redirect_to place_path(@goshuin.place)  # 関連する寺社の詳細ページに遷移
         end
         format.json { render :show, status: :created, location: @goshuin }
       else
@@ -61,8 +61,10 @@ class User::GoshuinsController < ApplicationController
     @goshuin = Goshuin.find(params[:id])
     # 更新された場合
     if @goshuin.update(goshuin_params)
+      # 成功メッセージ
+      flash[:info] = "編集されました"
       # 関連する寺社の詳細ページに遷移
-      redirect_to place_path(@goshuin[:place_id]), info: "編集されました"
+      redirect_to place_path(@goshuin[:place_id])
     # 失敗した場合
     else
       # 失敗メッセージ

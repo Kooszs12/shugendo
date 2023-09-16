@@ -45,6 +45,7 @@ class User::PlacesController < ApplicationController
         when 'old'
           @places = Place.old(page, per)
         when 'goshuin_count'
+        # binding.pry
           @places = Place.goshuin_count(page, per)
         else
           @places = Place.page(page).per(per)
@@ -70,14 +71,14 @@ class User::PlacesController < ApplicationController
     # ソート条件に基づいてソートされた場所を返す
     case params[:sort_option]
       when 'latest'
-        @goshuins = @place.goshuins.latest(page, per)
+        @goshuins = @goshuins.latest(page, per)
       when 'old'
-        @goshuins = @place.goshuins.old(page, per)
+        @goshuins = @goshuins.old(page, per)
       # いいねの多い順
       when 'most_liked'
-        @goshuins = @place.goshuins.most_liked(page, per)
+        @goshuins = @goshuins.most_liked(page, per)
       else
-        @goshuins = @place.goshuins.page(page).per(per)
+        @goshuins = @goshuins.page(page).per(per)
     end
   end
 

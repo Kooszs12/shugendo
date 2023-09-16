@@ -12,13 +12,13 @@ class User::HomesController < ApplicationController
     # ソート条件に基づいてソートされた場所を返す
     case params[:sort_option]
       when 'latest'
-        @goshuins = Goshuin.latest(page, per)
+        @goshuins = @goshuins.latest(page, per)
       when 'old'
-        @goshuins = Goshuin.old(page, per)
+        @goshuins = @goshuins.old(page, per)
       when 'most_liked'
-        @goshuins = Goshuin.most_liked(page, per)
+        @goshuins = @goshuins.most_liked(page, per)
       else
-        @goshuins = Goshuin.page(page).per(per)
+        @goshuins = @goshuins.page(page).per(per)
     end
   end
 
