@@ -1,5 +1,7 @@
 <!--御朱印編集ページ-->
-<!--題名-->
+<!--JavaScript呼び出し-->
+<%= javascript_pack_tag 'goshuin_form' %>
+
 <h2 class="text-center mb-5">御朱印<%= title %></h2>
 <%= form_with model: goshuin, url: target_path do |f| %>
   <!--バリデーションの部分テンプレート呼び出し-->
@@ -109,6 +111,4 @@
     <% end %>
   </div>
 <% end %>
-
-<%= javascript_pack_tag 'goshuin_form' %>
 

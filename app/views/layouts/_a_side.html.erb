@@ -7,7 +7,7 @@
     <!--寺社投稿アイコン-->
     <%= link_to image_tag("place_new.png", size: "150x150"), new_place_path %>
     <!--御朱印投稿アイコン-->
-    <%= link_to image_tag("godyuinn_new.png", size: "150x150"), new_goshuin_path %>
+    <%= link_to image_tag("godyuinn_new.png", size: "150x150"), new_goshuin_path, "data-turbolinks": false %>
   </div>
 <!--adminがログインしているか判断-->
 <% elsif admin_signed_in? %>

@@ -41,13 +41,13 @@ class User::GoshuinsController < ApplicationController
   def index
     page = params[:page]
     per = 5
-    
+
     # ログインしているユーザーデータを格納
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
     @goshuins = @user.goshuins.page(page).per(per) # ページネーションを適用（１ページ5件表示）
     # ユーザーが投稿した御朱印数を格納
-    @num_of_goshuin = @goshuins.count
+    @num_of_goshuin = @user.goshuins.count
     # ユーザーが保持している御朱印についたいいねの総数を格納
     @total_likes = @user.total_likes_count
     case params[:sort_option]
@@ -65,8 +65,8 @@ class User::GoshuinsController < ApplicationController
     # 全てのデータを取得してふるいにかけている（推奨されていない）
     @release_goshuins = @goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
     @private_goshuins = @goshuins.where(status: "private_status").order(created_at: :desc).page(params[:page]).per(5)
-    
-    
+
+
   end
 
   # 御朱印編集ページ
