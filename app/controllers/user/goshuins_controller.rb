@@ -45,6 +45,8 @@ class User::GoshuinsController < ApplicationController
     @user = current_user
     # ログインしているユーザーの御朱印データを格納
     @goshuins = @user.goshuins.page(page).per(per) # ページネーションを適用（１ページ5件表示）
+    # ユーザーが投稿した御朱印数を格納
+    @num_of_goshuin = @goshuins.count
     @release_goshuins = @user.goshuins.where(status: "release").order(created_at: :desc).page(params[:page]).per(5)
     @private_goshuins = @user.goshuins.where(status: "private_status").order(created_at: :desc).page(params[:page]).per(5)
     # ユーザーが保持している御朱印についたいいねの総数を格納
