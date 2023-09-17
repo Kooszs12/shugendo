@@ -49,12 +49,11 @@
   <!--places ハッシュを JSON 形式の文字列に変換し、places_json 変数に格納-->
   <% places_json = places.to_json %>
 
-
   <!--神社選択フォーム -->
   <div class="form-group"><!-- JavaScriptで能動的なセレクトボックスを作成する為にID設定 -->
     <%= f.label :place, "寺社名<font color='red'>*必須</font>".html_safe %>
     <!--神社のデータをセレクトボックス内に表示-->
-    <%= f.select :place_id, Place.all.map{ |place| [place.name, place.id] }, { prompt: "選択してください", selected: goshuin.place&.id }, { class: "form-control", "data-json": places_json, id: "placeSelectForm" } %>
+    <%= f.select :place_id, Place.where(category: goshuin.place&.category, prefecture_id: goshuin.place&.prefecture_id).map{ |place| [place.name, place.id] }, { prompt: "選択してください", selected: goshuin.place&.id }, { class: "form-control", "data-json": places_json, id: "placeSelectForm" } %>
   </div>
 
   <!--上記セレクトボックスが存在しなかった場合寺社を投稿してもらうためのlink_to-->
