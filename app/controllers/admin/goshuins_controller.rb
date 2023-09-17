@@ -7,12 +7,6 @@ class Admin::GoshuinsController < ApplicationController
   def edit
     # 特定の御朱印データを格納
     @goshuin = Goshuin.find(params[:id])
-    # 上記の御朱印に関連付いたplaceモデルに存在するcategoryカラムを格納
-    @category = @goshuin.place.category
-    # 神社データ（セレクトボックスの中身）
-    @jinja = Place.where(category: 0).joins(:prefecture).order(prefecture_id: :asc)
-    # お寺データの（セレクトボックスの中身）
-    @otera = Place.where(category: 1).joins(:prefecture).order(prefecture_id: :asc)
   end
 
   # 御朱印更新機能
