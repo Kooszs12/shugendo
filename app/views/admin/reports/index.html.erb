@@ -12,11 +12,11 @@
     <!-- ユーザー報告一覧表示 -->
     <div class="col-md-7 offset-md-1"> <!-- 右側のコラム (幅: 7カラム) -->
       <h2 class="text-center mb-5">報告一覧</h2>
-      <ol class="d-flex">
+      <ol class="d-flex flex-column">
         <!--ユーザー情報を繰り返し表示-->
         <% @reports.each do |report| %>
           <!--寺社名（寺社詳細へ遷移）-->
-          <li class="text-center"><%= link_to report.place.name, admin_place_path(report.place) %></li>
+          <li class="mx-5"><%= link_to report.place.name, admin_place_path(report.place) %></li>
         <% end %>
       </ol>
     </div>

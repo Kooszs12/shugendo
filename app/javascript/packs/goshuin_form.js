@@ -78,7 +78,6 @@ $(document).on('turbolinks:load', (e) => {
     const target = e.target // 自分自身の情報を取得
     const prefecture_id = target.value // 都道府県IDを取得
     const places = placesData(); // 寺社名を変数に格納
-    console.log(places[category])
     const result = places[category].filter( o => o.prefecture_id == prefecture_id ) // 神社・お寺一覧に都道府県フィルターをかけてresultに入れる
     replacePlaces (result); // 寺社名一覧を置き換え
   })
