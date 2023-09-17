@@ -52,8 +52,8 @@ class User::PlacesController < ApplicationController
       end
     end
 
-    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(5)
-    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(5)
+    @shrine = @places.where(category: "shrine").order(created_at: :desc).page(page).per(per)
+    @temple = @places.where(category: "temple").order(created_at: :desc).page(page).per(per)
 
   end
 
