@@ -76,10 +76,10 @@
           <div class="offset-md-9">
             <!-- ユーザーがログインしていて、かつ本人であった場合のみ表示される -->
             <% if user_signed_in? && goshuin.user == current_user %>
-              <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-info mr-3 c-btn" %>
+              <%= link_to "編集", edit_goshuin_path(goshuin), class: "btn btn-info mr-3 c-btn", "data-turbolinks": false %>
               <%= link_to "削除", goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger c-btn3" %>
             <% elsif admin_signed_in? %>
-              <%= link_to "編集", edit_admin_goshuin_path(goshuin), class: "btn btn-info mr-3 c-btn" %>
+              <%= link_to "編集", edit_admin_goshuin_path(goshuin), class: "btn btn-info mr-3 c-btn", "data-turbolinks": false%>
               <%= link_to "削除", admin_goshuin_path(goshuin), method: :delete, data: { confirm: "本当に削除してもいいですか?" }, class: "btn btn-danger c-btn3" %>
             <% end %>
           </div>
