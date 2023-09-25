@@ -48,7 +48,7 @@ class Place < ApplicationRecord
   #imageカラム
   has_one_attached :image
 
-  # プロフィールアイコンが存在するかどうか判断するメソッド
+  # No_imageが存在するかどうか判断するメソッド
   def get_place_image
     # 存在しなかった場合no_image.pngを使用
     (image.attached?) ? image : 'no_image.png'

@@ -22,17 +22,24 @@ class User < ApplicationRecord
     (image.attached?) ? image : 'profile_no_image.png'
   end
 
+  # 定数にメールアドレスを格納
+  GUEST_USER_EMAIL = "guest@example.com"
+
   # ゲストユーザーの生成
   def self.guest
-    user = User.find_or_initialize_by(email: 'guest@example.com', nickname: '修験者')
-    user.assign_attributes(password: SecureRandom.urlsafe_base64, is_deleted: false)
+    # find_or_initialize_byはfind_or_create_byとほぼ一緒。ただデータが保存されない
+    user = User.find_or_initialize_by(email: GUEST_USER_EMAIL)
+    # find_or_initialize_byで判断して、足りない情報を補完する
+    user.assign_attributes(password: SecureRandom.urlsafe_base64, nickname: '修験者')
+    # find_or_initialize_by使用しているためデータに保存させる必要があるため
     user.save
+    # 返り値としてユーザー情報を引き渡す
     user
   end
 
    # ゲストログイン判断メソッド
   def guest_user?
-    email == 'guest@example.com'
+    email == GUEST_USER_EMAIL
   end
 
   # is_deletedがfalseならtrueを返すようにしている(退会制限)

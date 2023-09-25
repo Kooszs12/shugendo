@@ -115,4 +115,12 @@ class User::GoshuinsController < ApplicationController
   def goshuin_params
     params.require(:goshuin).permit(:user_id, :place_id, :message, :price, :visit_day, :goshuin_status, :status, :image).merge(user_id: current_user.id)
   end
+
+  def authenticate_user!
+    # ユーザーがログインしていない場合、適切な処理を行う
+    unless current_user
+      redirect_to new_user_session_path, alert: 'ログインが必要です。'
+    end
+  end
+
 end
